@@ -10,6 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+/**
+ * Json转换配置
+ * @author Administrator
+ *
+ */
 public class CustomObjectMapper extends ObjectMapper {
 
 	/**
