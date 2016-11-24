@@ -12,6 +12,8 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * 异常日志记录
@@ -42,7 +44,7 @@ public class ExceptionLogAdvice {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("className", jp.getTarget().getClass().getName());
 		map.put("methodName", method.getName());
-		map.put("args",new ObjectMapper().writeValueAsString(jp.getArgs()));
+		map.put("args",JSON.toJSONString(jp.getArgs(), SerializerFeature.BrowserCompatible));
 		map.put("errorMsg",e.getMessage());
 		logger.error(new ObjectMapper().writeValueAsString(map));
 	}

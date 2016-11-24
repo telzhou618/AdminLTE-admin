@@ -1,8 +1,8 @@
 package com.vacomall.controller;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +22,7 @@ public class LoginController {
 	/**
 	 * Token服务
 	 */
-	@Autowired private TokenManager tokenManager;
+	@Resource(name="redisTokenManager") private TokenManager tokenManager;
 	
 	@IgnoreSecurity
 	@Log("用户登录")
@@ -33,7 +33,7 @@ public class LoginController {
 			return new Response().failure("error",ValidateUtil.toStringJson(result));
 		}
 		
-		if(userInfo.getName().equals("admin") && userInfo.getPassword().equals("123")){
+		if(userInfo.getName().equals("admin") && userInfo.getPassword().equals("123456")){
 			String token = tokenManager.createToken(userInfo.getName());
 			return new Response().success(token);
 		}

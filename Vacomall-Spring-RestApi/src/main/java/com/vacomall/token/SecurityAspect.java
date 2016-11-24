@@ -2,6 +2,7 @@ package com.vacomall.token;
 
 import java.lang.reflect.Method;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,7 +10,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -27,7 +27,7 @@ public class SecurityAspect {
 	
 	private static final String DEFAULT_TOKEN_NAME = "X-Token";
 
-	@Autowired private TokenManager tokenManager;
+	@Resource(name="redisTokenManager") private TokenManager tokenManager;
 	
 	@Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
 	public void controllerAspect() {
