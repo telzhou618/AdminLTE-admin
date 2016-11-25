@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.vacomall.bean.Response;
-
+/**
+ * 全局异常处理器
+ * @author Administrator
+ *
+ */
 @ControllerAdvice
 @ResponseBody
 public class ExceptionAdvice {

@@ -1,5 +1,9 @@
 package com.vacomall.exception;
-
+/**
+ * Tokean 异常
+ * @author Administrator
+ *
+ */
 public class TokenException extends RuntimeException{
 
 	/**

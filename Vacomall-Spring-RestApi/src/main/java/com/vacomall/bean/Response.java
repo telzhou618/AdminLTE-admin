@@ -1,5 +1,9 @@
 package com.vacomall.bean;
-
+/**
+ * 客户端响应对象
+ * @author Administrator
+ *
+ */
 public class Response {
 
 	private static final String OK = "ok";
