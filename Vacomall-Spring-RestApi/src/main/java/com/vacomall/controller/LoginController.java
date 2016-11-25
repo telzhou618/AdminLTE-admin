@@ -53,6 +53,6 @@ public class LoginController {
     @RequestMapping(value = "/logout",method=RequestMethod.POST)  
     public  Response logout(){
 		
-		return new Response().failure("退出成功.");
+		return new Response().success("退出成功.");
     }  
 }
