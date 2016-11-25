@@ -14,7 +14,11 @@ import com.vacomall.bean.Response;
 import com.vacomall.model.UserInfo;
 import com.vacomall.token.TokenManager;
 import com.vacomall.validate.ValidateUtil;
-
+/**
+ * 登录拦截器
+ * @author Administrator
+ *
+ */
 @RestController
 @RequestMapping("/login")
 public class LoginController {  
