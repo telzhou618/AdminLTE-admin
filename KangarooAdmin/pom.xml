@@ -26,6 +26,7 @@
 		<maven.resources.version>2.4.3</maven.resources.version>
 		<maven.surefire.version>2.7.2</maven.surefire.version>
 		<jackson.version>2.7.4</jackson.version>
+		
 	</properties>
 
 	<dependencies>

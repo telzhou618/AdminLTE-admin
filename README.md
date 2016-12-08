@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ###  **Vacomall-Spring-RestApi** 
 ### 项目说明
 ```
@@ -10,3 +11,6 @@
 7. 注解+AOP日志记录
 1. 统一处理返回客户端的数据格式如：日期、人民币.
 ```
+=======
+#KangarooAdmin
+>>>>>>> branch 'master' of https://git.oschina.net/kangarooorg/KangarooAdmin.git
