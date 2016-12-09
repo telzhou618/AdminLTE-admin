@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 *
  */
 @Controller
-@RequestMapping("/system/user")
+@RequestMapping("/system/role")
 public class RoleController {  
 
     @RequestMapping("/list")  
