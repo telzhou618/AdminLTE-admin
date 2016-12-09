@@ -1,0 +1,50 @@
+<#macro paginate currentPage totalPage actionUrl urlParas="">
+	<#if (totalPage <= 0) || (currentPage > totalPage)><#return></#if>
+	<#local startPage = currentPage - 4>
+	<#if (startPage < 1)><#local startPage = 1></#if>
+	
+	<#local endPage = currentPage + 4>
+	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
+	
+	<div class="page">
+		 <div class="page-box">
+			<#if (currentPage <= 8)>
+				<#local startPage = 1>
+			</#if>
+			<#if ((totalPage - currentPage) < 8)>
+				<#local endPage = totalPage>
+			</#if>
+			
+			<#if (currentPage == 1)>
+				<a href="javascript:void(0)" lang="On" class="before"><img src="/images/before.png"></a>
+			<#else>
+				<a href="${actionUrl}#{currentPage - 1}${urlParas!}" lang="On" class="before"><img src="/images/before.png"></a>
+			</#if>
+			
+			<#if (currentPage > 8)>
+			    <a href="${actionUrl}#{1}${urlParas!}" class="page-num">#{1}</a>
+			    <a href="${actionUrl}#{2}${urlParas!}" class="page-num">#{2}</a>
+			    <a href="javascript:void(0)" class="page-more">...</a>
+			</#if>
+			
+			<#list startPage..endPage as i>
+				<#if currentPage == i>
+				     <a href="javascript:void(0)" class="page-num page-click">#{i}</a>
+				<#else>
+					 <a href="${actionUrl}#{i}${urlParas!}" class="page-num">#{i}</a>
+				</#if>
+			</#list>
+			
+			<#if ((totalPage - currentPage) >= 8)>
+				<a href="javascript:void(0)" class="page-more">...</a>
+				<a href="${actionUrl}#{totalPage - 1}${urlParas!}" class="page-num">#{totalPage - 1}</a>
+				<a href="${actionUrl}#{totalPage}${urlParas!}" class="page-num">#{totalPage}</a>
+			</#if>
+			<#if (currentPage == totalPage)>
+				<a href="javascript:void(0)" lang="Next" class="next"><img src="/images/nect.png"></a>
+			<#else>
+				<a href="${actionUrl}#{currentPage + 1}${urlParas!}" lang="Next" class="next"><img src="/images/nect.png"></a>
+			</#if>
+		</div>
+	</div>
+</#macro>
