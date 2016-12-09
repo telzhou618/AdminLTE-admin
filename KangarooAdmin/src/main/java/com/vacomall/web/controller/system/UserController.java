@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 *
  */
 @Controller
-@RequestMapping("/system/role")
+@RequestMapping("/system/user")
 public class UserController {  
 
     @RequestMapping("/list")  
     public  String list(Model model){
 		return "system/user/list";
+    } 
+    
+    @RequestMapping("/add")  
+    public  String add(Model model){
+		return "system/user/add";
     }  
 }
