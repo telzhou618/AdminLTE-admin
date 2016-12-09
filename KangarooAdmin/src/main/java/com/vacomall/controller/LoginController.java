@@ -49,5 +49,6 @@ public class LoginController {
     public  Response logout(){
 		
 		return new Response().success("退出成功.");
+		
     }  
 }
