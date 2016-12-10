@@ -5,9 +5,13 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.vacomall.common.bean.Response;
+import com.vacomall.common.util.CommonUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.service.ISysUserService;
 /**
@@ -23,15 +27,15 @@ public class UserController {
 
 	@Autowired private ISysUserService sysUserService;
 	
-    @RequestMapping("/list")  
-    public  String list(Model model){
+    @RequestMapping("/list/{pageNumber}")  
+    public  String list(@PathVariable Integer pageNumber,Model model){
     	
-		Page<SysUser> page = new Page<SysUser>(1, 20);
+		Page<SysUser> page = new Page<SysUser>(pageNumber,20);
 		page.setOrderByField("createTime");
 		page.setAsc(false);
 		// 查询分页
-		Page<SysUser> userList = sysUserService.selectPage(page, null);
-		model.addAttribute("userList", userList);
+		Page<SysUser> pageData = sysUserService.selectPage(page, null);
+		model.addAttribute("pageData", pageData);
 		return "system/user/list";
     } 
     
@@ -42,10 +46,18 @@ public class UserController {
     
     
     @RequestMapping("/doAdd")  
-    public  String doAdd(SysUser user,Model model){
+    public  String doAdd(SysUser user){
     	user.setCreateTime(new Date());
+    	user.setPassword(CommonUtil.MD5(user.getPassword()));
     	sysUserService.insertSelective(user);
 		return "redirect:/system/user/list.html";
 
+    }  
+    
+    @RequestMapping("/delete")  
+    @ResponseBody
+    public  Response doAdd(String id){
+    	sysUserService.deleteById(id);
+    	return new Response().success();
     }  
 }

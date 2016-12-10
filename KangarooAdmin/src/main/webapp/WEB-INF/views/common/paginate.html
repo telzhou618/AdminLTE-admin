@@ -6,8 +6,7 @@
 	<#local endPage = currentPage + 4>
 	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
 	
-	<div class="page">
-		 <div class="page-box">
+	<ul class="pagination pagination-sm no-margin pull-right">
 			<#if (currentPage <= 8)>
 				<#local startPage = 1>
 			</#if>
@@ -16,35 +15,34 @@
 			</#if>
 			
 			<#if (currentPage == 1)>
-				<a href="javascript:void(0)" lang="On" class="before"><img src="/images/before.png"></a>
+				 <li><a href="javascript:void(0)">&laquo;</a></li>
 			<#else>
-				<a href="${actionUrl}#{currentPage - 1}${urlParas!}" lang="On" class="before"><img src="/images/before.png"></a>
+				 <li><a href="${actionUrl}#{currentPage - 1}${urlParas!}" >&laquo;</a></li>
 			</#if>
 			
 			<#if (currentPage > 8)>
-			    <a href="${actionUrl}#{1}${urlParas!}" class="page-num">#{1}</a>
-			    <a href="${actionUrl}#{2}${urlParas!}" class="page-num">#{2}</a>
-			    <a href="javascript:void(0)" class="page-more">...</a>
+			     <li><a href="${actionUrl}#{1}${urlParas!}" >#{1}</a></li>
+			     <li><a href="${actionUrl}#{2}${urlParas!}" >#{2}</a></li>
+			     <li><a href="javascript:void(0)" class="page-more">...</a></li>
 			</#if>
 			
 			<#list startPage..endPage as i>
 				<#if currentPage == i>
-				     <a href="javascript:void(0)" class="page-num page-click">#{i}</a>
+				      <li class="active"><a href="javascript:void(0)" >#{i}</a></li>
 				<#else>
-					 <a href="${actionUrl}#{i}${urlParas!}" class="page-num">#{i}</a>
+					  <li><a href="${actionUrl}#{i}${urlParas!}">#{i}</a></li>
 				</#if>
 			</#list>
 			
 			<#if ((totalPage - currentPage) >= 8)>
-				<a href="javascript:void(0)" class="page-more">...</a>
-				<a href="${actionUrl}#{totalPage - 1}${urlParas!}" class="page-num">#{totalPage - 1}</a>
-				<a href="${actionUrl}#{totalPage}${urlParas!}" class="page-num">#{totalPage}</a>
+				 <li><a href="javascript:void(0)" >...</a></li>
+				 <li><a href="${actionUrl}#{totalPage - 1}${urlParas!}" >#{totalPage - 1}</a></li>
+				 <li><a href="${actionUrl}#{totalPage}${urlParas!}" >#{totalPage}</a></li>
 			</#if>
 			<#if (currentPage == totalPage)>
-				<a href="javascript:void(0)" lang="Next" class="next"><img src="/images/nect.png"></a>
+				 <li><a href="javascript:void(0)">&raquo;</a></li>
 			<#else>
-				<a href="${actionUrl}#{currentPage + 1}${urlParas!}" lang="Next" class="next"><img src="/images/nect.png"></a>
+				 <li><a href="${actionUrl}#{currentPage + 1}${urlParas!}" >&raquo;</a></li>
 			</#if>
-		</div>
-	</div>
+	</ul>
 </#macro>
