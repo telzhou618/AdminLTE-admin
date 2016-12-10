@@ -38,7 +38,7 @@
                 <th>状态</th>
                 <th width="120px">操作</th>
               </tr>
-              <#list userList.getRecords() as user>
+              <#list pageData.getRecords() as user>
               	  <tr>
 	                <td><input name="userState" type="checkbox" class="minimal"></td>
 	                <td>${(user.userName)!}</td>
@@ -47,31 +47,22 @@
 	                <td><#if user.userState==1><span class="label label-success">启用</span><#else><span class="label label-danger">禁用</span></#if></td>
 	                <td>
 	                	<a class="btn btn-primary btn-xs">编辑</a>
-	                	<a class="btn btn-danger btn-xs">删除</a>
+	                	<a class="btn btn-danger btn-xs"
+	                	 data-tiggle="ajax"
+	                	 data-submit-url="/system/user/delete?id=${(user.id)!}"
+	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
 	                </td>
 	              </tr>
               </#list>
             </table>
           </div><!-- /.box-body -->
           <div class="box-footer">
-            <div class="col-xs-6">Showing 1 to 10 of 57 entries</div>
+            <div class="col-xs-6">显示 ${((pageData.current -1) * pageData.size)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
             <div class="col-xs-6">
-            	<ul class="pagination pagination-sm no-margin pull-right">
-	              <li><a href="#">&laquo;</a></li>
-	              <li><a href="#">1</a></li>
-	              <li class="active"><a href="#">2</a></li>
-	              <li><a href="#">3</a></li>
-	              <li><a href="#">4</a></li>
-	              <li><a href="#">5</a></li>
-	              <li><a href="#">6</a></li>
-	              <li><a href="#">7</a></li>
-	              <li><a href="#">8</a></li>
-	              <li><a href="#">&raquo;</a></li>
-	            </ul>
+	             <#include "/common/paginate.html" />
+	  			 <@paginate currentPage=pageData.getCurrent() totalPage=pageData.getPages() actionUrl="/system/user/list/" urlParas=".html?search=${search!}"  />
             </div>
-            
           </div>
-          
         </div><!-- /.box -->
       </div>
     </div>
