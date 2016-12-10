@@ -16,7 +16,6 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
-          
           <div class="box-header">
             <a class="btn btn-primary" href="/system/user/add.html"><i class="fa fa-plus"></i> 创建新用户</a>
             <div class="box-tools">
@@ -32,35 +31,47 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
-                <th>ID</th>
+                <th  width="30px"><input name="userState" type="checkbox" class="minimal"></th>
                 <th>用户名</th>
-                <th>创建时间</th>
                 <th>描述</th>
+                <th>创建时间</th>
                 <th>状态</th>
                 <th>操作</th>
               </tr>
               <#list userList.getRecords() as user>
               	  <tr>
-	                <th>${(user.id)!}</th>
-	                <th>${(user.username)!}</th>
-	                <th>${(user.createtime)!}</th>
-	                <th>${(user.userdesc)!}</th>
-	                <th><#if user.userstate==1>启用<#else>x 禁用</#if></th>
-	                <th>111</th>
+	                <td><input name="userState" type="checkbox" class="minimal"></td>
+	                <td>${(user.userName)!}</td>
+	                <td>${(user.userDesc)!'--'}</td>
+	                <td>${(user.createTime?string('yyyy/MM/dd HH:mm:ss'))!}</td>
+	                <td><#if user.userState==1><span class="label label-success">启用</span><#else><span class="label label-danger">禁用</span></#if></td>
+	                <td>
+	                	<a class="btn btn-primary btn-xs">编辑</a>
+	                	<a class="btn btn-danger btn-xs">删除</a>
+	                </td>
 	              </tr>
               </#list>
             </table>
           </div><!-- /.box-body -->
-          
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
+          <div class="box-footer">
+            <div class="col-xs-6">Showing 1 to 10 of 57 entries</div>
+            <div class="col-xs-6">
+            	<ul class="pagination pagination-sm no-margin pull-right">
+	              <li><a href="#">&laquo;</a></li>
+	              <li><a href="#">1</a></li>
+	              <li class="active"><a href="#">2</a></li>
+	              <li><a href="#">3</a></li>
+	              <li><a href="#">4</a></li>
+	              <li><a href="#">5</a></li>
+	              <li><a href="#">6</a></li>
+	              <li><a href="#">7</a></li>
+	              <li><a href="#">8</a></li>
+	              <li><a href="#">&raquo;</a></li>
+	            </ul>
+            </div>
+            
           </div>
+          
         </div><!-- /.box -->
       </div>
     </div>
