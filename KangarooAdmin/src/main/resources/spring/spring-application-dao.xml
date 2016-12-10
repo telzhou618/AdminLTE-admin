@@ -71,7 +71,6 @@
         <!-- 自动扫描注解方式配置的hibernate类文件 -->
         <property name="packagesToScan">
             <list>
-                <value>com.baomidou.hibernate.po</value>
                 <value>com.vacomall.web.model</value>
             </list>
         </property>

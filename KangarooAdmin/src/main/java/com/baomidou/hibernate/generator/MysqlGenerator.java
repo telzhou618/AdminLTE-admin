@@ -45,7 +45,7 @@ public class MysqlGenerator {
 		GlobalConfig gc = new GlobalConfig();
 		gc.setOutputDir("D:\\AUTO\\");
 		gc.setFileOverride(true);
-		gc.setAuthor("Yanghu");
+		gc.setAuthor("gaojun.zhou");
 
 		// 自定义文件命名，注意 %s 会自动填充表实体属性！
 		// gc.setMapperName("%sDao");
@@ -60,13 +60,13 @@ public class MysqlGenerator {
 		dsc.setDbType(DbType.MYSQL);
 		dsc.setDriverName("com.mysql.jdbc.Driver");
 		dsc.setUsername("root");
-		dsc.setPassword("521");
-		dsc.setUrl("jdbc:mysql://127.0.0.1:3306/hibernate-plus?characterEncoding=utf8");
+		dsc.setPassword("root");
+		dsc.setUrl("jdbc:mysql://127.0.0.1:3306/kangarooadmin?characterEncoding=utf8");
 		mpg.setDataSource(dsc);
 
 		// 策略配置
 		StrategyConfig strategy = new StrategyConfig();
-		strategy.setTablePrefix("bmd_");// 此处可以修改为您的表前缀
+		strategy.setTablePrefix("sys_");// 此处可以修改为您的表前缀
 		strategy.setNaming(NamingStrategy.remove_prefix_and_camel);// 表名生成策略
 		// strategy.setInclude(new String[] { "user" }); // 需要生成的表
 		// strategy.setExclude(new String[]{"test"}); // 排除生成的表
@@ -94,7 +94,8 @@ public class MysqlGenerator {
 
 		// 包配置
 		PackageConfig pc = new PackageConfig();
-		pc.setModuleName("hibernate");
+		pc.setParent("com.vacomall");
+		pc.setModuleName("web");
 		mpg.setPackageInfo(pc);
 		// 执行生成
 		mpg.execute();

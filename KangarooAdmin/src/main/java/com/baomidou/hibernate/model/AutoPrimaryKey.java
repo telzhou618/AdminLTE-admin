@@ -19,6 +19,11 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class AutoPrimaryKey extends Convert {
 
+	/**
+	* @Fields serialVersionUID : TODO()
+	*/
+	
+	private static final long serialVersionUID = 1L;
 	protected Long id;
 
 	@Id
