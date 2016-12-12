@@ -32,6 +32,6 @@
 	<!-- 切面 -->
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"
-			pointcut="execution(* com.vacomall.service.*.*(..))" />
+			pointcut="execution(* com.vacomall.service.impl.*.*(..))" />
 	</aop:config>
 </beans>
