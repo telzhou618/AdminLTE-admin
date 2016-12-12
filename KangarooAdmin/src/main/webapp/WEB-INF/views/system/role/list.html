@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      <small>系统管理 > 用户管理</small>
+      <small>系统管理 > 角色管理</small>
     </h1>
   </section>
   <!-- Main content -->
@@ -16,7 +16,7 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <a class="btn btn-primary" href="/system/user/add.html"><i class="fa fa-plus"></i> 创建新用户</a>
+            <a class="btn btn-primary" href="/system/role/add.html"><i class="fa fa-plus"></i> 创建新角色</a>
             <div class="box-tools">
               <div class="input-group" style="width: 250px;">
                 <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
@@ -30,25 +30,23 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
-                <th  width="30px"><input name="userState" type="checkbox" class="minimal"></th>
-                <th>用户名</th>
+                <th  width="30px"><input name="roleState" type="checkbox" class="minimal"></th>
+                <th>角色名称</th>
                 <th>描述</th>
-                <th>创建时间</th>
                 <th>状态</th>
                 <th width="120px">操作</th>
               </tr>
-              <#list pageData.getRecords() as user>
+              <#list pageData.getRecords() as role>
               	  <tr>
-	                <td><input name="userState" type="checkbox" class="minimal"></td>
-	                <td>${(user.userName)!}</td>
-	                <td>${(user.userDesc)!'--'}</td>
-	                <td>${(user.createTime?string('yyyy/MM/dd HH:mm:ss'))!}</td>
-	                <td><#if user.userState==1>启用<#else><font color="red">禁用</font></#if></td>
+	                <td><input name="roleState" type="checkbox" class="minimal"></td>
+	                <td>${(role.roleName)!}</td>
+	                <td>${(role.roleDesc)!'--'}</td>
+	                <td><#if role.roleState==1>启用<#else><font color="red">禁用</font></#if></td>
 	                <td>
-	                	<a class="btn btn-primary btn-xs" href="/system/user/edit/${(user.id)!}.html">编辑</a>
+	                	<a class="btn btn-primary btn-xs" href="/system/role/edit/${(role.id)!}.html">编辑</a>
 	                	<a class="btn btn-danger btn-xs"
 	                	 data-tiggle="ajax"
-	                	 data-submit-url="/system/user/delete?id=${(user.id)!}"
+	                	 data-submit-url="/system/role/delete?id=${(role.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
 	                </td>
 	              </tr>
@@ -59,7 +57,7 @@
             <div class="col-xs-6">显示 ${((pageData.current -1) * pageData.size)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
             <div class="col-xs-6">
 	             <#include "/common/paginate.html" />
-	  			 <@paginate currentPage=pageData.getCurrent() totalPage=pageData.getPages() actionUrl="/system/user/list/" urlParas=".html?search=${search!}"  />
+	  			 <@paginate currentPage=pageData.getCurrent() totalPage=pageData.getPages() actionUrl="/system/role/list/" urlParas=".html?search=${search!}"  />
             </div>
           </div>
         </div><!-- /.box -->

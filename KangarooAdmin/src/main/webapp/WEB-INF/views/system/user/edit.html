@@ -16,45 +16,42 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">创建新用户</h3>
+            <h3 class="box-title">编辑用户</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
           <div class="row">
           	<div class="col-md-4">
-        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/user/doAdd">
+        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/user/doEdit">
 	            <div class="box-body">
 	              <div class="form-group">
 	                <label for="uname">用户名</label>
-	               	<input type="text" id="uname" name="userName" class="form-control" placeholder="请输入用户名"  data-rule="用户名:required;username;">
+	                <input type="hidden" value="${sysUser.id}" name="id">
+	               	<input type="text" id="uname" name="userName" value="${(sysUser.userName)!}" class="form-control" placeholder="请输入用户名"  data-rule="用户名:required;username;">
 	              </div>
 	              <div class="form-group">
 	                <label for="password">密码</label>
-	                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" data-rule="密码: required; length(6~16)">
-	              </div>
-	              <div class="form-group">
-	                <label for="password2">确认密码</label>
-	                <input type="password" class="form-control" id="password2" name="password2" placeholder="请再次输入密码" data-rule="确认密码: required; match(password)">
+	                <input type="password" class="form-control" disabled="disabled" id="password" value="********" name="password" placeholder="请输入密码" data-rule="密码: required; length(6~16)">
 	              </div>
 	              <div class="form-group">
                       <label>描述</label>
-                      <textarea class="form-control" name="userDesc" rows="3" placeholder="请输入描述，最多300个字符 ..." ></textarea>
+                      <textarea class="form-control" name="userDesc" rows="3" placeholder="请输入描述，最多300个字符 ..." >${(sysUser.userDesc)!}</textarea>
                     </div>
 	              <div class="form-group">
-                  <label>
-                      <input name="userState" type="radio" class="minimal" checked value="1"> 启用
-                      <input name="userState" type="radio" class="minimal"  value="-1"> 禁用
-                     </label>
+                    <label>
+                      <input name="userState" type="radio" class="minimal" <#if sysUser.userState = 1> checked </#if> value="1"> 启用
+                      <input name="userState" type="radio" class="minimal" <#if sysUser.userState = -1>checked </#if>  value="-1"> 禁用
+                    </label>
                   </div>
                   <div class="form-group">
-                  	<#list roleList as role>
-                    <label title="${(role.roleDesc)!}">
-                      <input type="checkbox" name="roleId" class="minimal" value="${(role.id)!}">
-                      	${(role.roleName)!}
-                    </label>
-                    &nbsp;
+                  	<#list sysRoles as role>
+	                    <label title="${(role.roleDesc)!}">
+	                      <input type="checkbox" name="roleId" class="minimal" value="${(role.id)!}" <#if myRolds?seq_contains('${role.id}') > checked </#if> >
+	                      ${(role.roleName)!}
+	                    </label>
+	                    &nbsp;
                     </#list>
                   </div>
-	              </div><!-- /.box-body -->
+	            </div><!-- /.box-body -->
 	            <div class="box-footer">
 	              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
 	              <a  class="btn btn-default" href="/system/user/list/1.html"><i class="fa fa-close"></i>  取消</a>
