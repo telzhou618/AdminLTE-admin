@@ -2,6 +2,7 @@ package com.vacomall.controller.system;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,22 +37,25 @@ public class UserController {
 	@Autowired private ISysUserRoleService sysUserRoleService;
 	
     @RequestMapping("/list/{pageNumber}")  
-    public  String list(@PathVariable Integer pageNumber,Model model){
+    public  String list(@PathVariable Integer pageNumber,String search,Model model){
     	
 		Page<SysUser> page = new Page<SysUser>(pageNumber,20);
 		page.setOrderByField("createTime");
 		page.setAsc(false);
 		// 查询分页
-		Page<SysUser> pageData = sysUserService.selectPage(page, null);
+		EntityWrapper<SysUser> ew = new EntityWrapper<SysUser>();
+		if(StringUtils.isNotBlank(search)){
+			ew.like("userName",search);
+			model.addAttribute("search",search);
+		}
+		Page<SysUser> pageData = sysUserService.selectPage(page, ew);
 		model.addAttribute("pageData", pageData);
 		return "system/user/list";
     } 
     
     @RequestMapping("/add")  
     public  String add(Model model){
-    	EntityWrapper<SysRole> ew = new EntityWrapper<SysRole>();
-    	ew.addFilter("roleState = {0}",1);
-    	model.addAttribute("roleList", sysRoleService.selectList(ew));
+    	model.addAttribute("roleList", sysRoleService.selectList(null));
 		return "system/user/add";
     } 
     

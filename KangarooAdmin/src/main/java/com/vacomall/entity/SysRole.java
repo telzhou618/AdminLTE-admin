@@ -1,9 +1,9 @@
 package com.vacomall.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.IdType;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -31,6 +31,9 @@ public class SysRole implements Serializable {
 
 	/** 状态,1-启用,-1禁用 */
 	private Integer roleState;
+	
+	/** 创建时间 */
+	private Date createTime;
 
 
 	public String getId() {
@@ -65,4 +68,11 @@ public class SysRole implements Serializable {
 		this.roleState = roleState;
 	}
 
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 }
