@@ -109,4 +109,16 @@ public class RoleController extends SuperController{
     	sysRoleService.updateSelectiveById(sysRole);
     	return redirectTo("/system/role/list/1.html");
     } 
+    
+    /**
+     * 权限
+     */
+    @RequestMapping("/auth")  
+    public  String auth( String id,Model model){
+    	
+    	SysRole sysRole = sysRoleService.selectById(id);
+
+    	model.addAttribute("sysRole", sysRole);
+    	return "system/role/auth";
+    } 
 }
