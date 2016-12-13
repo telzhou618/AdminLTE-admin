@@ -15,25 +15,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.vacomall.common.bean.Response;
+import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
 import com.vacomall.service.ISysRoleService;
 /**
- * 用户控制器
-* @ClassName: UserController
-* @author Gaojun.Zhou
-* @date 2016年12月9日 下午1:48:35
-*
+ * 角色控制器
+ * @author Gaojun.Zhou
+ * @date 2016年12月13日 上午10:23:41
  */
 @Controller
 @RequestMapping("/system/role")
-public class RoleController {  
+public class RoleController extends SuperController{  
 
+	/**
+	 * 角色服务
+	 */
 	@Autowired private ISysRoleService sysRoleService;
 	
+	/**
+	 * 分页查询角色
+	 */
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
     	
-		Page<SysRole> page = new Page<SysRole>(pageNumber,20);
+		Page<SysRole> page = getPage(pageNumber);
 		page.setOrderByField("createTime");
 		page.setAsc(false);
 		// 查询分页
@@ -47,34 +52,37 @@ public class RoleController {
 		return "system/role/list";
     } 
     
+    /**
+     * 新增角色
+     */
     @RequestMapping("/add")  
     public  String add(Model model){
 		return "system/role/add";
     } 
     
-    
+    /**
+     * 执行新增角色
+     */
     @RequestMapping("/doAdd")  
     public  String doAdd(SysRole role){
     	role.setCreateTime(new Date());
     	sysRoleService.insertSelective(role);
-		return "redirect:/system/role/list/1.html";
+		return redirectTo("/system/role/list/1.html");
 
     }  
     
+    /**
+     * 删除角色
+     */
     @RequestMapping("/delete")  
     @ResponseBody
     public  Response delete(String id){
     	sysRoleService.deleteById(id);
     	return new Response().success();
     }  
-    
+
     /**
-     * 批量删除
-    * @Title: deleteBatch 
-    * @param @param id
-    * @param @return     
-    * @return Response     
-    * @throws
+     * 批量删除角色
      */
     @RequestMapping("/deleteBatch")  
     @ResponseBody
@@ -84,12 +92,7 @@ public class RoleController {
     }  
     
     /**
-     * 编辑
-    * @Title: edit 
-    * @param @param user
-    * @param @return     
-    * @return String     
-    * @throws
+     * 编辑角色
      */
     @RequestMapping("/edit/{id}")  
     public  String edit(@PathVariable String id,Model model){
@@ -97,17 +100,13 @@ public class RoleController {
     	model.addAttribute(sysRole);
     	return "system/role/edit";
     } 
+    
     /**
-     * 执行编辑
-    * @Title: edit 
-    * @param @param user
-    * @param @return     
-    * @return String     
-    * @throws
+     * 执行编辑角色
      */
     @RequestMapping("/doEdit")  
     public  String doEdit(SysRole sysRole,Model model){
     	sysRoleService.updateSelectiveById(sysRole);
-    	return "redirect:/system/role/list/1.html";
+    	return redirectTo("/system/role/list/1.html");
     } 
 }
