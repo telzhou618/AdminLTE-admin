@@ -47,6 +47,7 @@
 	                <td>${(role.createTime?string('yyyy/MM/dd HH:mm:ss'))!'--'}</td>
 	                <td><#if role.roleState==1>启用<#else><font color="red">禁用</font></#if></td>
 	                <td>
+	                	<a id="${role.id}" class="btn btn-success btn-xs auth" data-toggle="modal" title="授权" data-placement="bottom">授权</a>
 	                	<a class="btn btn-primary btn-xs" href="/system/role/edit/${(role.id)!}.html" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
 	                	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
 	                	 data-tiggle="ajax"
@@ -58,7 +59,6 @@
             </table>
           </div><!-- /.box-body -->
           <div class="box-footer">
-            
             <div class="col-xs-6">显示 ${((pageData.current -1) * pageData.size)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
             <div class="col-xs-6">
 	             <#include "/common/paginate.html" />
@@ -72,4 +72,33 @@
 </div><!-- /.content-wrapper -->
 </@body>
 <@footer>
+
+<div id="ajax-modal" class="modal fade" tabindex="-1" style="display: none;"></div>
+<script id="ajax" type="text/javascript">
+
+	var $modal = $('#ajax-modal');
+	
+	$('.auth').on('click', function(){
+	  // create the backdrop and wait for next modal to be triggered
+	  var me= this;
+	  $('body').modalmanager('loading');
+	  $modal.load('/system/role/auth?id='+$(me).attr('id'), '', function(){
+	      $modal.modal();
+	    });
+	});
+	
+	$modal.on('click', '.update', function(){
+	  $modal.modal('loading');
+	  setTimeout(function(){
+	    $modal
+	      .modal('loading')
+	      .find('.modal-body')
+	        .prepend('<div class="alert alert-success fade in">' +
+	          'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+	        '</div>');
+	  }, 1000);
+	});
+
+</script> 
+
 </@footer>
