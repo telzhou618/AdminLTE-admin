@@ -37,7 +37,7 @@
                 <th>描述</th>
                 <th>创建时间</th>
                 <th>状态</th>
-                <th width="120px">操作</th>
+                <th width="150px">操作</th>
               </tr>
               <#list pageData.getRecords() as role>
               	  <tr>
@@ -47,8 +47,8 @@
 	                <td>${(role.createTime?string('yyyy/MM/dd HH:mm:ss'))!'--'}</td>
 	                <td><#if role.roleState==1>启用<#else><font color="red">禁用</font></#if></td>
 	                <td>
-	                	<a class="btn btn-primary btn-xs" href="/system/role/edit/${(role.id)!}.html">编辑</a>
-	                	<a class="btn btn-danger btn-xs"
+	                	<a class="btn btn-primary btn-xs" href="/system/role/edit/${(role.id)!}.html" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
+	                	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/role/delete?id=${(role.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>

@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.vacomall.common.bean.Response;
+import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
 import com.vacomall.entity.SysUser;
 import com.vacomall.entity.SysUserRole;
@@ -23,23 +24,24 @@ import com.vacomall.service.ISysUserRoleService;
 import com.vacomall.service.ISysUserService;
 /**
  * 用户控制器
-* @ClassName: UserController
-* @author Gaojun.Zhou
-* @date 2016年12月9日 下午1:48:35
-*
+ * @author Gaojun.Zhou
+ * @date 2016年12月13日 上午10:22:41
  */
 @Controller
 @RequestMapping("/system/user")
-public class UserController {  
+public class UserController extends SuperController{  
 
 	@Autowired private ISysUserService sysUserService;
 	@Autowired private ISysRoleService sysRoleService;
 	@Autowired private ISysUserRoleService sysUserRoleService;
 	
+	/**
+	 * 分页查询用户
+	 */
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
     	
-		Page<SysUser> page = new Page<SysUser>(pageNumber,20);
+		Page<SysUser> page = getPage(pageNumber);
 		page.setOrderByField("createTime");
 		page.setAsc(false);
 		// 查询分页
@@ -53,20 +55,27 @@ public class UserController {
 		return "system/user/list";
     } 
     
+    /**
+     * 新增用户
+     */
     @RequestMapping("/add")  
     public  String add(Model model){
     	model.addAttribute("roleList", sysRoleService.selectList(null));
 		return "system/user/add";
     } 
     
-    
+    /**
+     * 执行新增
+     */
     @RequestMapping("/doAdd")  
     public  String doAdd(SysUser user,String[] roleId){
     	
     	sysUserService.insertUser(user,roleId);
-		return "redirect:/system/user/list/1.html";
+		return redirectTo("/system/user/list/1.html");
     }  
-    
+    /**
+     * 删除用户
+     */
     @RequestMapping("/delete")  
     @ResponseBody
     public  Response delete(String id){
@@ -74,14 +83,9 @@ public class UserController {
     	return new Response().success();
     }  
     
-    /**
-     * 编辑
-    * @Title: edit 
-    * @param @param user
-    * @param @return     
-    * @return String     
-    * @throws
-     */
+	/**
+	 * 编辑用户
+	 */
     @RequestMapping("/edit/{id}")  
     public  String edit(@PathVariable String id,Model model){
     	SysUser sysUser = sysUserService.selectById(id);
@@ -106,15 +110,10 @@ public class UserController {
     } 
     /**
      * 执行编辑
-    * @Title: edit 
-    * @param @param user
-    * @param @return     
-    * @return String     
-    * @throws
      */
     @RequestMapping("/doEdit")  
     public  String doEdit(SysUser sysUser,String[] roleId,Model model){
     	sysUserService.updateUser(sysUser,roleId);
-    	return "redirect:/system/user/list/1.html";
+    	return redirectTo("/system/user/list/1.html");
     } 
 }
