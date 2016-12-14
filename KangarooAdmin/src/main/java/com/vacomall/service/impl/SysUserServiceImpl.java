@@ -6,6 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.kisso.common.encrypt.MD5;
 import com.vacomall.common.util.CommonUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.entity.SysUserRole;
@@ -62,6 +63,15 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 				userRoleMapper.insert(sysUserRole);
 			}
 		}
+	}
+
+	@Override
+	public SysUser login(String userName, String password) {
+		// TODO Auto-generated method stub
+		SysUser sysUser = new SysUser();
+		sysUser.setUserName(userName);
+		sysUser.setPassword(MD5.toMD5(password));
+		return this.selectOne(sysUser);
 	}
 
 
