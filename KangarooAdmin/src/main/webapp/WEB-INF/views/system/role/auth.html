@@ -1,19 +1,64 @@
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h3>设置角色[${(sysRole.roleName)!}]的权限</h3>
-</div>
-<div class="modal-body">
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#tab1" data-toggle="tab">Tab 1</a></li>
-		<li><a href="#tab2" data-toggle="tab">Tab 2</a></li>
-	</ul>
-	<div class="tab-content">
-		<div class="tab-pane active" id="tab1"><p>This modal was loaded in via ajax</p></div>
-		<div class="tab-pane" id="tab2"><p>This is some other tab content</p></div>
-	</div>
-	<button class="btn update">更新</button>
-</div>
-<div class="modal-footer">
-	<button type="button" data-dismiss="modal" class="btn">关闭</button>
-	<button type="button" data-dismiss="modal" class="btn btn-primary">确认</button>
-</div>
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 角色管理</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+     <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <form action="/system/role/doAuth.html" method="post">
+        <input type="hidden" value="${(sysRole.id)!}" name="roleId" />
+        <div class="box box-primary">
+          <!-- form start -->
+          <div class="box-body">
+	        <table class="table table-hover">
+	          <tr>
+	            <th colspan="2">给角色【${(sysRole.roleName)!}】授权</th>
+	          </tr>
+	          <#list treeMenuVos as vo>
+	          <tr>
+	             <td width="120px">
+	             	<label><input name="mid" type="checkbox" <#if vo.menuVo.allowAccess>  checked="checked"  </#if>  value="${(vo.menuVo.sysMenu.id)!}" class="minimal checkbox-tr"> ${(vo.menuVo.sysMenu.menuName)!} ></label></td>
+	             <td>
+	             	<#list vo.menuVoChild as ch>
+	                <label><input name="mid" type="checkbox" <#if ch.allowAccess>  checked="checked"  </#if> value="${(ch.sysMenu.id)!}" class="minimal checkbox-td"> ${(ch.sysMenu.menuName)!}</label>&nbsp;
+	             	</#list>
+	             </td>
+	           </tr>
+	           </#list>
+	        </table>
+	      </div>
+         <div class="box-footer">
+              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  确认授权</button>
+              <a  class="btn btn-default" href="/system/role/list/1.html"><i class="fa fa-angle-left"></i>  返回</a>
+         </div>
+        </div><!-- /.box -->
+        </form>
+      </div><!--/.col (left) -->
+     </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+<script type="text/javascript">
+	
+	$(".checkbox-tr").on('ifClicked',function(){
+		$(this).parents('tr').find('.checkbox-td').iCheck('check');
+	}).on('ifUnchecked',function(){
+		$(this).parents('tr').find('.checkbox-td').iCheck('uncheck');
+	});
+
+	$(".checkbox-td").on('ifClicked',function(){
+		$(this).parents('tr').find('.checkbox-tr').iCheck('check');
+	});
+	
+</script>
+</@footer>

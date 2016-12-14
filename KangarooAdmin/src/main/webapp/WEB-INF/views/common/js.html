@@ -1,5 +1,16 @@
-<!-- REQUIRED JS SCRIPTS -->
 
+<!-- 确认提示组件 -->
+<div id="confirm-modal" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
+  <div class="modal-body">
+    <p>您确定要删除该条记录吗?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+    <button type="button"  class="btn btn-primary del">删除</button>
+  </div>
+</div>
+
+<!-- REQUIRED JS SCRIPTS -->
 <!-- jQuery 2.1.4 -->
 <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
@@ -13,13 +24,13 @@
      user experience. Slimscroll is required when using the
      fixed layout. -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-
+<!-- nice-validator-1.0.8 -->
 <script src="/plugins/nice-validator-1.0.8/jquery.validator.js?local=zh-CN"></script>
+<!--jquery-confirm  -->
+<script src="/plugins/jquery-confirm/jquery-confirm.min.js"></script>
 
-<script src="/plugins/bootbox.min.js"></script>
 
-<script src="/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
-<script src="/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+
 
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
