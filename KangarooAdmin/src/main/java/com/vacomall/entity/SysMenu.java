@@ -3,7 +3,6 @@ package com.vacomall.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.IdType;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -35,6 +34,8 @@ public class SysMenu implements Serializable {
 	/** 连接地址 */
 	private String url;
 
+	/** 图标 */
+	private String icon;
 	/** 排序 */
 	private Integer sort;
 
@@ -87,4 +88,11 @@ public class SysMenu implements Serializable {
 		this.sort = sort;
 	}
 
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 }

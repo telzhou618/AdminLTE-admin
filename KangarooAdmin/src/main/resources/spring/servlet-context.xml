@@ -70,8 +70,7 @@
 		<property name="maxUploadSize" value="5242880"></property>
 	</bean>
 	
-	
-		<!-- KISSO 初始化 -->
+	<!-- KISSO 初始化 -->
 	<bean id="kissoInit" class="com.baomidou.kisso.web.WebKissoConfigurer" init-method="initKisso">
 		<property name="ssoPropPath" value="properties/sso.properties" />
 	</bean>
@@ -90,5 +89,13 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven> 
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.vacomall.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
 	
 </beans>
