@@ -6,33 +6,34 @@
 /**
  * Ajax提交操作
  */
-
 $("*[data-tiggle='ajax']").click(function(){
 	
 	var dataUrl = $(this).attr("data-submit-url");
 	var dataConfirm = $(this).attr("data-confirm");
 	
-	bootbox.confirm({
-	    title: "警告消息",
-	    message: dataConfirm ? dataConfirm : "确认执行该操作?",
-	    backdrop: true,
+	$.confirm({
+		type: 'red',
+		closeIcon: true,
+	    title: '警告',
+	    content: dataConfirm ? dataConfirm : '确认操作?',
 	    buttons: {
-	        cancel: {
-	            label: '<i class="fa fa-times"></i> 取消'
+	        '确认': {
+	            btnClass: 'btn-blue',
+	            action: function(){
+	            	$.post(dataUrl,{},function(json){
+						if(json.meta.success){
+							window.location.reload();
+						}else{
+							$.alert({
+							    title: '提示',
+							    content: json.meta.message,
+							    buttons:{"好的":{ btnClass: 'btn-blue'}}
+							});
+						}
+					});
+	            }
 	        },
-	        confirm: {
-	            label: '<i class="fa fa-check"></i> 确认',
-	             className: 'btn-success'
-	        }
-	    },
-	    callback: function (result) {
-	    	if(result){
-	    		$.post(dataUrl,{},function(json){
-	    			if(json.meta.success){
-	    				window.location.reload();
-	    			}
-	    		});
-	    	}
+	        '取消':{}
 	    }
 	});
 	
@@ -68,39 +69,44 @@ $("*[delete-batch-url]").click(function(){
 	var deleteBatchUrl = $(this).attr('delete-batch-url');
 	var ids = [];
 	$.each($("input:checked"),function(n,i){
-		ids.push($(this).val());
+		if($(this).val()!='root'){
+		   ids.push($(this).val());
+		}
 	});
 	
 	if(ids.length==0){
-		bootbox.alert({
-			title:'提示',
-		    message: "请选择要删除的记录!",
-		    backdrop: true
+		$.alert({
+		    title: '提示',
+		    backgroundDismiss:true,
+		    content: "请选择要删除的记录!",
+		    buttons:{"好的":{ btnClass: 'btn-blue'}}
 		});
 	}else{
-		bootbox.confirm({
-	    title: "警告消息",
-	    message: "确认删除选中的【"+ids.length+"】条记录?",
-	    backdrop: true,
-	    buttons: {
-	        cancel: {
-	            label: '<i class="fa fa-times"></i> 取消'
-	        },
-	        confirm: {
-	            label: '<i class="fa fa-check"></i> 确认',
-	             className: 'btn-success'
-	        }
-	    },
-	    callback: function (result) {
-	    	if(result){
-	    		$.post(deleteBatchUrl,{id:ids},function(json){
-	    			if(json.meta.success){
-	    				window.location.reload();
-	    			}
-	    		});
-	    	}
-	    }
-	});
+		$.confirm({
+			type: 'red',
+			closeIcon: true,
+		    title: '警告',
+		    content: "确认删除选中的【"+ids.length+"】条记录?",
+		    buttons: {
+		        '确认': {
+		            btnClass: 'btn-blue',
+		            action: function(){
+		            	$.post(deleteBatchUrl,{id:ids},function(json){
+							if(json.meta.success){
+								window.location.reload();
+							}else{
+								$.alert({
+								    title: '提示',
+								    content: json.meta.message,
+								    buttons:{"好的":{ btnClass: 'btn-blue'}}
+								});
+							}
+						});
+		            }
+		        },
+		        '取消':{}
+		    }
+		});		
 	}
 });
 

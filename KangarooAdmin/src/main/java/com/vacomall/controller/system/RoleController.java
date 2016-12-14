@@ -17,6 +17,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
+import com.vacomall.entity.vo.TreeMenuVo;
+import com.vacomall.service.ISysMenuService;
+import com.vacomall.service.ISysRoleMenuService;
 import com.vacomall.service.ISysRoleService;
 /**
  * 角色控制器
@@ -31,6 +34,14 @@ public class RoleController extends SuperController{
 	 * 角色服务
 	 */
 	@Autowired private ISysRoleService sysRoleService;
+	/**
+	 * 菜单服务
+	 */
+	@Autowired private ISysMenuService sysMenuService;
+	/**
+	 * 角色权限服务
+	 */
+	@Autowired private ISysRoleMenuService sysRoleMenuService;
 	
 	/**
 	 * 分页查询角色
@@ -113,12 +124,24 @@ public class RoleController extends SuperController{
     /**
      * 权限
      */
-    @RequestMapping("/auth")  
-    public  String auth( String id,Model model){
+    @RequestMapping("/auth/{id}")  
+    public  String auth(@PathVariable String id,Model model){
     	
     	SysRole sysRole = sysRoleService.selectById(id);
-
+    	List<TreeMenuVo> TreeMenuVos = sysMenuService.selectTreeMenuVoList(id);
+    	
     	model.addAttribute("sysRole", sysRole);
+    	model.addAttribute("treeMenuVos", TreeMenuVos);
+    	
     	return "system/role/auth";
+    } 
+    
+    /**
+     * 权限
+     */
+    @RequestMapping("/doAuth")  
+    public  String doAuth(String roleId,String[] mid,Model model){
+    	sysRoleMenuService.addAuth(roleId,mid);
+    	return redirectTo("/system/role/list/1.html");
     } 
 }
