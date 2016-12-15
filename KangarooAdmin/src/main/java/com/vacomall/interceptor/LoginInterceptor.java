@@ -51,7 +51,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				/*
 				 * 正常请求，request 设置 token 减少二次解密
 				 */
-				request.setAttribute("token", token);
 				request.setAttribute(SSOConfig.SSO_TOKEN_ATTR, token);
 			}
 		}

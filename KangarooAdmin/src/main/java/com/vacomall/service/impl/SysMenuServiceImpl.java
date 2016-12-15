@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import com.vacomall.entity.SysMenu;
 import com.vacomall.entity.SysRoleMenu;
 import com.vacomall.entity.vo.MenuVo;
+import com.vacomall.entity.vo.SysMenuVo;
 import com.vacomall.entity.vo.TreeMenuVo;
 import com.vacomall.mapper.SysMenuMapper;
 import com.vacomall.service.ISysMenuService;
@@ -79,5 +80,34 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
 		});
 		
 		return treeMenuVos;
+	}
+
+	@Override
+	public List<SysMenuVo> selectSysMenuTree() {
+		// TODO Auto-generated method stub
+		/**
+		 * 查询所有权限树
+		 */
+		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
+		ew.orderBy("sort", true);
+		ew.addFilter("pid = {0} ", "0");
+		List<SysMenu> sysMenus = this.selectList(ew);
+		
+		List<SysMenuVo> sysMenuVos = Lists.transform(sysMenus, new Function<SysMenu, SysMenuVo>() {
+			@Override
+			public SysMenuVo apply(SysMenu sysMenu) {
+				// TODO Auto-generated method stub
+				
+				SysMenuVo vo = new SysMenuVo();
+				vo.setSysMenu(sysMenu);
+				EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
+				ew.orderBy("sort", true);
+				ew.addFilter("pid = {0} ", sysMenu.getId());
+				vo.setSysMenuChild(selectList(ew));
+				return vo;
+			}
+		});
+		
+		return sysMenuVos;
 	}
 }
