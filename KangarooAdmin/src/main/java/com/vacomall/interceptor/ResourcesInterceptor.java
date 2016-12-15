@@ -15,9 +15,10 @@ import com.vacomall.entity.vo.SysMenuVo;
 import com.vacomall.service.ISysMenuService;
 
 /**
- * 资源拦截器
+ * 权限拦截器
+ * 
  * @author Gaojun.Zhou
- * @date 2016年12月15日 下午2:35:27
+ * @date 2016年12月15日 下午4:27:55
  */
 public class ResourcesInterceptor extends HandlerInterceptorAdapter {
 
@@ -25,10 +26,10 @@ public class ResourcesInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		// TODO Auto-generated method stub
-		
-		SSOToken token =  SSOHelper.getToken(request);
-		
-		if(token != null){
+
+		SSOToken token = SSOHelper.getToken(request);
+
+		if (token != null) {
 			/**
 			 * 登录信息
 			 */
@@ -37,16 +38,18 @@ public class ResourcesInterceptor extends HandlerInterceptorAdapter {
 			 * 资源
 			 */
 			String resource = request.getParameter("resource");
-			if(StringUtils.isNotBlank(resource)){
+			if (StringUtils.isNotBlank(resource)) {
 				request.getSession().setAttribute("resource", resource);
 			}
 			/**
 			 * 获取当前用户的菜单
 			 */
-			List<SysMenuVo> sysMenuVos = SpringUtil.getBean(ISysMenuService.class).selectSysMenuTree();
+			List<SysMenuVo> sysMenuVos = SpringUtil.getBean(
+					ISysMenuService.class).selectSysMenuTree();
 			request.setAttribute("sysMenuVos", sysMenuVos);
-			
+
 		}
 		return true;
+
 	}
 }

@@ -24,7 +24,6 @@
 	<!-- 开启aop，对类代理-->
 	<aop:config proxy-target-class="true"/>
 	
-	
 	<!-- freemarker的配置 -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -52,7 +51,6 @@
 		<property name="order" value="1" />
 	</bean>
 	
-	
 	<!-- 资源映射 -->
 	<mvc:resources location="/WEB-INF/static/bootstrap/" mapping="/bootstrap/**"/>
 	<mvc:resources location="/WEB-INF/static/dist/" mapping="/dist/**"/>
@@ -60,7 +58,6 @@
 	<mvc:resources location="/WEB-INF/static/images/" mapping="/images/**"/>
 	<mvc:resources location="/WEB-INF/static/plugins/" mapping="/plugins/**"/>
 	 
-	
 	<!-- 定义文件上传解析器 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -100,6 +97,11 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.vacomall.interceptor.ResourcesInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.vacomall.interceptor.PermissionInterceptor" />
 		</mvc:interceptor>
 		
 	</mvc:interceptors>
