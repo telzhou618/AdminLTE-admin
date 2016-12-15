@@ -110,4 +110,13 @@ $("*[delete-batch-url]").click(function(){
 	}
 });
 
+//sidebar-menu
+
+$(".sidebar-menu a").click(function(){
+	id = $(this).attr('id');
+	if(id){
+	  $.cookie("selct_id",id);
+	}
+});
+
 })(jQuery, window);

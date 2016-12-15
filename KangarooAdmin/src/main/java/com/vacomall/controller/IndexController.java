@@ -1,13 +1,12 @@
 package com.vacomall.controller;
 
-import java.util.Date;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vacomall.common.anno.IgnoreSecurity;
 import com.vacomall.common.anno.Log;
+import com.vacomall.service.ISysMenuService;
 /**
  * 首页控制器
 * @ClassName: IndexController
@@ -19,17 +18,14 @@ import com.vacomall.common.anno.Log;
 @RequestMapping("/")
 public class IndexController {  
     
-	/**
-	 * Token服务
-	 */
-	@IgnoreSecurity
+	
+	@Autowired private ISysMenuService sysMenuService;
+	
+	
 	@Log("访问首页")
     @RequestMapping(value = {"/","/index"})  
     public  String index(Model model){
-		
-		model.addAttribute("name", "张三");
-		model.addAttribute("date", new Date());
-		model.addAttribute("money", 15.7585D);
+	
 		return "index";
     }  
 }

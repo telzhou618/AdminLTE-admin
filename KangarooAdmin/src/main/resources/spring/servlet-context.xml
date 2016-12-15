@@ -91,9 +91,15 @@
 	</mvc:annotation-driven> 
 	
 	<mvc:interceptors>
+		
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.vacomall.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.vacomall.interceptor.ResourcesInterceptor" />
 		</mvc:interceptor>
 		
 	</mvc:interceptors>
