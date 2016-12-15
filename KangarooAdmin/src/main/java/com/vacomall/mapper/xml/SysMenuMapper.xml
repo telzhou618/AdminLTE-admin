@@ -4,7 +4,19 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, menuName, pid, leaf, url, sort
+		id, menuName, pid, leaf, url, sort,deep,code,resource
 	</sql>
-
+	
+		
+	<select id="selectMenuByuserId" parameterType="java.lang.String" resultType="com.vacomall.entity.SysMenu">
+	
+		SELECT m.* FROM `sys_user_role` ur
+		INNER JOIN `sys_role` r ON r.`id` = ur.`roleId`
+		INNER JOIN  `sys_role_menu` rm ON rm.`roleId` = ur.`roleId`
+		INNER JOIN `sys_menu` m ON m.`id` = rm.`menuId`
+		AND ur.`userId` = #{uid}
+		AND r.`roleState` = 1
+		
+	</select>
+	
 </mapper>
