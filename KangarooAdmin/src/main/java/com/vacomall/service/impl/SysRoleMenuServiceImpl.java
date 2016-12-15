@@ -2,6 +2,7 @@ package com.vacomall.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -31,14 +32,14 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuMapper, S
 		/**
 		 * 重新授权
 		 */
-		for(String menuId : menuIds){
-			
-			SysRoleMenu sysRoleMenu2 = new SysRoleMenu();
-			sysRoleMenu2.setRoleId(roleId);
-			sysRoleMenu2.setMenuId(menuId);
-			this.insert(sysRoleMenu2);
+		if(ArrayUtils.isNotEmpty(menuIds)){
+			for(String menuId : menuIds){
+				SysRoleMenu sysRoleMenu2 = new SysRoleMenu();
+				sysRoleMenu2.setRoleId(roleId);
+				sysRoleMenu2.setMenuId(menuId);
+				this.insert(sysRoleMenu2);
+			}
 		}
-		
 	}
 
 	@Override

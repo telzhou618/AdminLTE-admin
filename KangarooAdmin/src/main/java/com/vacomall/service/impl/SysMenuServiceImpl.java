@@ -3,6 +3,7 @@ package com.vacomall.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -31,6 +32,8 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
 	 */
 	@Autowired private ISysRoleMenuService sysRoleMenuService;
 	
+	@Autowired private SysMenuMapper sysMenuMapper;
+	
 	@Override
 	public List<TreeMenuVo> selectTreeMenuVoList(String roleId) {
 		// TODO Auto-generated method stub
@@ -53,6 +56,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
 		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
 		ew.orderBy("sort", true);
 		ew.addFilter("pid = {0} ", "0");
+		
 		List<SysMenu> sysMenus = this.selectList(ew);
 
 		List<TreeMenuVo> treeMenuVos = Lists.transform(sysMenus, new Function<SysMenu, TreeMenuVo>() {
@@ -108,6 +112,54 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
 			}
 		});
 		
+		return sysMenuVos;
+	}
+
+	@Override
+	public List<SysMenu> selectMenuByuserId(String uid) {
+		// TODO Auto-generated method stub
+		return sysMenuMapper.selectMenuByuserId(uid);
+	}
+
+	@Override
+	@Cacheable(value = "permissionCache", key = "#uid")
+	public List<SysMenuVo> selectMenuVoByuserId(String uid) {
+		// TODO Auto-generated method stub
+		/**
+		 * 我的菜单
+		 */
+		final List<String> idList= Lists.transform(this.selectMenuByuserId(uid), new Function<SysMenu, String>() {
+			@Override
+			public String apply(SysMenu input) {
+				// TODO Auto-generated method stub
+				return input.getId();
+			}
+		});
+	
+		/**
+		 * 筛选菜单树
+		 */
+		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
+		ew.orderBy("sort", true);
+		ew.addFilter("pid = {0} ", "0");
+		ew.in("id", idList);
+		List<SysMenu> sysMenus = this.selectList(ew);
+		
+		List<SysMenuVo> sysMenuVos = Lists.transform(sysMenus, new Function<SysMenu, SysMenuVo>() {
+			@Override
+			public SysMenuVo apply(SysMenu sysMenu) {
+				// TODO Auto-generated method stub
+				
+				SysMenuVo vo = new SysMenuVo();
+				vo.setSysMenu(sysMenu);
+				EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
+				ew.orderBy("sort", true);
+				ew.addFilter("pid = {0} ", sysMenu.getId());
+				ew.in("id", idList);
+				vo.setSysMenuChild(selectList(ew));
+				return vo;
+			}
+		});
 		return sysMenuVos;
 	}
 }

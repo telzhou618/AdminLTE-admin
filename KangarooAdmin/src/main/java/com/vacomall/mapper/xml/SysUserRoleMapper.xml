@@ -7,14 +7,4 @@
 		Id, userId, roleId
 	</sql>
 	
-	<select id="selectPermissionByUid" parameterType="java.lang.String" resultType="java.lang.String">
-	
-		SELECT m.`resource` FROM `sys_user_role` ur
-		INNER JOIN  `sys_role_menu` rm ON rm.`roleId` = ur.`roleId`
-		INNER JOIN `sys_menu` m ON m.`id` = rm.`menuId`
-		AND ur.`userId` = #{uid}
-		AND m.`resource` IS NOT NULL
-		
-	</select>
-	
 </mapper>
