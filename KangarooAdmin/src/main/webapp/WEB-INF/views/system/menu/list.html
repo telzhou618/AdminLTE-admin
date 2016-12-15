@@ -1,70 +1,79 @@
-<#include "/common/layout.html"> <@header>
-<link rel="stylesheet" href="/plugins/jquerytree/css/style.css" />
-</@header> <@body>
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			<small>系统管理 > 菜单管理</small>
-		</h1>
-	</section>
-	<!-- Main content -->
-	<section class="content">
-		<!-- Your Page Content Here -->
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="tree well">
-					<ul>
-						<li><span><i class="fa fa-folder-open"></i> 根节点</span>
-							<ul>
-							    <#list sysMenuVos as vo>
-								<li><span><i class="fa fa-folder-open"></i> ${(vo.sysMenu.menuName)!}</span>
-									<ul>
-									    <#list vo.sysMenuChild as ch>
-										<li><span><i class="fa fa-file"></i> ${(ch.menuName)!}</span></li>
-										</#list>
-									</ul>
-								</li>
-								</#list>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-</@body> <@footer>
-<script type="text/javascript">
-$(function() {
-
-	$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr(
-			'title', 'Collapse this branch');
-
-	$('.tree li.parent_li > span').on('click',
-		function(e) {
-		var children = $(this).parent('li.parent_li').find(
-				' > ul > li');
-		if (children.is(":visible")) {
-
-			children.hide('fast');
-
-			$(this).attr('title', 'Expand this branch')
-					.find(' > i').addClass('fa fa-folder')
-					.removeClass('fa-folder-open');
-		} else {
-
-			children.show('fast');
-
-			$(this).attr('title', 'Collapse this branch').find(
-					' > i').addClass('fa fa-folder-open')
-					.removeClass('fa-folder');
-		}
-		e.stopPropagation();
-	});
-
-});
-</script>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 菜单管理</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Your Page Content Here -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+         <form action="/system/menu/list/1.html" method="post">
+          <div class="box-header">
+            <a class="btn btn-primary" href="/system/menu/add.html"><i class="fa fa-plus"></i> 创建菜单</a>
+            <div class="box-tools">
+              <div class="input-group" style="width: 250px;">
+                <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
+                <div class="input-group-btn">
+                  <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.box-header -->
+          </form>
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th  width="30px"><input value="root" type="checkbox" class="minimal checkbox-toolbar"></th>
+                <th>菜单名称</th>
+                <th>菜单编码</th>
+                <th>访问地址</th>
+                <th>显示图标</th>
+                <th>菜单深度</th>
+                <th>菜单排序</th>
+                <th>菜单节点类型</th>
+                <th width="150px">操作</th>
+              </tr>
+              <#list pageData.getRecords() as menu>
+              	  <tr>
+	                <td><input value="${menu.id}" name="roleState" type="checkbox" class="minimal checkbox-item"></td>
+	                <td>${(menu.menuName)!}</td>
+	                <td>${(menu.code)!}</td>
+	                <td><a href="${(menu.url)!'--'}" target="_blank">${(menu.url)!'--'}</a></td>
+	                <td><i class="fa ${(menu.icon)!}"></i> ${(menu.icon)!}</td>
+	                <td>${(menu.deep)!}</td>
+	                <td>${(menu.sort)!}</td>
+	                <td> <#if menu.leaf?? && menu.leaf==1 >叶节点<#else>目录</#if> </td>
+	                <td>
+	                	<a class="btn btn-primary btn-xs" href="/system/menu/edit/${(menu.id)!}.html" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
+	                	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
+	                	 data-tiggle="ajax"
+	                	 data-submit-url="/system/menu/delete?id=${(menu.id)!}"
+	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
+	                </td>
+	              </tr>
+              </#list>
+            </table>
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <div class="col-xs-6">显示 ${((pageData.current -1) * pageData.size)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
+            <div class="col-xs-6">
+            <#include "/common/paginate.html" />
+ 			<@paginate currentPage=pageData.getCurrent() totalPage=pageData.getPages() actionUrl="/system/menu/list/" urlParas=".html?search=${search!}"  />
+            </div>
+          </div>
+        </div><!-- /.box -->
+      </div>
+    </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
 </@footer>
