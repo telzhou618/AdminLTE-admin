@@ -8,5 +8,3 @@
 ### 截图
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1215/175139_9d484d32_89451.png "在这里输入图片标题")
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1215/175152_8b00f1b2_89451.png "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1215/175203_e8c38e98_89451.png "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1215/175211_28f76967_89451.png "在这里输入图片标题")
