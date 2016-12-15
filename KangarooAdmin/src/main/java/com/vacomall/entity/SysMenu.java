@@ -36,8 +36,15 @@ public class SysMenu implements Serializable {
 
 	/** 图标 */
 	private String icon;
+	
 	/** 排序 */
 	private Integer sort;
+	
+	/** 深度 */
+	private Integer deep;
+	
+	/** 编码 */
+	private String code;
 
 
 	public String getId() {
@@ -95,4 +102,21 @@ public class SysMenu implements Serializable {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
+
+	public Integer getDeep() {
+		return deep;
+	}
+
+	public void setDeep(Integer deep) {
+		this.deep = deep;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 }

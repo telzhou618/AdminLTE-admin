@@ -24,7 +24,7 @@
            <span class="label label-success">4</span>
          </a>
          <ul class="dropdown-menu">
-           <li class="header">You have 4 messages</li>
+           <li class="header">您有4封未读邮件</li>
            <li>
              <!-- inner menu: contains the messages -->
              <ul class="menu">
@@ -57,7 +57,7 @@
            <span class="label label-warning">10</span>
          </a>
          <ul class="dropdown-menu">
-           <li class="header">You have 10 notifications</li>
+           <li class="header">您有10条消息</li>
            <li>
              <!-- Inner Menu: contains the notifications -->
              <ul class="menu">
@@ -74,43 +74,15 @@
        <!-- User Account Menu -->
        <li class="dropdown user user-menu">
          <!-- Menu Toggle Button -->
-         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-           <!-- The user image in the navbar-->
+         <a href="#" class="dropdown-toggle" data-toggle="tooltip" title="Admnin" data-placement="bottom">
            <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-           <!-- hidden-xs hides the username on small devices so only the image appears. -->
            <span class="hidden-xs">Admin</span>
          </a>
-         <ul class="dropdown-menu">
-           <!-- The user image in the menu -->
-           <li class="user-header">
-             <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-             <p>
-               Alexander Pierce - Web Developer
-               <small>Member since Nov. 2012</small>
-             </p>
-           </li>
-           <!-- Menu Body -->
-           <li class="user-body">
-             <div class="col-xs-4 text-center">
-               <a href="#">Followers</a>
-             </div>
-             <div class="col-xs-4 text-center">
-               <a href="#">Sales</a>
-             </div>
-             <div class="col-xs-4 text-center">
-               <a href="#">Friends</a>
-             </div>
-           </li>
-           <!-- Menu Footer-->
-           <li class="user-footer">
-             <div class="pull-left">
-               <a href="#" class="btn btn-default btn-flat">Profile</a>
-             </div>
-             <div class="pull-right">
-               <a href="/login/logout.html" class="btn btn-default btn-flat">Sign out</a>
-             </div>
-           </li>
-         </ul>
+       </li>
+       <li>
+         <a href="/login/logout.html" class="dropdown-toggle" data-toggle="tooltip" title="退出" data-placement="bottom">
+           <i class="fa fa-sign-out"></i>
+         </a>
        </li>
        <!-- Control Sidebar Toggle Button -->
         <li>

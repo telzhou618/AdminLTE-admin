@@ -28,6 +28,12 @@
 <script src="/plugins/nice-validator-1.0.8/jquery.validator.js?local=zh-CN"></script>
 <!--jquery-confirm  -->
 <script src="/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+<!-- Select2 -->
+<script src="/plugins/select2/select2.full.min.js"></script>
+ <!-- InputMask -->
+<script src="/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
@@ -35,22 +41,24 @@
 <script src="/dist/js/init.js"></script>
 
 <script type="text/javascript">
- 	//iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass: 'iradio_minimal-blue'
-    });
  	
-    $(function(){
-        // Custom theme
-        $.validator.setTheme('bootstrap', {
-            validClass: 'has-success',
-            invalidClass: 'has-error',
-            bindClassTo: '.form-group',
-            formClass: 'n-default n-bootstrap',
-            msgClass: 'n-right'
-        });
+$(function(){
+	//select2
+	$(".select2").select2();
+	//iCheck for checkbox and radio inputs
+	$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+       checkboxClass: 'icheckbox_minimal-blue',
+       radioClass: 'iradio_minimal-blue'
     });
+    // Custom theme
+    $.validator.setTheme('bootstrap', {
+        validClass: 'has-success',
+        invalidClass: 'has-error',
+        bindClassTo: '.form-group',
+        formClass: 'n-default n-bootstrap',
+        msgClass: 'n-right'
+    });
+});
 </script>
 
 

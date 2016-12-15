@@ -98,7 +98,7 @@ public class SuperController {
 	 * </p>
 	 */
 	protected <T> Page<T> getPage(int pageNumber) {
-		return getPage(pageNumber,10);
+		return getPage(pageNumber,15);
 	}
 
 
