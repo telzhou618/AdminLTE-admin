@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.vacomall.common.anno.PermissionSecurity;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
@@ -28,6 +29,7 @@ import com.vacomall.service.ISysUserService;
  * @date 2016年12月13日 上午10:22:41
  */
 @Controller
+@PermissionSecurity("user")
 @RequestMapping("/system/user")
 public class UserController extends SuperController{  
 

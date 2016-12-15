@@ -1,5 +1,7 @@
 package com.vacomall.mapper;
 
+import java.util.List;
+
 import com.vacomall.entity.SysUserRole;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
 
@@ -10,5 +12,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface SysUserRoleMapper extends AutoMapper<SysUserRole> {
 
+	List<String> selectPermissionByUid(String uid);
 
 }

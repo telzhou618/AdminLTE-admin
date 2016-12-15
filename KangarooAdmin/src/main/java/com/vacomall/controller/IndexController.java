@@ -25,7 +25,7 @@ public class IndexController {
 	@Log("访问首页")
     @RequestMapping(value = {"/","/index"})  
     public  String index(Model model){
-	
+		
 		return "index";
     }  
 }

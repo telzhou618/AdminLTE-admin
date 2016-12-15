@@ -5,22 +5,19 @@ import javax.validation.ValidationException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.ui.Model;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
-import com.vacomall.common.bean.Response;
 /**
  * 全局异常处理器
  * @author Administrator
  *
  */
 @ControllerAdvice
-@ResponseBody
 public class ExceptionAdvice {
 	
 	public static final Logger logger = Logger.getLogger(ExceptionAdvice.class);
@@ -30,18 +27,20 @@ public class ExceptionAdvice {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidationException.class)
-    public Response handleValidationException(ValidationException e) {
+    public String handleValidationException(ValidationException e,Model model) {
         logger.error("参数验证失败", e);
-        return new Response().failure("validation_exception");
+        model.addAttribute("error","不支持当前媒体类型,"+e.getMessage());
+        return "error/500";
     }
 	 /**
      * 400 - Bad Request
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public Response handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+    public String handleHttpMessageNotReadableException(HttpMessageNotReadableException e,Model model) {
         logger.error("参数解析失败", e);
-        return new Response().failure("could_not_read_json");
+        model.addAttribute("error","不支持当前媒体类型,"+e.getMessage());
+        return "error/500";
     }
 
     /**
@@ -49,9 +48,10 @@ public class ExceptionAdvice {
      */
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public Response handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+    public String handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e,Model model) {
         logger.error("不支持当前请求方法", e);
-        return new Response().failure("request_method_not_supported");
+        model.addAttribute("error","不支持当前媒体类型,"+e.getMessage());
+        return "error/500";
     }
 
     /**
@@ -59,9 +59,10 @@ public class ExceptionAdvice {
      */
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public Response handleHttpMediaTypeNotSupportedException(Exception e) {
+    public String handleHttpMediaTypeNotSupportedException(Exception e,Model model) {
         logger.error("不支持当前媒体类型", e);
-        return new Response().failure("content_type_not_supported");
+        model.addAttribute("error","不支持当前媒体类型,"+e.getMessage());
+        return "error/500";
     }
 
     /**
@@ -69,9 +70,11 @@ public class ExceptionAdvice {
      */
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException.class)
-    public Response handleNoHandlerFoundException(NoHandlerFoundException  e) {
+    public String handleNoHandlerFoundException(NoHandlerFoundException  e,Model model) {
         logger.error("资源不存在", e);
-        return new Response().failure("not_found");
+        model.addAttribute("error","资源不存在,"+e.getMessage());
+        return "error/500";
+        
     }
     
     /**
@@ -79,15 +82,17 @@ public class ExceptionAdvice {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NullPointerException.class)
-    public Response handleNullPointerException(NullPointerException e) {
+    public String handleNullPointerException(NullPointerException e,Model model) {
         logger.error("空指针异常", e);
-        return new Response().failure("null_pointer_exception");
+        model.addAttribute("error","空指针异常,"+e.getMessage());
+        return "error/500";
     }
     
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public Response handleException(Exception e) {
+    public String handleException(Exception e,Model model) {
         logger.error("服务运行异常", e);
-        return new Response().failure(e.getMessage());
+        model.addAttribute("error","服务运行异常,"+e.getMessage());
+        return "error/500";
     }
 }

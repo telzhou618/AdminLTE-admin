@@ -45,6 +45,9 @@ public class SysMenu implements Serializable {
 	
 	/** 编码 */
 	private String code;
+	
+	/** 资源定义 */
+	private String resource;
 
 
 	public String getId() {
@@ -118,5 +121,12 @@ public class SysMenu implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
+	public String getResource() {
+		return resource;
+	}
+
+	public void setResource(String resource) {
+		this.resource = resource;
+	}
 }

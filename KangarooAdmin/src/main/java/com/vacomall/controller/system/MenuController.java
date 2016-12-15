@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.vacomall.common.anno.PermissionSecurity;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysMenu;
@@ -22,6 +23,7 @@ import com.vacomall.service.ISysMenuService;
  * @date 2016年12月13日 上午10:23:41
  */
 @Controller
+@PermissionSecurity("menu")
 @RequestMapping("/system/menu")
 public class MenuController extends SuperController{  
 
