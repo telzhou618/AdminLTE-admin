@@ -84,7 +84,7 @@ public class LoginController extends SuperController{
 		 */
 		SSOToken st = new SSOToken();
 		st.setUid(sysUser.getId());
-		st.setApp(sysUser.getUserName());
+		st.setData(sysUser.getUserName());
 		st.setIp(IpHelper.getIpAddr(request));
 		SSOHelper.setSSOCookie(request, response, st, true);
 		if(StringUtils.isNotBlank(returnURL)){
