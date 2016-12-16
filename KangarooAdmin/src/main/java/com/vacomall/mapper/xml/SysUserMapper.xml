@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, userName, password, userState, createTime, userDesc
+		id, userName, password, userState, createTime, userDesc,userImg
 	</sql>
 
 </mapper>

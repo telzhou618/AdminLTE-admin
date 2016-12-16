@@ -37,6 +37,9 @@ public class SysUser implements Serializable {
 
 	/** 描述 */
 	private String userDesc;
+	
+	/** 头像 */
+	private String userImg;
 
 
 	public String getId() {
@@ -87,4 +90,13 @@ public class SysUser implements Serializable {
 		this.userDesc = userDesc;
 	}
 
+	public String getUserImg() {
+		return userImg;
+	}
+
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+	
+	
 }
