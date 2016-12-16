@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.vacomall.common.anno.Log;
 import com.vacomall.common.anno.PermissionSecurity;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
@@ -106,6 +107,7 @@ public class MenuController extends SuperController{
     /**
      * 添加目录
      */
+    @Log("创建目录菜单")
     @RequestMapping("/doAddDir")
     public String doAddDir(SysMenu sysMenu,Model model){
     	
@@ -119,6 +121,7 @@ public class MenuController extends SuperController{
     /**
      * 添加菜单
      */
+    @Log("创建菜单")
     @RequestMapping("/doAddMenu")
     public String doAddMenu(SysMenu sysMenu,Model model){
     	sysMenu.setLeaf(1);
@@ -149,6 +152,7 @@ public class MenuController extends SuperController{
     /**
      * 执行编辑菜单
      */
+    @Log("编辑菜单")
     @RequestMapping("/doEdit")
     public String doEdit(SysMenu sysMenu,Model model){
     	sysMenuService.updateSelectiveById(sysMenu);
@@ -158,6 +162,7 @@ public class MenuController extends SuperController{
     /**
      * 执行编辑菜单
      */
+    @Log("删除菜单")
     @RequestMapping("/delete")
     @ResponseBody
     public Response delete(String id){

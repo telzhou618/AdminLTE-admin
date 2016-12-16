@@ -31,7 +31,7 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
-                <th  width="30px"><input value="root" type="checkbox" class="minimal checkbox-toolbar"></th>
+                <th  width="100px"><input value="root" type="checkbox" class="minimal checkbox-toolbar"> 行号</th>
                 <th>菜单名称</th>
                 <th>菜单编码</th>
                 <th>访问地址</th>
@@ -43,7 +43,12 @@
               </tr>
               <#list pageData.getRecords() as menu>
               	  <tr>
-	                <td><input value="${menu.id}" name="roleState" type="checkbox" class="minimal checkbox-item"></td>
+	                <td>
+	                	<label>
+	               	 		<input value="${menu.id}" name="roleState" type="checkbox" class="minimal checkbox-item">
+	               		 	${((pageData.current-1)*pageData.size +menu_index+1)!}
+	                 	</label>
+	               	</td>
 	                <td>${(menu.menuName)!}</td>
 	                <td>${(menu.code)!}</td>
 	                <td><a href="${(menu.url)!'--'}" target="_blank">${(menu.url)!'--'}</a></td>
@@ -63,7 +68,7 @@
             </table>
           </div><!-- /.box-body -->
           <div class="box-footer">
-            <div class="col-xs-6">显示 ${((pageData.current -1) * pageData.size)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
+            <div class="col-xs-6">显示 ${((pageData.current -1) * pageData.size + 1)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
             <div class="col-xs-6">
             <#include "/common/paginate.html" />
  			<@paginate currentPage=pageData.getCurrent() totalPage=pageData.getPages() actionUrl="/system/menu/list/" urlParas=".html?search=${search!}"  />

@@ -110,4 +110,22 @@ $("*[delete-batch-url]").click(function(){
 	}
 });
 
+
+//ajaxmodel
+
+$("*[data-tiggle='ajaxmodel']").click(function(){
+
+	var dataUrl = $(this).attr("data-url");
+	
+	$.confirm({
+	    title: '参数',
+	    content: 'url:'+dataUrl,
+		closeIcon: true,
+		backgroundDismiss:true,
+	    buttons:{'关闭':{}}
+	});
+	
+});
+
+
 })(jQuery, window);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.vacomall.common.anno.Log;
 import com.vacomall.common.anno.PermissionSecurity;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
@@ -76,6 +77,7 @@ public class RoleController extends SuperController{
     /**
      * 执行新增角色
      */
+    @Log("创建角色")
     @RequestMapping("/doAdd")  
     public  String doAdd(SysRole role){
     	role.setCreateTime(new Date());
@@ -87,6 +89,7 @@ public class RoleController extends SuperController{
     /**
      * 删除角色
      */
+    @Log("删除角色")
     @RequestMapping("/delete")  
     @ResponseBody
     public  Response delete(String id){
@@ -97,6 +100,7 @@ public class RoleController extends SuperController{
     /**
      * 批量删除角色
      */
+    @Log("批量删除角色")
     @RequestMapping("/deleteBatch")  
     @ResponseBody
     public Response deleteBatch(@RequestParam("id[]") List<String> ids){
@@ -117,6 +121,7 @@ public class RoleController extends SuperController{
     /**
      * 执行编辑角色
      */
+    @Log("编辑角色")
     @RequestMapping("/doEdit")  
     public  String doEdit(SysRole sysRole,Model model){
     	sysRoleService.updateSelectiveById(sysRole);
@@ -141,6 +146,7 @@ public class RoleController extends SuperController{
     /**
      * 权限
      */
+    @Log("角色分配权限")
     @RequestMapping("/doAuth")  
     public  String doAuth(String roleId,String[] mid,Model model){
     	sysRoleMenuService.addAuth(roleId,mid);
