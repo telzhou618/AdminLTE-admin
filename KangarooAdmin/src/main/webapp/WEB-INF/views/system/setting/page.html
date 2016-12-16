@@ -1,0 +1,121 @@
+<#include "/common/layout.html">
+<@header>
+<link rel="stylesheet" href="/plugins/bootstrap-fileinput/css/fileinput.min.css">
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 系统配置</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Your Page Content Here -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tab_1" data-toggle="tab">系统设置</a></li>
+                  <li><a href="#tab_2" data-toggle="tab">插件设置</a></li>
+                  <li><a href="#tab_3" data-toggle="tab">支付设置</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab_1">
+                   	 <div class="row">
+			          	<div class="col-md-4">
+			        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/menu/doSystemSetting.html">
+				            <div class="box-body">
+				              <div class="form-group">
+				                <label for="systemName">系统名称</label>
+				               	<input type="text" name="systemName" value="KangarooAdmin" class="form-control"  data-rule="系统名称:required;">
+				              </div>
+				              <div class="form-group">
+			                      <label for="systemLogo">上传系统Logo</label>
+			                      <input name="systemLogo" type="file" class="file-loading" id="systemLogo">
+			                    </div>
+				            </div><!-- /.box-body -->
+				            <div class="box-footer">
+				              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+				              <a  class="btn btn-default" href="/system/menu/list/1.html"><i class="fa fa-close"></i>  取消</a>
+				            </div>
+				          </form>
+			          	</div>
+			          </div>
+                  </div><!-- /.tab-pane -->
+                  <div class="tab-pane" id="tab_2">
+                     <div class="row">
+			          	<div class="col-md-4">
+			        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/menu/doAddMenu.html">
+				            <div class="box-body">
+				            	 <div class="form-group">
+					                <label for="uname">菜单名称</label>
+					               	<input type="text" name="menuName" class="form-control" placeholder="请输入菜单名称"  data-rule="菜单名称:required;">
+					              </div>
+				            </div><!-- /.box-body -->
+				            <div class="box-footer">
+				              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+				              <a  class="btn btn-default" href="/system/menu/list/1.html"><i class="fa fa-close"></i>  取消</a>
+				            </div>
+				          </form>
+			          	</div>
+			          </div>
+                  </div><!-- /.tab-pane -->
+                  <div class="tab-pane" id="tab_3">
+                     <div class="row">
+			          	<div class="col-md-4">
+			        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/menu/doAddMenu.html">
+				            <div class="box-body">
+				            	 <div class="form-group">
+					                <label for="uname">菜单名称2</label>
+					               	<input type="text" name="menuName" class="form-control" placeholder="请输入菜单名称"  data-rule="菜单名称:required;">
+					              </div>
+				            </div><!-- /.box-body -->
+				            <div class="box-footer">
+				              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+				              <a  class="btn btn-default" href="/system/menu/list/1.html"><i class="fa fa-close"></i>  取消</a>
+				            </div>
+				          </form>
+			          	</div>
+			          </div>
+                  </div><!-- /.tab-pane -->
+                  </div><!-- /.tab-pane -->
+                </div><!-- /.tab-content -->
+      </div>
+    </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+<script src="/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+<script>
+//初始化fileinput控件（第一次初始化）
+function initFileInput(ctrlName, uploadUrl) {    
+    var control = $('#' + ctrlName); 
+
+    control.fileinput({
+    	
+    	 initialPreview: [
+             'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg'
+         ],
+         initialPreviewAsData: true,
+         initialPreviewConfig: [
+             {caption: "Moon.jpg", size: 930321, width: "120px", key: 1, showDelete: false}
+         ],
+         deleteUrl: "/site/file-delete",
+    	
+        language: 'zh', //设置语言
+        uploadUrl: uploadUrl, //上传的地址
+        allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+        showUpload: false, //是否显示上传按钮
+        showCaption: false,//是否显示标题
+        browseClass: "btn btn-primary"       
+    });
+}
+	
+initFileInput("systemLogo", "/User/EditPortrait");
+
+</script>
+</@footer>

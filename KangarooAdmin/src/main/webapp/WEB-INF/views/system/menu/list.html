@@ -37,6 +37,7 @@
                 <th>访问地址</th>
                 <th>显示图标</th>
                 <th>菜单深度</th>
+                <th>菜单权限资源</th>
                 <th>菜单排序</th>
                 <th>菜单节点类型</th>
                 <th width="150px">操作</th>
@@ -54,6 +55,7 @@
 	                <td><a href="${(menu.url)!'--'}" target="_blank">${(menu.url)!'--'}</a></td>
 	                <td><i class="fa ${(menu.icon)!}"></i> ${(menu.icon)!}</td>
 	                <td>${(menu.deep)!}</td>
+	                <td>${(menu.resource)!}</td>
 	                <td>${(menu.sort)!}</td>
 	                <td> <#if menu.leaf?? && menu.leaf==1 >叶节点<#else>目录</#if> </td>
 	                <td>
