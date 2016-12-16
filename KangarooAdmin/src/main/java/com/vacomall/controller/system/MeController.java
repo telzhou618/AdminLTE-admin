@@ -23,8 +23,8 @@ public class MeController extends SuperController{
     @RequestMapping("/page")  
     public  String page(Model model){
     	
-    	SysUser me = sysUserService.selectById(SSOHelper.getToken(request).getUid());
-    	model.addAttribute("me", me);
+    	SysUser sysUser = sysUserService.selectById(SSOHelper.getToken(request).getUid());
+    	model.addAttribute("sysUser", sysUser);
 		return "system/me/page";
     } 
     
