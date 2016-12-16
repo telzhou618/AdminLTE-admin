@@ -55,7 +55,6 @@ public class LoginController extends SuperController{
 	/**
 	 * 执行登录
 	 */
-	@Log("用户登录")
 	@Login(action=Action.Skip)
     @RequestMapping(value = "/doLogin",method=RequestMethod.POST)  
     public  String doLogin(String userName,String password, String captcha,String returnURL,Model model){
@@ -112,6 +111,7 @@ public class LoginController extends SuperController{
 	@Login(action=Action.Skip)
     @RequestMapping("/captcha")
 	@ResponseBody
+	@Log("用户退出")
     public  Response captcha() throws ServletException, IOException{
     	new KaptchaExtend().captcha(request, response);
     	return new Response().success();
