@@ -12,8 +12,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.Token;
 import com.vacomall.common.util.SpringUtil;
+import com.vacomall.entity.SysUser;
 import com.vacomall.entity.vo.SysMenuVo;
 import com.vacomall.service.ISysMenuService;
+import com.vacomall.service.ISysUserService;
 
 /**
  * 权限拦截器
@@ -37,7 +39,9 @@ public class ResourcesInterceptor extends HandlerInterceptorAdapter {
 				/**
 				 * 登录信息
 				 */
-				request.setAttribute("token", token);
+				SysUser me = SpringUtil.getBean(ISysUserService.class).selectById(token.getUid());
+				me.setPassword("");
+				request.setAttribute("me", me);
 				/**
 				 * 资源
 				 */

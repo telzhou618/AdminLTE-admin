@@ -27,7 +27,7 @@
 	            <div class="box-body">
 	              <div class="form-group">
 	                <label for="userName">用户名</label>
-	               	<input type="text" name="userName" value="${(me.userName)!}" class="form-control" readonly="readonly">
+	               	<input type="text" name="userName" value="${(sysUser.userName)!}" class="form-control" readonly="readonly">
 	              </div>
 	              <div class="form-group">
 	                     <label for="systemLogo">头像</label>
@@ -59,11 +59,11 @@ function initFileInput(ctrlName, uploadUrl) {
     control.fileinput({
     	
     	 initialPreview: [
-             '${(me.userImg)!}'
+             '${(sysUser.userImg)!}'
          ],
          initialPreviewAsData: true,
          initialPreviewConfig: [
-             {caption: "${(me.userImg)!}", size: 930321, width: "120px", key: '${(me.id)!}', showDelete: false}
+             {caption: "${(sysUser.userImg)!}", size: 930321, width: "120px", key: '${(sysUser.id)!}', showDelete: false}
          ],
          deleteUrl: "/file/delete",
     	
