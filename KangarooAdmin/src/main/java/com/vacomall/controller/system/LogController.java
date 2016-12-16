@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -37,12 +38,23 @@ public class LogController extends SuperController{
 		// 查询分页
 		EntityWrapper<SysLog> ew = new EntityWrapper<SysLog>();
 		if(StringUtils.isNotBlank(search)){
-			ew.like("userName",search);
-			ew.like("title", search);
-			model.addAttribute("search",search);
+			ew.where("userName like CONCAT('\'%'\',{0},'\'%'\')", search)
+			.or("title like CONCAT('\'%'\',{0},'\'%'\')", search);
+			model.addAttribute("search", search);
 		}
 		Page<SysLog> pageData = sysLogService.selectPage(page, ew);
 		model.addAttribute("pageData", pageData);
 		return "system/log/list";
     } 
+    
+    /**
+     * 获取参数
+     */
+    @RequestMapping("/params/{id}")
+    @ResponseBody
+    public String params(@PathVariable String id,Model model){
+    	SysLog sysLog = sysLogService.selectById(id);
+    	return sysLog.getParams();
+    }
+    
 }

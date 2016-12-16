@@ -70,6 +70,7 @@ public class UserController extends SuperController{
     /**
      * 执行新增
      */
+    @Log("创建用户")
     @RequestMapping("/doAdd")  
     public  String doAdd(SysUser user,String[] roleId){
     	
@@ -79,6 +80,7 @@ public class UserController extends SuperController{
     /**
      * 删除用户
      */
+    @Log("删除用户")
     @RequestMapping("/delete")  
     @ResponseBody
     public  Response delete(String id){
