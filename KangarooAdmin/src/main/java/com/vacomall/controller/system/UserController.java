@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.vacomall.common.anno.Log;
 import com.vacomall.common.anno.PermissionSecurity;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
@@ -113,6 +114,7 @@ public class UserController extends SuperController{
     /**
      * 执行编辑
      */
+    @Log("编辑用户")
     @RequestMapping("/doEdit")  
     public  String doEdit(SysUser sysUser,String[] roleId,Model model){
     	sysUserService.updateUser(sysUser,roleId);

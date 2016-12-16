@@ -23,6 +23,7 @@
 	
 	<!-- 开启aop，对类代理-->
 	<aop:config proxy-target-class="true"/>
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 	
 	<!-- freemarker的配置 -->
 	<bean id="freemarkerConfig"
@@ -87,6 +88,7 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven> 
 	
+	<!-- 拦截器 -->
 	<mvc:interceptors>
 		
 		<mvc:interceptor>

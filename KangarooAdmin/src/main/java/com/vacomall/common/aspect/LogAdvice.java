@@ -1,15 +1,28 @@
 package com.vacomall.common.aspect;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.baomidou.kisso.SSOHelper;
+import com.baomidou.kisso.SSOToken;
 import com.vacomall.common.anno.Log;
+import com.vacomall.common.util.SpringUtil;
+import com.vacomall.entity.SysLog;
+import com.vacomall.service.ISysLogService;
 /**
  * 正常业务日志记录
  * @author Administrator
@@ -19,7 +32,9 @@ import com.vacomall.common.anno.Log;
 @Component
 public class LogAdvice {
 	
-	@Pointcut("@annotation(com.vacomall.core.anno.Log)")
+	public static final Logger LOG = Logger.getLogger(LogAdvice.class);
+	
+	@Pointcut("@annotation(com.vacomall.common.anno.Log)")
 	public void controllerAspect() {
 		
 	}
@@ -32,9 +47,18 @@ public class LogAdvice {
 		
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 		Method method = methodSignature.getMethod();
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();  
 		Log log =  method.getAnnotation(Log.class);
+		SSOToken st = SSOHelper.getToken(request);
 		if(log != null){
-			System.out.println(String.format("记录业务日志.[%s]",log.value()));
+			SysLog sysLog  =new SysLog();
+			sysLog.setCreateTime(new Date());
+			sysLog.setTitle(log.value());
+			sysLog.setUserName((st != null )? st.getData() : "system");
+			sysLog.setUrl(request.getRequestURI().toString());
+			sysLog.setParams(JSON.toJSONString(request.getParameterMap(),SerializerFeature.BrowserCompatible));
+			SpringUtil.getBean(ISysLogService.class).insertSelective(sysLog);
+			LOG.debug("记录日志:"+sysLog.toString());
 		}
 	}
 }
