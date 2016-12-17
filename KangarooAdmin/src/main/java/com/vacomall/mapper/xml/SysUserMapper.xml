@@ -4,7 +4,17 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, userName, password, userState, createTime, userDesc,userImg
+		id, userName, password, userState, createTime, userDesc,userImg,deptId
 	</sql>
-
+	
+	<select id="selectUserList" resultType="java.util.HashMap">
+	
+		SELECT u.*,d.`deptName` FROM `sys_user` u
+		LEFT JOIN `sys_dept` d ON d.`id` = u.`deptId` WHERE 1=1
+		<if test="search != null">
+			AND u.userName LIKE CONCAT('%',#{search},'%')
+		</if>
+		ORDER BY u.`createTime` DESC
+	</select>
+	
 </mapper>

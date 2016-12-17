@@ -40,6 +40,9 @@ public class SysUser implements Serializable {
 	
 	/** 头像 */
 	private String userImg;
+	
+	/** 部门主键 */
+	private String deptId;
 
 
 	public String getId() {
@@ -96,6 +99,14 @@ public class SysUser implements Serializable {
 
 	public void setUserImg(String userImg) {
 		this.userImg = userImg;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 	
 	

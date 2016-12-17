@@ -1,7 +1,10 @@
 package com.vacomall.service;
 
-import com.vacomall.entity.SysUser;
+import java.util.Map;
+
 import com.baomidou.framework.service.ISuperService;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.vacomall.entity.SysUser;
 
 /**
  *
@@ -9,7 +12,12 @@ import com.baomidou.framework.service.ISuperService;
  *
  */
 public interface ISysUserService extends ISuperService<SysUser> {
-
+	
+	/**
+	 * 分页查询用户
+	 */
+	Page<Map<Object, Object>> selectUserPage(Page<Map<Object, Object>> page, String search);
+	
 	/**
 	 * 保存用户
 	 */
@@ -22,6 +30,5 @@ public interface ISysUserService extends ISuperService<SysUser> {
 	 * 登录
 	 */
 	SysUser login(String userName, String password);
-
 
 }
