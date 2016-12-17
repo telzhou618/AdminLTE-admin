@@ -2,6 +2,7 @@ package com.vacomall.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -142,7 +143,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
 		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
 		ew.orderBy("sort", true);
 		ew.addFilter("pid = {0} ", "0");
-		ew.in("id", idList);
+		ew.in("id", idList.size() > 0 ? idList : Lists.newArrayList(RandomStringUtils.randomNumeric(30)));
 		List<SysMenu> sysMenus = this.selectList(ew);
 		
 		List<SysMenuVo> sysMenuVos = Lists.transform(sysMenus, new Function<SysMenu, SysMenuVo>() {

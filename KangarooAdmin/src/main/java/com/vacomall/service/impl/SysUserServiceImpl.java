@@ -1,12 +1,14 @@
 package com.vacomall.service.impl;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.kisso.common.encrypt.MD5;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.vacomall.common.util.CommonUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.entity.SysUserRole;
@@ -72,6 +74,13 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 		sysUser.setUserName(userName);
 		sysUser.setPassword(MD5.toMD5(password));
 		return this.selectOne(sysUser);
+	}
+
+	@Override
+	public Page<Map<Object, Object>> selectUserPage(Page<Map<Object, Object>> page, String search) {
+		// TODO Auto-generated method stub
+		page.setRecords(baseMapper.selectUserList(page, search));
+		return page;
 	}
 
 

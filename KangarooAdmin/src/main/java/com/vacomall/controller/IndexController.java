@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vacomall.common.anno.Log;
 import com.vacomall.service.ISysMenuService;
 /**
  * 首页控制器
@@ -22,7 +21,6 @@ public class IndexController {
 	@Autowired private ISysMenuService sysMenuService;
 	
 	
-	@Log("访问首页")
     @RequestMapping(value = {"/","/index"})  
     public  String index(Model model){
 		

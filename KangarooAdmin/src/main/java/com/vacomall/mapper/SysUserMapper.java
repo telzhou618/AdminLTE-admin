@@ -1,7 +1,11 @@
 package com.vacomall.mapper;
 
-import com.vacomall.entity.SysUser;
+import java.util.List;
+import java.util.Map;
+
 import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.vacomall.entity.SysUser;
 
 /**
  *
@@ -10,5 +14,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface SysUserMapper extends AutoMapper<SysUser> {
 
-
+	List<Map<Object, Object>> selectUserList(Page<Map<Object, Object>> page, String search);
 }

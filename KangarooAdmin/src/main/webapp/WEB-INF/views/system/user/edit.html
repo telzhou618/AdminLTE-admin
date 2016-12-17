@@ -29,6 +29,14 @@
 	               	<input type="text" id="uname" name="userName" value="${(sysUser.userName)!}" class="form-control" placeholder="请输入用户名"  data-rule="用户名:required;username;">
 	              </div>
 	              <div class="form-group">
+                     <label>部门</label>
+                     <select name="deptId" class="form-control select2" style="width: 100%;" data-rule="部门:required;">
+                      <#list deptList as dept>
+                        <option value="${(dept.id)!}" <#if sysUser.deptId?? && dept.id==sysUser.deptId> selected="selected" </#if> >${(dept.deptName)!}</option>
+                      </#list>
+                    </select>
+                  </div>
+	              <div class="form-group">
 	                <label for="password">密码</label>
 	                <input type="password" class="form-control" disabled="disabled" id="password" value="********" name="password" placeholder="请输入密码" data-rule="密码: required; length(6~16)">
 	              </div>

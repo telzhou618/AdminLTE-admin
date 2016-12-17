@@ -97,6 +97,7 @@ public class LoginController extends SuperController{
 	 * @return
 	 * @throws IOException 
 	 */
+	@Log("用户退出")
 	@Login(action=Action.Skip)
     @RequestMapping(value = "/logout")  
     public String logout() throws IOException{
@@ -111,7 +112,6 @@ public class LoginController extends SuperController{
 	@Login(action=Action.Skip)
     @RequestMapping("/captcha")
 	@ResponseBody
-	@Log("用户退出")
     public  Response captcha() throws ServletException, IOException{
     	new KaptchaExtend().captcha(request, response);
     	return new Response().success();

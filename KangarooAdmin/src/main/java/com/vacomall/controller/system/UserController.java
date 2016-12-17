@@ -1,8 +1,8 @@
 package com.vacomall.controller.system;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +21,7 @@ import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
 import com.vacomall.entity.SysUser;
 import com.vacomall.entity.SysUserRole;
+import com.vacomall.service.ISysDeptService;
 import com.vacomall.service.ISysRoleService;
 import com.vacomall.service.ISysUserRoleService;
 import com.vacomall.service.ISysUserService;
@@ -37,33 +38,25 @@ public class UserController extends SuperController{
 	@Autowired private ISysUserService sysUserService;
 	@Autowired private ISysRoleService sysRoleService;
 	@Autowired private ISysUserRoleService sysUserRoleService;
+	@Autowired private ISysDeptService sysDeptService;
 	
 	/**
 	 * 分页查询用户
 	 */
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
-    	
-		Page<SysUser> page = getPage(pageNumber);
-		page.setOrderByField("createTime");
-		page.setAsc(false);
-		// 查询分页
-		EntityWrapper<SysUser> ew = new EntityWrapper<SysUser>();
-		if(StringUtils.isNotBlank(search)){
-			ew.like("userName",search);
-			model.addAttribute("search",search);
-		}
-		Page<SysUser> pageData = sysUserService.selectPage(page, ew);
-		model.addAttribute("pageData", pageData);
-		return "system/user/list";
+    	Page<Map<Object, Object>> page = getPage(pageNumber);
+    	Page<Map<Object, Object>> pageData = sysUserService.selectUserPage(page, search);
+    	model.addAttribute("pageData", pageData);
+    	return "system/user/list";
     } 
-    
     /**
      * 新增用户
      */
     @RequestMapping("/add")  
     public  String add(Model model){
     	model.addAttribute("roleList", sysRoleService.selectList(null));
+    	model.addAttribute("deptList", sysDeptService.selectList(null));
 		return "system/user/add";
     } 
     
@@ -110,7 +103,7 @@ public class UserController extends SuperController{
     	model.addAttribute("sysUser",sysUser);
     	model.addAttribute("sysRoles",sysRoles);
     	model.addAttribute("myRolds",myRolds);
-    	
+    	model.addAttribute("deptList", sysDeptService.selectList(null));
     	return "system/user/edit";
     } 
     /**
