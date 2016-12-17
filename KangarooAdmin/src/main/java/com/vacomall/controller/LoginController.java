@@ -55,6 +55,7 @@ public class LoginController extends SuperController{
 	/**
 	 * 执行登录
 	 */
+	@Log("用户登录")
 	@Login(action=Action.Skip)
     @RequestMapping(value = "/doLogin",method=RequestMethod.POST)  
     public  String doLogin(String userName,String password, String captcha,String returnURL,Model model){
