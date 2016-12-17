@@ -1,6 +1,7 @@
 package com.vacomall.interceptor;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,10 @@ import com.baomidou.kisso.Token;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Login;
 import com.baomidou.kisso.common.util.HttpUtil;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.vacomall.common.util.SpringUtil;
+import com.vacomall.entity.SysSetting;
+import com.vacomall.service.ISysSettingService;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
@@ -23,6 +28,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		// TODO Auto-generated method stub
 
 		if (handler instanceof HandlerMethod) {
+			
+			/**
+			 * 加载全局常量
+			 */
+			List<SysSetting> list =  SpringUtil.getBean(ISysSettingService.class).selectList(new EntityWrapper<SysSetting>().orderBy("sort",true));
+			for(SysSetting setting : list){
+				request.setAttribute(setting.getSysKey(),setting.getSysValue());
+			}
+			
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			Method method = handlerMethod.getMethod();
 			Login login = method.getAnnotation(Login.class);
