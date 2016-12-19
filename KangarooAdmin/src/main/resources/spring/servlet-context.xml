@@ -91,16 +91,19 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		
+		<!-- 登录拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.vacomall.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 		
+		<!-- 全局资源拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.vacomall.interceptor.ResourcesInterceptor" />
 		</mvc:interceptor>
 		
+		<!-- 权限拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.vacomall.interceptor.PermissionInterceptor" />
