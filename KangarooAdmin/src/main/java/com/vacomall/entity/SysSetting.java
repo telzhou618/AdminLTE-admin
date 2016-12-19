@@ -3,7 +3,6 @@ package com.vacomall.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.IdType;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -34,6 +33,9 @@ public class SysSetting implements Serializable {
 
 	/** 排序 */
 	private Integer sort;
+	
+	/** 描述*/
+	private String sysDesc;
 
 
 	public String getId() {
@@ -76,4 +78,12 @@ public class SysSetting implements Serializable {
 		this.sort = sort;
 	}
 
+	public String getSysDesc() {
+		return sysDesc;
+	}
+
+	public void setSysDesc(String sysDesc) {
+		this.sysDesc = sysDesc;
+	}
+	
 }
