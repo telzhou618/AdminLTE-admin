@@ -49,6 +49,10 @@ public class ResourcesInterceptor extends HandlerInterceptorAdapter {
 				if (StringUtils.isNotBlank(resource)) {
 					request.getSession().setAttribute("resource", resource);
 				}
+				String cur = request.getParameter("cur");
+				if (StringUtils.isNotBlank(cur)) {
+					request.getSession().setAttribute("cur", cur);
+				}
 				/**
 				 * 获取当前用户的菜单
 				 */
