@@ -1,4 +1,6 @@
 ###  **KangarooAdmin** 
+体验地址：[http://kangarooadmin.duapp.com](http://kangarooadmin.duapp.com/login/index.html) 
+账号密码: admin/123456
 ```
 1.KangarooAdmin是以SpringMVC+Mybatis为核心开发的精简后台基础系统。
 2.包含用户管理,角色管理,权限管理,菜单管理,日志管理等常用业务模块。
@@ -17,5 +19,4 @@
 ```
 ### 截图
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1221/112111_edebae9b_89451.png "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1215/175152_8b00f1b2_89451.png "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1221/112135_155c0766_89451.png "在这里输入图片标题")
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1221/152134_321c8072_89451.png "在这里输入图片标题")
