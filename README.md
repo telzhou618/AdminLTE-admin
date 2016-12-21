@@ -6,5 +6,5 @@
 4.引入第三方Mybatis-plus作为ORM框架。
 ```
 ### 截图
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1215/175139_9d484d32_89451.png "在这里输入图片标题")
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1221/112111_edebae9b_89451.png "在这里输入图片标题")
 ![输入图片说明](http://git.oschina.net/uploads/images/2016/1215/175152_8b00f1b2_89451.png "在这里输入图片标题")
