@@ -29,8 +29,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:xml/mybatis-config.xml" />
 		<property name="typeAliasesPackage" value="com.vacomall.entity" />
-		<property name="mapperLocations"
-			value="classpath:com\vacomall\mapper\xml\*Mapper.xml" />
+		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml" />
 		<property name="plugins">
 			<array>
 				<!-- 分页插件配置 -->
