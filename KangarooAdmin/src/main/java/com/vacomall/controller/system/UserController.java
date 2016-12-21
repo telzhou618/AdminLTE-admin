@@ -115,4 +115,19 @@ public class UserController extends SuperController{
     	sysUserService.updateUser(sysUser,roleId);
     	return redirectTo("/system/user/list/1.html");
     } 
+    
+    /**
+     * 验证用户名是否已存在
+     */
+    @RequestMapping("/checkName")  
+    @ResponseBody
+    public String checkName(String userName){
+    	
+    	List<SysUser> list = sysUserService.selectList(new EntityWrapper<SysUser>().addFilter("userName = {0}", userName));
+    	if(list.size() > 0){
+    		return "{\"error\":\" "+userName+" 用户名已存在,请换一个尝试.\"}";
+    	}
+    	return "{\"ok\":\"用户名很棒.\"}";
+    }
+    
 }
