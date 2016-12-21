@@ -25,7 +25,7 @@
 	       </a>
 	       <ul class="treeview-menu">
 	         <#list vo.sysMenuChild as ch>
-	         	<li><a href="${(ch.url)!}?resource=${(vo.sysMenu.id)!}"><i class="fa ${(ch.icon)!}"></i> ${(ch.menuName)!}</a></li>
+	         	<li><a href="${(ch.url)!}?resource=${(vo.sysMenu.id)!}&cur=${(ch.id)!}"  style="<#if cur?? && ch.id==cur> color: white </#if>"><i class="fa ${(ch.icon)!}"></i> ${(ch.menuName)!}</a></li>
 	         </#list>
 	       </ul>
 	     </li>
