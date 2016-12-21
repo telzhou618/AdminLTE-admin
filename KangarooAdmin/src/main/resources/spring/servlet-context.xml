@@ -91,6 +91,12 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		
+		<!-- 只读拦截器 -->
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.vacomall.interceptor.ReadOnlyterceptor" />
+		</mvc:interceptor> -->
+		
 		<!-- 登录拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
