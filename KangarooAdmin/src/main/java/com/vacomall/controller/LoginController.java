@@ -114,7 +114,8 @@ public class LoginController extends SuperController{
     @RequestMapping("/captcha")
 	@ResponseBody
     public  Response captcha() throws ServletException, IOException{
-    	new KaptchaExtend().captcha(request, response);
+		KaptchaExtend kaptchaExtend =  new KaptchaExtend();
+		kaptchaExtend.captcha(request, response);
     	return new Response().success();
     }
 }
