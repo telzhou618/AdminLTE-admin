@@ -316,13 +316,14 @@ function _init() {
       //Enable sidebar toggle
       $(toggleBtn).on('click', function (e) {
         e.preventDefault();
-
         //Enable sidebar push menu
         if ($(window).width() > (screenSizes.sm - 1)) {
           if ($("body").hasClass('sidebar-collapse')) {
             $("body").removeClass('sidebar-collapse').trigger('expanded.pushMenu');
+            localStorage.setItem('collapse',false);
           } else {
             $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+             localStorage.setItem('collapse',true);
           }
         }
         //Handle sidebar push menu for small screens
@@ -586,6 +587,11 @@ function _init() {
       box.slideUp(this.animationSpeed);
     }
   };
+  
+  var collapse = localStorage.getItem("collapse");
+  if(collapse && collapse=='true'){
+  	 $("body").addClass('sidebar-collapse');
+  }
 }
 
 /* ------------------
