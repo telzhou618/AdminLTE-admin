@@ -19,14 +19,14 @@
      <!-- Optionally, you can add icons to the links -->
      <#if sysMenuVos??>
 	     <#list sysMenuVos as vo>
-		     <li class="treeview <#if resource?? && vo.sysMenu.id==resource> active </#if> ">
+		     <li class="treeview <#if res?? && vo.sysMenu.id==res> active </#if> ">
 		       <a href="#"><i class="fa ${(vo.sysMenu.icon)!}"></i> 
 		       <span>${(vo.sysMenu.menuName)!}</span>  
 		       <i class="fa fa-angle-left pull-right"></i>
 		       </a>
 		       <ul class="treeview-menu">
 		         <#list vo.sysMenuChild as ch>
-		         	<li><a href="${(ch.url)!}?resource=${(vo.sysMenu.id)!}&cur=${(ch.id)!}"  style="<#if cur?? && ch.id==cur> color: white </#if>"><i class="fa ${(ch.icon)!}"></i> ${(ch.menuName)!}</a></li>
+		         	<li><a href="${(ch.url)!}?res=${(vo.sysMenu.id)!}&cur=${(ch.id)!}"  style="<#if cur?? && ch.id==cur> color: white </#if>"><i class="fa ${(ch.icon)!}"></i> ${(ch.menuName)!}</a></li>
 		         </#list>
 		       </ul>
 		     </li>

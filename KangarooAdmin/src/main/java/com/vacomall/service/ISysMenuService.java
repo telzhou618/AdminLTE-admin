@@ -19,10 +19,6 @@ public interface ISysMenuService extends ISuperService<SysMenu> {
 	 */
 	List<TreeMenuVo> selectTreeMenuVoList(String roleId);
 	/**
-	 * 获取菜单树
-	 */
-	List<SysMenuVo> selectSysMenuTree();
-	/**
 	 * 获取指定用户拥有的菜单
 	 */
 	List<SysMenu> selectMenuByuserId(String uid);
