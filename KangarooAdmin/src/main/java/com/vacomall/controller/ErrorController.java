@@ -4,9 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.baomidou.kisso.annotation.Action;
-import com.baomidou.kisso.annotation.Login;
 /**
  * 错误控制器
  * @author Gaojun.Zhou
@@ -15,7 +12,6 @@ import com.baomidou.kisso.annotation.Login;
 @Controller
 @RequestMapping("/error")
 public class ErrorController {  
-	@Login(action=Action.Skip)
     @RequestMapping(value ="/{code}")  
     public  String index(@PathVariable String code,Model model){
 		return "error/" + code;

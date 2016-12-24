@@ -88,35 +88,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
 	}
 
 	@Override
-	public List<SysMenuVo> selectSysMenuTree() {
-		// TODO Auto-generated method stub
-		/**
-		 * 查询所有权限树
-		 */
-		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-		ew.orderBy("sort", true);
-		ew.addFilter("pid = {0} ", "0");
-		List<SysMenu> sysMenus = this.selectList(ew);
-		
-		List<SysMenuVo> sysMenuVos = Lists.transform(sysMenus, new Function<SysMenu, SysMenuVo>() {
-			@Override
-			public SysMenuVo apply(SysMenu sysMenu) {
-				// TODO Auto-generated method stub
-				
-				SysMenuVo vo = new SysMenuVo();
-				vo.setSysMenu(sysMenu);
-				EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-				ew.orderBy("sort", true);
-				ew.addFilter("pid = {0} ", sysMenu.getId());
-				vo.setSysMenuChild(selectList(ew));
-				return vo;
-			}
-		});
-		
-		return sysMenuVos;
-	}
-
-	@Override
+	@Cacheable(value = "selectMenuByuserId", key = "#uid")
 	public List<SysMenu> selectMenuByuserId(String uid) {
 		// TODO Auto-generated method stub
 		return sysMenuMapper.selectMenuByuserId(uid);
