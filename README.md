@@ -18,5 +18,5 @@
 5.说明：注意域名和端口可随意定义，但一定记得修改properties/sso.properties配置文件中的sso.cookie.domain和sso.login.url,这两个配置要和自己定义的一致即可 。
 ```
 ### 截图
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1221/112111_edebae9b_89451.png "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2016/1221/152134_321c8072_89451.png "在这里输入图片标题")
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1222/134828_5eb3a8d0_89451.png "在这里输入图片标题")
+![输入图片说明](http://git.oschina.net/uploads/images/2016/1222/134841_8518af2d_89451.png "在这里输入图片标题")
