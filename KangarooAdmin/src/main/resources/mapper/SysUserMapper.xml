@@ -12,7 +12,7 @@
 		SELECT u.*,d.`deptName` FROM `sys_user` u
 		LEFT JOIN `sys_dept` d ON d.`id` = u.`deptId` WHERE 1=1
 		<if test="search != null">
-			AND u.userName LIKE CONCAT('%',#{search},'%')
+			AND u.userName LIKE CONCAT('%',#{search,jdbcType=VARCHAR},'%')
 		</if>
 		ORDER BY u.`createTime` DESC
 	</select>

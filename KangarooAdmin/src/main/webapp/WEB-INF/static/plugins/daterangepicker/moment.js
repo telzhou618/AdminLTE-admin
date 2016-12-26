@@ -880,7 +880,7 @@
             return this._months[m.month()];
         },
 
-        _monthsShort : 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+        _monthsShort : '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
         monthsShort : function (m) {
             return this._monthsShort[m.month()];
         },
@@ -926,7 +926,7 @@
             return this._weekdaysShort[m.day()];
         },
 
-        _weekdaysMin : 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+        _weekdaysMin : '日_一_二_三_四_五_六'.split('_'),
         weekdaysMin : function (m) {
             return this._weekdaysMin[m.day()];
         },

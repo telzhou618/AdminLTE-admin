@@ -3,6 +3,7 @@ package com.vacomall.controller.system;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,9 @@ public class UserController extends SuperController{
 	@Permission("listUser")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
+		if(StringUtils.isNotBlank(search)){
+			model.addAttribute("search", search);
+		}
     	Page<Map<Object, Object>> page = getPage(pageNumber);
     	Page<Map<Object, Object>> pageData = sysUserService.selectUserPage(page, search);
     	model.addAttribute("pageData", pageData);
