@@ -102,8 +102,8 @@ $("*[data-tiggle='ajaxmodel']").click(function(){
 });
 
 	
-	//icheck
- var checkedBgColor = "#f5f5f5",
+//icheck
+var checkedBgColor = "#f5f5f5",
 		unCheckedBgColor = "#fff";
 	//单选
 	$(".checkbox-item").on('ifChecked',function(){
