@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.baomidou.framework.service.ISuperService;
 import com.vacomall.entity.SysMenu;
-import com.vacomall.entity.vo.SysMenuVo;
-import com.vacomall.entity.vo.TreeMenuVo;
+import com.vacomall.entity.vo.TreeMenu;
+import com.vacomall.entity.vo.TreeMenuAllowAccess;
 
 /**
  *
@@ -15,17 +15,24 @@ import com.vacomall.entity.vo.TreeMenuVo;
 public interface ISysMenuService extends ISuperService<SysMenu> {
 
 	/**
-	 * 获取指定角色的权限,选中拥有的权限
-	 */
-	List<TreeMenuVo> selectTreeMenuVoList(String roleId);
-	/**
 	 * 获取指定用户拥有的菜单
 	 */
-	List<SysMenu> selectMenuByuserId(String uid);
-	
+	List<String> selectMenuIdsByuserId(String uid);
 	/**
-	 * 获取指定用户拥有的菜单
+	 * 获取指定用户的菜单
+	 * @param  menuIds 当前用户所在角色拥有的权限ID集合
+	 * @param  pid 菜单父ID
 	 */
-	List<SysMenuVo> selectMenuVoByuserId(String uid);
+	List<TreeMenu> selectTreeMenuByMenuIdsAndPid(List<String> menuIds,String pid);
+	/**
+	 * 获取当前用户的菜单
+	 */
+	List<TreeMenu> selectTreeMenuByUserId(String uid);
+	/**
+	 * 获取指定用户拥有权限
+	 * @param  menuIds 该角色拥有的权限ID集合
+	 * @param  pid 菜单父ID
+	 */
+	List<TreeMenuAllowAccess> selectTreeMenuAllowAccessByMenuIdsAndPid(List<String> menuIds,String pid);
 
 }

@@ -17,7 +17,9 @@
         <div class="box">
          <form action="/system/user/list/1.html" method="post">
           <div class="box-header">
-            <a class="btn btn-primary" href="/system/user/add.html"><i class="fa fa-plus"></i> 创建新用户</a>
+            <#if permissions?seq_contains('addUser')>
+              <a class="btn btn-primary" href="/system/user/add.html"><i class="fa fa-plus"></i> 创建新用户</a>
+            </#if>
             <div class="box-tools">
               <div class="input-group" style="width: 250px;">
                 <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
@@ -53,11 +55,15 @@
 	                <td>${(user.deptName)!'--'}</td>
 	                <td><#if user.userState==1>启用<#else><font color="red">禁用</font></#if></td>
 	                <td>
+	                	<#if permissions?seq_contains('editUser')>
 	                	<a class="btn btn-primary btn-xs" href="/system/user/edit/${(user.id)!}.html">编辑</a>
+	                	<#else>-</#if>
+	                	<#if permissions?seq_contains('deleteUser')>
 	                	<a class="btn btn-danger btn-xs"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/user/delete?id=${(user.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
+	                	 <#else>-</#if>
 	                </td>
 	              </tr>
               </#list>

@@ -2,8 +2,8 @@ package com.vacomall.mapper;
 
 import java.util.List;
 
-import com.vacomall.entity.SysMenu;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.vacomall.entity.SysMenu;
 
 /**
  *
@@ -12,6 +12,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface SysMenuMapper extends AutoMapper<SysMenu> {
 
-	List<SysMenu> selectMenuByuserId(String uid);
+	List<String> selectMenuIdsByuserId(String uid);
 
 }

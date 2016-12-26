@@ -28,9 +28,6 @@ public class SysMenu implements Serializable {
 	/** 父级菜单ID */
 	private String pid;
 
-	/** 是否为叶子 */
-	private Integer leaf;
-
 	/** 连接地址 */
 	private String url;
 
@@ -72,14 +69,6 @@ public class SysMenu implements Serializable {
 
 	public void setPid(String pid) {
 		this.pid = pid;
-	}
-
-	public Integer getLeaf() {
-		return this.leaf;
-	}
-
-	public void setLeaf(Integer leaf) {
-		this.leaf = leaf;
 	}
 
 	public String getUrl() {

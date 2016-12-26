@@ -10,8 +10,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.baomidou.kisso.SSOHelper;
 import com.baomidou.kisso.Token;
-import com.vacomall.common.anno.Permission;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.vacomall.common.anno.PermissionSecurity;
 import com.vacomall.common.util.SpringUtil;
+import com.vacomall.entity.SysMenu;
 import com.vacomall.service.ISysMenuService;
 
 /**
@@ -29,13 +32,21 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			Token token = SSOHelper.getToken(request);
 			if (token != null) {
-				List<String> permissions = SpringUtil.getBean(ISysMenuService.class).selectMenuIdsByuserId(token.getUid());
-				Permission permissionSecurity =  handlerMethod.getMethodAnnotation(Permission.class);
+				List<SysMenu> list = SpringUtil.getBean(ISysMenuService.class).selectMenuByuserId(token.getUid());
+				
+				List<String> reources = Lists.transform(list, new Function<SysMenu, String>() {
+					@Override
+					public String apply(SysMenu input) {
+						// TODO Auto-generated method stub
+						return input.getResource();
+					}
+				});
+				
+				PermissionSecurity permissionSecurity =  handlerMethod.getBeanType().getAnnotation(PermissionSecurity.class);
 				if(permissionSecurity!=null){
-					if(permissions.contains(permissionSecurity.value())){
+					if(reources.contains(permissionSecurity.value())){
 						return true;
 					}
-					request.setAttribute("url",request.getRequestURL());
 					request.getRequestDispatcher("/error/illegalAccess").forward(request, response);
 					return false;
 				}

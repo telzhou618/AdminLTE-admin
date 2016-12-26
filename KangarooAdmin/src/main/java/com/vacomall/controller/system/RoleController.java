@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.anno.PermissionSecurity;
+import com.vacomall.common.anno.Permission;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
-import com.vacomall.entity.vo.TreeMenuVo;
+import com.vacomall.entity.SysRoleMenu;
+import com.vacomall.entity.vo.TreeMenuAllowAccess;
 import com.vacomall.service.ISysMenuService;
 import com.vacomall.service.ISysRoleMenuService;
 import com.vacomall.service.ISysRoleService;
@@ -29,7 +32,6 @@ import com.vacomall.service.ISysRoleService;
  * @date 2016年12月13日 上午10:23:41
  */
 @Controller
-@PermissionSecurity("role")
 @RequestMapping("/system/role")
 public class RoleController extends SuperController{  
 
@@ -49,6 +51,7 @@ public class RoleController extends SuperController{
 	/**
 	 * 分页查询角色
 	 */
+	@Permission("listRole")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
     	
@@ -69,6 +72,7 @@ public class RoleController extends SuperController{
     /**
      * 新增角色
      */
+	@Permission("addRole")
     @RequestMapping("/add")  
     public  String add(Model model){
 		return "system/role/add";
@@ -77,6 +81,7 @@ public class RoleController extends SuperController{
     /**
      * 执行新增角色
      */
+	@Permission("addRole")
     @Log("创建角色")
     @RequestMapping("/doAdd")  
     public  String doAdd(SysRole role){
@@ -89,6 +94,7 @@ public class RoleController extends SuperController{
     /**
      * 删除角色
      */
+	@Permission("deleteRole")
     @Log("删除角色")
     @RequestMapping("/delete")  
     @ResponseBody
@@ -100,6 +106,7 @@ public class RoleController extends SuperController{
     /**
      * 批量删除角色
      */
+	@Permission("deleteBatchRole")
     @Log("批量删除角色")
     @RequestMapping("/deleteBatch")  
     @ResponseBody
@@ -111,6 +118,7 @@ public class RoleController extends SuperController{
     /**
      * 编辑角色
      */
+	@Permission("editRole")
     @RequestMapping("/edit/{id}")  
     public  String edit(@PathVariable String id,Model model){
     	SysRole sysRole = sysRoleService.selectById(id);
@@ -121,6 +129,7 @@ public class RoleController extends SuperController{
     /**
      * 执行编辑角色
      */
+	@Permission("editRole")
     @Log("编辑角色")
     @RequestMapping("/doEdit")  
     public  String doEdit(SysRole sysRole,Model model){
@@ -131,14 +140,25 @@ public class RoleController extends SuperController{
     /**
      * 权限
      */
+	@Permission("authRole")
     @RequestMapping("/auth/{id}")  
     public  String auth(@PathVariable String id,Model model){
     	
     	SysRole sysRole = sysRoleService.selectById(id);
-    	List<TreeMenuVo> TreeMenuVos = sysMenuService.selectTreeMenuVoList(id);
     	
+    	List<SysRoleMenu> sysRoleMenus = sysRoleMenuService.selectList(new EntityWrapper<SysRoleMenu>().addFilter("roleId = {0}", id));
+    	List<String> menuIds = Lists.transform(sysRoleMenus, new Function<SysRoleMenu, String>() {
+			@Override
+			public String apply(SysRoleMenu input) {
+				// TODO Auto-generated method stub
+				return input.getMenuId();
+			}
+		});
+    	
+    	List<TreeMenuAllowAccess> treeMenuAllowAccesses = sysMenuService.selectTreeMenuAllowAccessByMenuIdsAndPid(menuIds, "0");
+
     	model.addAttribute("sysRole", sysRole);
-    	model.addAttribute("treeMenuVos", TreeMenuVos);
+    	model.addAttribute("treeMenuAllowAccesses", treeMenuAllowAccesses);
     	
     	return "system/role/auth";
     } 
@@ -146,10 +166,13 @@ public class RoleController extends SuperController{
     /**
      * 权限
      */
+	@Permission("authRole")
     @Log("角色分配权限")
     @RequestMapping("/doAuth")  
     public  String doAuth(String roleId,String[] mid,Model model){
     	sysRoleMenuService.addAuth(roleId,mid);
-    	return redirectTo("/system/role/list/1.html");
+    	model.addAttribute("info","OK,授权成功,1分钟后生效 ~ ~");
+    	this.auth(roleId, model);
+    	return "system/role/auth";
     } 
 }

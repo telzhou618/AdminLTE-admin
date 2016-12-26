@@ -17,7 +17,9 @@
         <div class="box">
          <form action="/system/menu/list/1.html" method="post">
           <div class="box-header">
+            <#if permissions?seq_contains('addMenu')>
             <a class="btn btn-primary" href="/system/menu/add.html"><i class="fa fa-plus"></i> 创建菜单</a>
+            </#if>
             <div class="box-tools">
               <div class="input-group" style="width: 250px;">
                 <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
@@ -36,10 +38,10 @@
                 <th>菜单编码</th>
                 <th>访问地址</th>
                 <th>显示图标</th>
-                <th>菜单深度</th>
-                <th>菜单权限资源</th>
-                <th>菜单排序</th>
-                <th>菜单节点类型</th>
+                <th>深度</th>
+                <th>权限资源</th>
+                <th>排序</th>
+                <th>类型</th>
                 <th width="150px">操作</th>
               </tr>
               <#list pageData.getRecords() as menu>
@@ -52,18 +54,22 @@
 	               	</td>
 	                <td>${(menu.menuName)!}</td>
 	                <td>${(menu.code)!}</td>
-	                <td><a href="${(menu.url)!'--'}" target="_blank">${(menu.url)!'--'}</a></td>
-	                <td><i class="fa ${(menu.icon)!}"></i> ${(menu.icon)!}</td>
+	                <td><#if menu.deep?? && (menu.deep==1 || menu.deep==3) >--<#else><a href="${(menu.url)!'#'}" target="_blank">${(menu.url)!}</a></#if></td>
+	                <td><small class="label label-default"><i class="fa ${(menu.icon)!}"></i> ${(menu.icon)!"--"}</small></td>
 	                <td>${(menu.deep)!}</td>
-	                <td>${(menu.resource)!}</td>
+	                <td>${(menu.resource)!"--"}</td>
 	                <td>${(menu.sort)!}</td>
-	                <td> <#if menu.leaf?? && menu.leaf==1 >叶节点<#else>目录</#if> </td>
+	                <td><#if menu.deep?? && menu.deep==1 >目录<#elseif menu.deep?? && menu.deep==2>菜单<#else>功能</#if> </td>
 	                <td>
+	                	<#if permissions?seq_contains('editMenu')>
 	                	<a class="btn btn-primary btn-xs" href="/system/menu/edit/${(menu.id)!}.html" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
+	                	<#else>-</#if>
+	                	<#if permissions?seq_contains('deleteMenu')>
 	                	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/menu/delete?id=${(menu.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
+	                	 <#else>-</#if>
 	                </td>
 	              </tr>
               </#list>

@@ -17,8 +17,12 @@
         <div class="box">
          <form action="/system/role/list/1.html" method="post">
           <div class="box-header">
+            <#if permissions?seq_contains('addRole')>
             <a class="btn btn-primary" href="/system/role/add.html"><i class="fa fa-plus"></i> 创建新角色</a>
+            </#if>
+            <#if permissions?seq_contains('deleteBatchRole')>
             <a class="btn btn-danger" delete-batch-url="/system/role/deleteBatch" ><i class="fa fa-remove"></i> 删除选中</a>
+            </#if>
             <div class="box-tools">
               <div class="input-group" style="width: 250px;">
                 <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
@@ -53,12 +57,18 @@
 	                <td>${(role.createTime?string('yyyy/MM/dd HH:mm:ss'))!'--'}</td>
 	                <td><#if role.roleState==1>启用<#else><font color="red">禁用</font></#if></td>
 	                <td>
+	                	<#if permissions?seq_contains('authRole')>
 	                	<a class="btn btn-success btn-xs" href="/system/role/auth/${(role.id)!}.html" data-toggle="tooltip" title="授权" data-placement="bottom">授权</a>
+	                	<#else>-</#if>
+	                	<#if permissions?seq_contains('editRole')>
 	                	<a class="btn btn-primary btn-xs" href="/system/role/edit/${(role.id)!}.html" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
-	                	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
+	 	               	<#else>-</#if>
+	                	<#if permissions?seq_contains('deleteRole')>
+	 	               	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/role/delete?id=${(role.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
+	                	 <#else>-</#if>
 	                </td>
 	              </tr>
               </#list>

@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.vacomall.common.util.SpringUtil;
 import com.vacomall.entity.SysSetting;
 import com.vacomall.entity.SysUser;
-import com.vacomall.entity.vo.SysMenuVo;
+import com.vacomall.entity.vo.TreeMenu;
 import com.vacomall.service.ISysMenuService;
 import com.vacomall.service.ISysSettingService;
 import com.vacomall.service.ISysUserService;
@@ -91,9 +91,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				/**
 				 * 获取当前用户的菜单
 				 */
-				List<SysMenuVo> sysMenuVos = SpringUtil.getBean(ISysMenuService.class).selectMenuVoByuserId(token.getUid());
-				request.setAttribute("sysMenuVos", sysMenuVos);
-			
+				List<TreeMenu> treeMenus = SpringUtil.getBean(ISysMenuService.class).selectTreeMenuByUserId(token.getUid());
+				request.setAttribute("treeMenus", treeMenus);
+				
+				/**
+				 * 获取当前用于的权限
+				 */
+				List<String> list2 = SpringUtil.getBean(ISysMenuService.class).selectMenuIdsByuserId(token.getUid());
+				String[] permissions = list2.toArray(new String[list2.size()]);
+				request.setAttribute("permissions", permissions);
 			}
 		}
 

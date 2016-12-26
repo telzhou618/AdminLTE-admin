@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.anno.PermissionSecurity;
+import com.vacomall.common.anno.Permission;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysSetting;
 import com.vacomall.service.ISysSettingService;
@@ -21,15 +21,15 @@ import com.vacomall.service.ISysSettingService;
  * @date 2016年12月16日 下午4:24:13
  */
 @Controller
-@PermissionSecurity("setting")
 @RequestMapping("/system/setting")
 public class SettingController extends SuperController{  
 	
 	@Autowired private ISysSettingService	sysSettingService;
 	
 	/**
-	 * 分页查询日志
+	 * 查询系统设置
 	 */
+	@Permission("listSetting")
     @RequestMapping("/page")  
     public  String page(Model model){
     	
@@ -38,6 +38,7 @@ public class SettingController extends SuperController{
 		return "system/setting/page";
     } 
     
+	@Permission("doSetting")
     @Log("更新系统设置")
     @RequestMapping("/doSetting")
     public String doSetting(String[] id,String[] sysValue,Model model){
