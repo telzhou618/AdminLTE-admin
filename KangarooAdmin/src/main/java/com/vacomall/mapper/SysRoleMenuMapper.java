@@ -1,7 +1,9 @@
 package com.vacomall.mapper;
 
-import com.vacomall.entity.SysRoleMenu;
+import java.util.List;
+
 import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.vacomall.entity.SysRoleMenu;
 
 /**
  *
@@ -10,5 +12,9 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface SysRoleMenuMapper extends AutoMapper<SysRoleMenu> {
 
-
+	/**
+	 * 根据用户Id获取用户所在角色的权限
+	 */
+	public List<SysRoleMenu> selectRoleMenuByUserId(String uid);
+	
 }

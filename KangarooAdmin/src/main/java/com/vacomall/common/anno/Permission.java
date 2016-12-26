@@ -11,10 +11,10 @@ import java.lang.annotation.Target;
  * @author Administrator
  *
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface PermissionSecurity {
+public @interface Permission {
 	
 	 String value() ;
 	

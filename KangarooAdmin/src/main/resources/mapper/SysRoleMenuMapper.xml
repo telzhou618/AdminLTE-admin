@@ -6,5 +6,13 @@
 	<sql id="Base_Column_List">
 		id, roleId, menuId
 	</sql>
-
+	
+	<select id="selectRoleMenuByUserId" parameterType="java.lang.String" resultType="com.vacomall.entity.SysRoleMenu">
+		SELECT DISTINCT rm.* FROM `sys_user_role` ur
+		INNER JOIN `sys_role` r ON r.`id` = ur.`roleId`
+		INNER JOIN  `sys_role_menu` rm ON rm.`roleId` = ur.`roleId`
+		WHERE ur.`userId` = #{uid}
+		AND r.`roleState` = 1
+	</select>
+	
 </mapper>

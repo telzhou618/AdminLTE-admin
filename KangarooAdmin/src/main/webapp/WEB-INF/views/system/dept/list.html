@@ -17,7 +17,9 @@
         <div class="box">
          <form action="/system/dept/list/1.html" method="post">
           <div class="box-header">
+            <#if permissions?seq_contains('addDept')>
             <a class="btn btn-primary" href="/system/dept/add.html"><i class="fa fa-plus"></i> 创建部门</a>
+            </#if>
             <div class="box-tools">
               <div class="input-group" style="width: 250px;">
                 <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
@@ -47,11 +49,15 @@
 	                <td>${(dept.deptName)!}</td>
 	                <td>${(dept.deptDesc)!'--'}</td>
 	                <td>
+	                	<#if permissions?seq_contains('editDept')>
 	                	<a class="btn btn-primary btn-xs" href="/system/dept/edit/${(dept.id)!}.html">编辑</a>
+	                	<#else>-</#if>
+	                	<#if permissions?seq_contains('deleteDept')>
 	                	<a class="btn btn-danger btn-xs"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/dept/delete?id=${(dept.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
+	                	 <#else>-</#if>
 	                </td>
 	              </tr>
               </#list>

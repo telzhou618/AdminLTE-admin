@@ -12,10 +12,10 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.vacomall.entity.SysMenu;
 import com.vacomall.entity.SysRoleMenu;
-import com.vacomall.entity.vo.MenuVo;
-import com.vacomall.entity.vo.SysMenuVo;
-import com.vacomall.entity.vo.TreeMenuVo;
+import com.vacomall.entity.vo.TreeMenu;
+import com.vacomall.entity.vo.TreeMenuAllowAccess;
 import com.vacomall.mapper.SysMenuMapper;
+import com.vacomall.mapper.SysRoleMenuMapper;
 import com.vacomall.service.ISysMenuService;
 import com.vacomall.service.ISysRoleMenuService;
 import com.vacomall.service.support.BaseServiceImpl;
@@ -35,104 +35,98 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> 
 	
 	@Autowired private SysMenuMapper sysMenuMapper;
 	
+	@Autowired private SysRoleMenuMapper sysRoleMenuMapper;
+	
+
+	@Cacheable(value = "permissionCache", key = "#uid")
 	@Override
-	public List<TreeMenuVo> selectTreeMenuVoList(String roleId) {
+	public List<String> selectMenuIdsByuserId(String uid) {
+		// TODO Auto-generated method stub
+		return sysMenuMapper.selectMenuIdsByuserId(uid);
+	}
+
+	@Override
+	public List<TreeMenu> selectTreeMenuByMenuIdsAndPid(final List<String> menuIds,
+			String pid) {
 		// TODO Auto-generated method stub
 		
+		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
+		ew.orderBy("sort", true);
+		ew.addFilter("pid = {0} ", pid);
+		ew.in("id", menuIds.size() > 0 ? menuIds : Lists.newArrayList(RandomStringUtils.randomNumeric(30)));
+		List<SysMenu> sysMenus = this.selectList(ew);
+		
+		List<TreeMenu> treeMenus = Lists.transform(sysMenus, new Function<SysMenu, TreeMenu>() {
+			@Override
+			public TreeMenu apply(SysMenu sysMenu) {
+				// TODO Auto-generated method stub
+				TreeMenu treeMenu = new TreeMenu();
+				treeMenu.setSysMenu(sysMenu);
+				/**
+				 * 子节点
+				 */
+				if(sysMenu.getDeep() < 2){
+					treeMenu.setChildren(selectTreeMenuByMenuIdsAndPid(menuIds,sysMenu.getId()));
+				}
+				return treeMenu;
+			}
+		});
+		return treeMenus;
+		
+	}
+	
+	@Cacheable(value = "menuCache", key = "#uid")
+	@Override
+	public List<TreeMenu> selectTreeMenuByUserId(String uid) {
+		// TODO Auto-generated method stub
 		/**
-		 * 获取当前角色权限
+		 * 当前用户二级菜单权限
 		 */
-		List<SysRoleMenu> sysRoleMenus = sysRoleMenuService.selectByRole(roleId);
-		final List<String> myAuths = Lists.transform(sysRoleMenus, new Function<SysRoleMenu, String>() {
+		List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectRoleMenuByUserId(uid);
+		/**
+		 * 当前用户菜单主键
+		 */
+		List<String> menuIds = Lists.transform(sysRoleMenus, new Function<SysRoleMenu, String>() {
 			@Override
 			public String apply(SysRoleMenu input) {
 				// TODO Auto-generated method stub
 				return input.getMenuId();
 			}
 		});
-		
-		/**
-		 * 查询所有权限树
-		 */
-		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-		ew.orderBy("sort", true);
-		ew.addFilter("pid = {0} ", "0");
-		
-		List<SysMenu> sysMenus = this.selectList(ew);
-
-		List<TreeMenuVo> treeMenuVos = Lists.transform(sysMenus, new Function<SysMenu, TreeMenuVo>() {
-
-			@Override
-			public TreeMenuVo apply(SysMenu sysMenum) {
-				// TODO Auto-generated method stub
-				
-				TreeMenuVo tr = new TreeMenuVo();
-				tr.setMenuVo(new MenuVo(sysMenum,myAuths.contains(sysMenum.getId()) ? true : false));
-				EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-				ew.orderBy("sort", true);
-				ew.addFilter("pid = {0} ", sysMenum.getId());
-				List<SysMenu> sysMenus = selectList(ew);
-				tr.setMenuVoChild(Lists.transform(sysMenus, new Function<SysMenu, MenuVo>() {
-					@Override
-					public MenuVo apply(SysMenu sysMenum) {
-						// TODO Auto-generated method stub
-						return new MenuVo(sysMenum,myAuths.contains(sysMenum.getId()) ? true : false);
-					}
-				}));
-				
-				return tr;
-			}
-		});
-		
-		return treeMenuVos;
+		return selectTreeMenuByMenuIdsAndPid(menuIds, "0");
 	}
-
-	@Override
-	@Cacheable(value = "selectMenuByuserId", key = "#uid")
-	public List<SysMenu> selectMenuByuserId(String uid) {
-		// TODO Auto-generated method stub
-		return sysMenuMapper.selectMenuByuserId(uid);
-	}
-
-	@Override
-	@Cacheable(value = "permissionCache", key = "#uid")
-	public List<SysMenuVo> selectMenuVoByuserId(String uid) {
-		// TODO Auto-generated method stub
-		/**
-		 * 我的菜单
-		 */
-		final List<String> idList= Lists.transform(this.selectMenuByuserId(uid), new Function<SysMenu, String>() {
-			@Override
-			public String apply(SysMenu input) {
-				// TODO Auto-generated method stub
-				return input.getId();
-			}
-		});
 	
-		/**
-		 * 筛选菜单树
-		 */
+	@Override
+	public List<TreeMenuAllowAccess> selectTreeMenuAllowAccessByMenuIdsAndPid(
+			final List<String> menuIds, String pid) {
+		// TODO Auto-generated method stub
+		
 		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
 		ew.orderBy("sort", true);
-		ew.addFilter("pid = {0} ", "0");
-		ew.in("id", idList.size() > 0 ? idList : Lists.newArrayList(RandomStringUtils.randomNumeric(30)));
+		ew.addFilter("pid = {0} ", pid);
 		List<SysMenu> sysMenus = this.selectList(ew);
-		
-		List<SysMenuVo> sysMenuVos = Lists.transform(sysMenus, new Function<SysMenu, SysMenuVo>() {
+		List<TreeMenuAllowAccess> treeMenuAllowAccesss = Lists.transform(sysMenus, new Function<SysMenu, TreeMenuAllowAccess>() {
 			@Override
-			public SysMenuVo apply(SysMenu sysMenu) {
+			public TreeMenuAllowAccess apply(SysMenu sysMenu) {
 				// TODO Auto-generated method stub
-				
-				SysMenuVo vo = new SysMenuVo();
-				vo.setSysMenu(sysMenu);
-				EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-				ew.orderBy("sort", true);
-				ew.addFilter("pid = {0} ", sysMenu.getId());
-				ew.in("id", idList);
-				vo.setSysMenuChild(selectList(ew));
-				return vo;
+				TreeMenuAllowAccess treeMenuAllowAccess = new TreeMenuAllowAccess();
+				treeMenuAllowAccess.setSysMenu(sysMenu);
+				/**
+				 * 是否有权限
+				 */
+				if(menuIds.contains(sysMenu.getId())){
+					treeMenuAllowAccess.setAllowAccess(true);
+				}
+				/**
+				 * 子节点
+				 */
+				if(sysMenu.getDeep() < 3){
+					treeMenuAllowAccess.setChildren(selectTreeMenuAllowAccessByMenuIdsAndPid(menuIds,sysMenu.getId()));
+				}
+				return treeMenuAllowAccess;
 			}
 		});
-		return sysMenuVos;
+		return treeMenuAllowAccesss;
 	}
+
 }

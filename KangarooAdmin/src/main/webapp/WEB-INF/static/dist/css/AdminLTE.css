@@ -1734,7 +1734,8 @@ a:focus {
   margin-right: 5px;
 }
 .box-header > .box-tools {
-  position: absolute;
+ /*  position: absolute; */
+  float:right;
   right: 10px;
   top: 5px;
 }

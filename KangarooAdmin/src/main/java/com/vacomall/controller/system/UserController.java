@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.anno.PermissionSecurity;
+import com.vacomall.common.anno.Permission;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
@@ -31,7 +31,6 @@ import com.vacomall.service.ISysUserService;
  * @date 2016年12月13日 上午10:22:41
  */
 @Controller
-@PermissionSecurity("user")
 @RequestMapping("/system/user")
 public class UserController extends SuperController{  
 
@@ -43,6 +42,7 @@ public class UserController extends SuperController{
 	/**
 	 * 分页查询用户
 	 */
+	@Permission("listUser")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
     	Page<Map<Object, Object>> page = getPage(pageNumber);
@@ -53,6 +53,7 @@ public class UserController extends SuperController{
     /**
      * 新增用户
      */
+	@Permission("addUser")
     @RequestMapping("/add")  
     public  String add(Model model){
     	model.addAttribute("roleList", sysRoleService.selectList(null));
@@ -64,6 +65,7 @@ public class UserController extends SuperController{
      * 执行新增
      */
     @Log("创建用户")
+    @Permission("addUser")
     @RequestMapping("/doAdd")  
     public  String doAdd(SysUser user,String[] roleId){
     	
@@ -74,6 +76,7 @@ public class UserController extends SuperController{
      * 删除用户
      */
     @Log("删除用户")
+    @Permission("deleteUser")
     @RequestMapping("/delete")  
     @ResponseBody
     public  Response delete(String id){
@@ -85,6 +88,7 @@ public class UserController extends SuperController{
 	 * 编辑用户
 	 */
     @RequestMapping("/edit/{id}")  
+    @Permission("editUser")
     public  String edit(@PathVariable String id,Model model){
     	SysUser sysUser = sysUserService.selectById(id);
     	
@@ -110,6 +114,7 @@ public class UserController extends SuperController{
      * 执行编辑
      */
     @Log("编辑用户")
+    @Permission("editUser")
     @RequestMapping("/doEdit")  
     public  String doEdit(SysUser sysUser,String[] roleId,Model model){
     	sysUserService.updateUser(sysUser,roleId);

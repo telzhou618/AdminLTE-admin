@@ -39,30 +39,6 @@ $("*[data-tiggle='ajax']").click(function(){
 	
 });
 
-
-//icheck
-
-var checkedBgColor = "#f5f5f5",unCheckedBgColor = "#fff";
-
-$(".checkbox-item").on('ifChecked',function(){
-	$(this).parent().parent().parent().css('background',checkedBgColor);
-});
-
-$(".checkbox-item").on('ifUnchecked',function(){
-	$(this).parent().parent().parent().css('background',unCheckedBgColor);
-});
-$(".checkbox-toolbar").on('ifChecked',function(){
-	$(".checkbox-item").iCheck('check');
-	$(".checkbox-item").parent().parent().parent().css('background',checkedBgColor);
-	
-});
-$(".checkbox-toolbar").on('ifUnchecked',function(){
-	$(".checkbox-item").iCheck('uncheck');
-	$(".checkbox-item").parent().parent().parent().css('background',unCheckedBgColor);
-	
-});
-
-
 //delete batch
 
 $("*[delete-batch-url]").click(function(){
@@ -114,9 +90,7 @@ $("*[delete-batch-url]").click(function(){
 //ajaxmodel
 
 $("*[data-tiggle='ajaxmodel']").click(function(){
-
 	var dataUrl = $(this).attr("data-url");
-	
 	$.confirm({
 	    title: '参数',
 	    content: 'url:'+dataUrl,
@@ -126,6 +100,25 @@ $("*[data-tiggle='ajaxmodel']").click(function(){
 	});
 	
 });
+
+	
+	//icheck
+ var checkedBgColor = "#f5f5f5",
+		unCheckedBgColor = "#fff";
+	//单选
+	$(".checkbox-item").on('ifChecked',function(){
+		$(this).parents('tr').css('background',checkedBgColor);
+	}).on('ifUnchecked',function(){
+		$(this).parents("tr").css('background',unCheckedBgColor);
+	});
+	//全选
+	$(".checkbox-toolbar").on('ifChecked',function(){
+		$(".checkbox-item").iCheck('check');
+		$(".checkbox-item").parents("tr").css('background',checkedBgColor);
+	}).on('ifUnchecked',function(){
+		$(".checkbox-item").iCheck('uncheck');
+		$(".checkbox-item").parents("tr").css('background',unCheckedBgColor);
+	});
 
 
 })(jQuery, window);

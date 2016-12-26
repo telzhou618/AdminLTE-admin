@@ -1,5 +1,10 @@
 <#include "/common/layout.html">
 <@header>
+<style>
+	td > label{
+		padding: 3px;
+	}
+</style>
 </@header>
 <@body>
 <div class="content-wrapper">
@@ -23,13 +28,17 @@
 	          <tr>
 	            <th colspan="2">给角色【${(sysRole.roleName)!}】授权</th>
 	          </tr>
-	          <#list treeMenuVos as vo>
+	          <#list treeMenuAllowAccesses as vo>
 	          <tr>
-	             <td width="120px">
-	             	<label><input name="mid" type="checkbox" <#if vo.menuVo.allowAccess>  checked="checked"  </#if>  value="${(vo.menuVo.sysMenu.id)!}" class="minimal checkbox-tr"> ${(vo.menuVo.sysMenu.menuName)!} ></label></td>
+	             <td width="150px">
+	             	<label><input name="mid" type="checkbox" <#if vo.allowAccess>  checked="checked"  </#if>  value="${(vo.sysMenu.id)!}" class="minimal checkbox-tr"> <i class="fa ${(vo.sysMenu.icon)!}"></i> ${(vo.sysMenu.menuName)!} ></label></td>
 	             <td>
-	             	<#list vo.menuVoChild as ch>
-	                <label><input name="mid" type="checkbox" <#if ch.allowAccess>  checked="checked"  </#if> value="${(ch.sysMenu.id)!}" class="minimal checkbox-td"> ${(ch.sysMenu.menuName)!}</label>&nbsp;
+	             	<#list vo.children as ch>
+	                <label><input name="mid" type="checkbox" <#if ch.allowAccess>  checked="checked"  </#if> value="${(ch.sysMenu.id)!}" class="minimal checkbox-td"> <i class="fa ${(ch.sysMenu.icon)!}"></i> ${(ch.sysMenu.menuName)!}</label>&nbsp; > &nbsp;
+		             	<#list ch.children as it>
+		                	<label><input name="mid" type="checkbox" <#if it.allowAccess>  checked="checked"  </#if> value="${(it.sysMenu.id)!}" class="minimal checkbox-td"> ${(it.sysMenu.menuName)!}</label>&nbsp;
+		             	</#list>
+	             	<br>
 	             	</#list>
 	             </td>
 	           </tr>
@@ -44,20 +53,27 @@
         </form>
       </div><!--/.col (left) -->
      </div>
+     
+     <div class="row">
+     	<div class="col-md-3">
+     		<#if info??>
+		      	<div  class="alert alert-success alert-dismissible">
+			       <h4 style="margin-bottom: 0px;"><i class="fa fa-check-circle"></i> ${info!}</h4>
+			    </div>
+		      </#if>
+     	</div>
+     </div>
+     
   </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 </@body>
 <@footer>
 <script type="text/javascript">
 	
-	$(".checkbox-tr").on('ifClicked',function(){
+	 $(".checkbox-tr").on('ifClicked',function(){
 		$(this).parents('tr').find('.checkbox-td').iCheck('check');
 	}).on('ifUnchecked',function(){
 		$(this).parents('tr').find('.checkbox-td').iCheck('uncheck');
-	});
-
-	$(".checkbox-td").on('ifClicked',function(){
-		$(this).parents('tr').find('.checkbox-tr').iCheck('check');
 	});
 	
 </script>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.vacomall.common.anno.PermissionSecurity;
+import com.vacomall.common.anno.Permission;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysLog;
 import com.vacomall.service.ISysLogService;
@@ -20,7 +20,6 @@ import com.vacomall.service.ISysLogService;
  * @date 2016年12月13日 上午10:22:41
  */
 @Controller
-@PermissionSecurity("log")
 @RequestMapping("/system/log")
 public class LogController extends SuperController{  
 
@@ -29,6 +28,7 @@ public class LogController extends SuperController{
 	/**
 	 * 分页查询日志
 	 */
+	@Permission("listLog")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
     	
