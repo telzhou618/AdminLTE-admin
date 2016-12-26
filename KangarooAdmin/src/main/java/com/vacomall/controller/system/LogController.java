@@ -30,7 +30,7 @@ public class LogController extends SuperController{
 	 */
 	@Permission("listLog")
     @RequestMapping("/list/{pageNumber}")  
-    public  String list(@PathVariable Integer pageNumber,String search,Model model){
+    public  String list(@PathVariable Integer pageNumber,String search,String start,String over,Model model){
     	
 		Page<SysLog> page = getPage(pageNumber);
 		page.setOrderByField("createTime");
@@ -38,9 +38,17 @@ public class LogController extends SuperController{
 		// 查询分页
 		EntityWrapper<SysLog> ew = new EntityWrapper<SysLog>();
 		if(StringUtils.isNotBlank(search)){
-			ew.where("userName like CONCAT('\'%'\',{0},'\'%'\')", search)
-			.or("title like CONCAT('\'%'\',{0},'\'%'\')", search);
+			ew.where("(userName like CONCAT('\'%'\',{0},'\'%'\')", search)
+			.or("title like CONCAT('\'%'\',{0},'\'%'\'))", search);
 			model.addAttribute("search", search);
+		}
+		if(StringUtils.isNotBlank(start)){
+			model.addAttribute("start", start);
+			ew.addFilter(" createTime >= {0}", start +" 00:00:00");
+		}
+		if(StringUtils.isNotBlank(over)){
+			model.addAttribute("over", over);
+			ew.addFilter(" createTime <= {0}", over +" 23:59:59");
 		}
 		Page<SysLog> pageData = sysLogService.selectPage(page, ew);
 		model.addAttribute("pageData", pageData);

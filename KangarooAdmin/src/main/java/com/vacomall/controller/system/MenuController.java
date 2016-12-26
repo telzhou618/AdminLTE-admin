@@ -16,6 +16,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Maps;
 import com.vacomall.common.anno.Log;
+import com.vacomall.common.anno.Permission;
 import com.vacomall.common.bean.Response;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysMenu;
@@ -35,8 +36,9 @@ public class MenuController extends SuperController{
 	@Autowired private ISysMenuService sysMenuService;
 	
 	/**
-	 * 分页查询用户
+	 * 分页查询菜单
 	 */
+	@Permission("listMenu")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,String search,Model model){
     	
@@ -68,32 +70,9 @@ public class MenuController extends SuperController{
     } 
    
     /**
-     * 菜单树
+     * 增加菜单
      */
-    @RequestMapping("/tree")
-    public String tree(Model model){
-    	EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
-    	ew.orderBy("code", true);
-    	List<SysMenu> list = sysMenuService.selectList(ew);
-		for(SysMenu menu : list){
-			if(menu.getPid() == null || menu.getPid().equals("0")){
-				menu.setMenuName(StringUtils.join("<label><input name='mid' type='radio' class='minimal tm'> ",menu.getMenuName(),"</label>"));
-			}else{
-				menu.setMenuName(StringUtils.join("<label><input name='mid' type='radio' class='minimal tm'> ",menu.getMenuName(),"</label>"));
-			}
-			for(int i=1;i<menu.getDeep();i++){
-				menu.setMenuName(StringUtils.join("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",menu.getMenuName()));
-			}
-			
-		}
-		model.addAttribute("list", list);
-		return "system/menu/tree";
-    } 
-    
-    
-    /**
-     * 菜单树
-     */
+	@Permission("addMenu")
     @RequestMapping("/add")
     public String add(Model model){
 		
@@ -108,6 +87,7 @@ public class MenuController extends SuperController{
     /**
      * 添加目录
      */
+	@Permission("addMenu")
     @Log("创建目录菜单")
     @RequestMapping("/doAddDir")
     public String doAddDir(SysMenu sysMenu,Model model){
@@ -121,6 +101,7 @@ public class MenuController extends SuperController{
     /**
      * 添加菜单
      */
+	@Permission("addMenu")
     @Log("创建菜单")
     @RequestMapping("/doAddMenu")
     public String doAddMenu(SysMenu sysMenu,Model model){
@@ -131,6 +112,7 @@ public class MenuController extends SuperController{
     /**
      * 编辑菜单
      */
+	@Permission("editMenu")
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable String id,Model model){
     	SysMenu sysMenu =sysMenuService.selectById(id);
@@ -160,6 +142,7 @@ public class MenuController extends SuperController{
     /**
      * 执行编辑菜单
      */
+	@Permission("editMenu")
     @Log("编辑菜单")
     @RequestMapping("/doEdit")
     public String doEdit(SysMenu sysMenu,Model model){
@@ -170,6 +153,7 @@ public class MenuController extends SuperController{
     /**
      * 执行编辑菜单
      */
+	@Permission("deleteMenu")
     @Log("删除菜单")
     @RequestMapping("/delete")
     @ResponseBody
@@ -214,7 +198,7 @@ public class MenuController extends SuperController{
     	return "{\"ok\":\"资源名称很棒.\"}";
     }
     
-    
+    @Permission("addMenu")
     @Log("新增功能菜单")
     @RequestMapping("/doAddAction")
     public String doAddAction(SysMenu sysMenu,Model model){
