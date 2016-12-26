@@ -15,28 +15,26 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
-         <form action="/system/log/list/1.html" method="post">
           <div class="box-header">
-             <div class="box-tools">
-               <div class="input-group" style="width: 250px;">
-                <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
+             <form class="form-inline pull-right"  action="/system/log/list/1.html" method="post">
+			  <div class="form-group">
+			    <label for="start">日期范围</label>
+			    <input type="text" name="start" value="${start!}" class="form-control date" id="start" placeholder="开始日期">
+			  </div>
+			  <div class="form-group">
+			    <label for="over">~</label>
+			    <input type="text" name="over" value="${over!}" class="form-control date" id="over" placeholder="结束日期">
+			  </div>
+			  
+			  <div class="input-group">
+                <input type="text" id="search" name="search" value="${search!}" class="form-control" placeholder="关键词">
                 <div class="input-group-btn">
-                  <button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>
+                  <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                  <a class="btn btn-default" href="/system/log/list/1.html" data-toggle="tooltip" title="清空查询"><i class="fa fa-refresh"></i></a>
                 </div>
               </div>
-            </div>
-             <div class="box-tools">
-               <div class="input-group" style="width: 100px;">
-                <input type="text" name="over" value="${over!}" class="form-control input-sm pull-right date" placeholder="结束时间">
-              </div>
-            </div>
-             <div class="box-tools">
-               <div class="input-group" style="width: 100px;">
-                <input type="text" name="start" value="${start!}" class="form-control input-sm pull-right date" placeholder="开始时间">
-              </div>
-            </div>
-          </div><!-- /.box-header -->
-          </form>
+			</form>
+          </div>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
