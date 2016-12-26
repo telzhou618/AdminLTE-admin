@@ -53,9 +53,7 @@
 	</bean>
 	
 	<!-- 资源映射 -->
-	<mvc:resources location="/WEB-INF/static/bootstrap/" mapping="/bootstrap/**"/>
-	<mvc:resources location="/WEB-INF/static/dist/" mapping="/dist/**"/>
-	<mvc:resources location="/WEB-INF/static/font-awesome/" mapping="/font-awesome/**"/>
+	<mvc:resources location="/WEB-INF/static/app/" mapping="/app/**"/>
 	<mvc:resources location="/WEB-INF/static/images/" mapping="/images/**"/>
 	<mvc:resources location="/WEB-INF/static/plugins/" mapping="/plugins/**"/>
 	 
