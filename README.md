@@ -4,8 +4,8 @@
 ```
 ### 分支说明:
 1. v_1.0:启航版:[https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_1.0/](https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_1.0/)
-
-
+```
+### 项目说明:
 1.KangarooAdmin是以SpringMVC+Mybatis为核心开发的精简后台基础系统。
 2.包含用户管理,角色管理,权限管理,菜单管理,日志管理等常用业务模块。
 3.使用AdminLTE作为前端框架。
