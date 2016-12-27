@@ -1,9 +1,10 @@
 ###  **KangarooAdmin** 
 体验地址：[http://kangarooadmin.duapp.com](http://kangarooadmin.duapp.com/login/index.html) 
 账号密码: admin/123456
-
+```
+### 分支说明:
+```
 1. v_1.0:启航版:[https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_1.0/](https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_1.0/)
-
 ```
 ### 项目说明:
 ```
