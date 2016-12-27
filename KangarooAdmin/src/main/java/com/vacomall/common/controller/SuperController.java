@@ -1,18 +1,3 @@
-/**
- * Copyright (c) 2011-2014, hubin (jobob@qq.com).
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package com.vacomall.common.controller;
 
 import javax.servlet.ServletContext;
@@ -32,12 +17,9 @@ import com.baomidou.kisso.common.util.HttpUtil;
 import com.baomidou.mybatisplus.plugins.Page;
 
 /**
- * <p>
- * Controller 基础类（支持 kisso）
- * </p>
- * 
- * @author hubin
- * @Date 2016-03-15
+ * 基础控制器
+ * @author Gaojun.Zhou
+ * @date 2016年12月27日 上午11:50:57
  */
 public class SuperController {
 

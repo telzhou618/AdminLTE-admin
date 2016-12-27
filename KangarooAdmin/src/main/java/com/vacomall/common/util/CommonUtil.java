@@ -9,7 +9,11 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-
+/**
+ * 通用工具类
+ * @author Gaojun.Zhou
+ * @date 2016年12月27日 上午11:51:21
+ */
 public class CommonUtil {
 	
 	private final static Pattern pat = Pattern.compile("-");

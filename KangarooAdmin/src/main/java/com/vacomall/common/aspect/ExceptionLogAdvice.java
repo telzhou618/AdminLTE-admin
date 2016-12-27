@@ -17,6 +17,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * 异常日志记录
+ * 只有系统发生异常后执行这个类的方法,用于记录系统异常日志
  * @author Administrator
  *
  */
