@@ -16,6 +16,7 @@
 5.使用kisso单点登录。
 6.encache权限缓存。
 
+```
 ### 快速开始
 ```
 1.创建数据库KangarooAdmin,导入resource/sql/kangarooadmin.sql数据库脚本。
