@@ -6,10 +6,10 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vacomall.entity.SysRoleMenu;
 import com.vacomall.mapper.SysRoleMenuMapper;
 import com.vacomall.service.ISysRoleMenuService;
-import com.vacomall.service.support.BaseServiceImpl;
 
 /**
  *
@@ -17,7 +17,7 @@ import com.vacomall.service.support.BaseServiceImpl;
  *
  */
 @Service
-public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuMapper, SysRoleMenu> implements ISysRoleMenuService {
+public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRoleMenu> implements ISysRoleMenuService {
 
 	@Override
 	public void addAuth(String roleId, String[] menuIds) {
@@ -26,9 +26,7 @@ public class SysRoleMenuServiceImpl extends BaseServiceImpl<SysRoleMenuMapper, S
 		/**
 		 * 删除原有权限
 		 */
-		SysRoleMenu sysRoleMenu = new SysRoleMenu();
-		sysRoleMenu.setRoleId(roleId);
-		this.deleteSelective(sysRoleMenu);
+		this.delete(new EntityWrapper<SysRoleMenu>().eq("roleId",roleId));
 		/**
 		 * 重新授权
 		 */

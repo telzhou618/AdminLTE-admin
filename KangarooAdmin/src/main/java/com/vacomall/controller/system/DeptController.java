@@ -95,8 +95,9 @@ public class DeptController extends SuperController{
 	@Permission("editDept")
     @Log("编辑部门")
     @RequestMapping("/doEdit")  
-    public  String doEdit(SysDept dept,String[] roleId,Model model){
-    	sysDeptService.updateSelectiveById(dept);
+    public  String doEdit(SysDept dept,Model model){
+    	sysDeptService.updateById(dept);
     	return redirectTo("/system/dept/list/1.html");
     } 
+	
 }

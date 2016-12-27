@@ -1,14 +1,14 @@
 package com.vacomall.service;
 
+import com.baomidou.mybatisplus.service.IService;
 import com.vacomall.entity.SysSetting;
-import com.baomidou.framework.service.ISuperService;
 
 /**
  *
  * SysSetting 表数据服务层接口
  *
  */
-public interface ISysSettingService extends ISuperService<SysSetting> {
+public interface ISysSettingService extends IService<SysSetting> {
 
 
 }
