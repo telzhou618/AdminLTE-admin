@@ -146,7 +146,7 @@ public class MenuController extends SuperController{
     @Log("编辑菜单")
     @RequestMapping("/doEdit")
     public String doEdit(SysMenu sysMenu,Model model){
-    	sysMenuService.updateSelectiveById(sysMenu);
+    	sysMenuService.updateById(sysMenu);
     	return redirectTo("/system/menu/list/1.html");
     } 
     

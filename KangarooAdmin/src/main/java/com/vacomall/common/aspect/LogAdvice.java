@@ -56,7 +56,7 @@ public class LogAdvice {
 			sysLog.setUserName((st != null )? st.getData() : "system");
 			sysLog.setUrl(request.getRequestURI().toString());
 			sysLog.setParams(new Gson().toJson(request.getParameterMap()));
-			SpringUtil.getBean(ISysLogService.class).insertSelective(sysLog);
+			SpringUtil.getBean(ISysLogService.class).insert(sysLog);
 			LOG.debug("记录日志:"+sysLog.toString());
 		}
 	}

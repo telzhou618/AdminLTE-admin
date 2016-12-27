@@ -2,7 +2,7 @@ package com.vacomall.service;
 
 import java.util.List;
 
-import com.baomidou.framework.service.ISuperService;
+import com.baomidou.mybatisplus.service.IService;
 import com.vacomall.entity.SysMenu;
 import com.vacomall.entity.vo.TreeMenu;
 import com.vacomall.entity.vo.TreeMenuAllowAccess;
@@ -12,7 +12,7 @@ import com.vacomall.entity.vo.TreeMenuAllowAccess;
  * SysMenu 表数据服务层接口
  *
  */
-public interface ISysMenuService extends ISuperService<SysMenu> {
+public interface ISysMenuService extends IService<SysMenu> {
 
 	/**
 	 * 获取指定用户拥有的菜单

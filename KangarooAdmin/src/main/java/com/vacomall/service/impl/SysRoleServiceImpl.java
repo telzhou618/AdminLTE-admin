@@ -2,10 +2,10 @@ package com.vacomall.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.vacomall.mapper.SysRoleMapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vacomall.entity.SysRole;
+import com.vacomall.mapper.SysRoleMapper;
 import com.vacomall.service.ISysRoleService;
-import com.vacomall.service.support.BaseServiceImpl;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.vacomall.service.support.BaseServiceImpl;
  *
  */
 @Service
-public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleMapper, SysRole> implements ISysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements ISysRoleService {
 
 
 }

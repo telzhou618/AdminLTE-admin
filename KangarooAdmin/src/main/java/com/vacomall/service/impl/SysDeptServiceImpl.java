@@ -2,10 +2,10 @@ package com.vacomall.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.vacomall.mapper.SysDeptMapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vacomall.entity.SysDept;
+import com.vacomall.mapper.SysDeptMapper;
 import com.vacomall.service.ISysDeptService;
-import com.vacomall.service.support.BaseServiceImpl;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.vacomall.service.support.BaseServiceImpl;
  *
  */
 @Service
-public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptMapper, SysDept> implements ISysDeptService {
+public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements ISysDeptService {
 
 
 }

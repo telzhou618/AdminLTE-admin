@@ -2,10 +2,10 @@ package com.vacomall.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.vacomall.mapper.SysLogMapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vacomall.entity.SysLog;
+import com.vacomall.mapper.SysLogMapper;
 import com.vacomall.service.ISysLogService;
-import com.vacomall.service.support.BaseServiceImpl;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.vacomall.service.support.BaseServiceImpl;
  *
  */
 @Service
-public class SysLogServiceImpl extends BaseServiceImpl<SysLogMapper, SysLog> implements ISysLogService {
+public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements ISysLogService {
 
 
 }

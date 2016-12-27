@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.vacomall.entity.SysMenu;
@@ -18,7 +19,6 @@ import com.vacomall.mapper.SysMenuMapper;
 import com.vacomall.mapper.SysRoleMenuMapper;
 import com.vacomall.service.ISysMenuService;
 import com.vacomall.service.ISysRoleMenuService;
-import com.vacomall.service.support.BaseServiceImpl;
 
 /**
  *
@@ -26,7 +26,7 @@ import com.vacomall.service.support.BaseServiceImpl;
  *
  */
 @Service
-public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuMapper, SysMenu> implements ISysMenuService {
+public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements ISysMenuService {
 
 	/**
 	 * 角色权限服务

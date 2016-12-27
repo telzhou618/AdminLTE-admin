@@ -86,7 +86,7 @@ public class RoleController extends SuperController{
     @RequestMapping("/doAdd")  
     public  String doAdd(SysRole role){
     	role.setCreateTime(new Date());
-    	sysRoleService.insertSelective(role);
+    	sysRoleService.insert(role);
 		return redirectTo("/system/role/list/1.html");
 
     }  
@@ -133,7 +133,7 @@ public class RoleController extends SuperController{
     @Log("编辑角色")
     @RequestMapping("/doEdit")  
     public  String doEdit(SysRole sysRole,Model model){
-    	sysRoleService.updateSelectiveById(sysRole);
+    	sysRoleService.updateById(sysRole);
     	return redirectTo("/system/role/list/1.html");
     } 
     

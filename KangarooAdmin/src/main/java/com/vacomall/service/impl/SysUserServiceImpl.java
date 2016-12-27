@@ -8,14 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.kisso.common.encrypt.MD5;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vacomall.common.util.CommonUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.entity.SysUserRole;
 import com.vacomall.mapper.SysUserMapper;
 import com.vacomall.mapper.SysUserRoleMapper;
 import com.vacomall.service.ISysUserService;
-import com.vacomall.service.support.BaseServiceImpl;
 
 /**
  *
@@ -23,7 +24,7 @@ import com.vacomall.service.support.BaseServiceImpl;
  *
  */
 @Service
-public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
 	@Autowired private SysUserMapper userMapper;
 	
@@ -35,7 +36,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 		user.setCreateTime(new Date());
     	user.setPassword(CommonUtil.MD5(user.getPassword()));
 		//保存用户
-    	userMapper.insertSelective(user);
+    	userMapper.insert(user);
 		//绑定角色
 		if(ArrayUtils.isNotEmpty(roleIds)){
 			for(String rid : roleIds){
@@ -53,9 +54,9 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 		// TODO Auto-generated method stub
 		sysUser.setPassword(null);
 		//更新用户
-		userMapper.updateSelectiveById(sysUser);
+		userMapper.updateById(sysUser);
 		//删除已有权限
-		userRoleMapper.deleteSelective(new SysUserRole(sysUser.getId()));
+		userRoleMapper.delete(new EntityWrapper<SysUserRole>().eq("userId",sysUser.getId()));
 		//重新绑定角色
 		if(ArrayUtils.isNotEmpty(roleIds)){
 			for(String rid : roleIds){
@@ -70,10 +71,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 	@Override
 	public SysUser login(String userName, String password) {
 		// TODO Auto-generated method stub
-		SysUser sysUser = new SysUser();
-		sysUser.setUserName(userName);
-		sysUser.setPassword(MD5.toMD5(password));
-		return this.selectOne(sysUser);
+		return this.selectOne(new EntityWrapper<SysUser>().eq("userName", userName).eq("password", MD5.toMD5(password)));
 	}
 
 	@Override
