@@ -6,7 +6,8 @@
 ```
 1. v_1.0:启航版:[https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_1.0/](https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_1.0/)
 2. v_2.0:进取版:[https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_2.0/](https://git.oschina.net/kangarooorg/KangarooAdmin/tree/v_2.0/)
-3.master:不断增强完善版本。
+3. master:不断增强完善版本。
+
 ```
 ### 项目说明:
 ```
