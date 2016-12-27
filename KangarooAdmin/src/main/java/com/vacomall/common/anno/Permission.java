@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 忽略Token验证
+ * 权限拦截注解
  * @author Administrator
  *
  */

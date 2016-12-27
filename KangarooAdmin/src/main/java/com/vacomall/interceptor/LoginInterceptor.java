@@ -24,7 +24,11 @@ import com.vacomall.entity.vo.TreeMenu;
 import com.vacomall.service.ISysMenuService;
 import com.vacomall.service.ISysSettingService;
 import com.vacomall.service.ISysUserService;
-
+/**
+ * 登录拦截器
+ * @author Gaojun.Zhou
+ * @date 2016年12月27日 上午11:52:56
+ */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
