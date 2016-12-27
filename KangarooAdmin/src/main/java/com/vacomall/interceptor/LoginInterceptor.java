@@ -95,7 +95,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				request.setAttribute("treeMenus", treeMenus);
 				
 				/**
-				 * 获取当前用于的权限
+				 * 获取当前用户的权限列表,用于控制页面功能按钮是否显示
 				 */
 				List<String> list2 = SpringUtil.getBean(ISysMenuService.class).selectMenuIdsByuserId(token.getUid());
 				String[] permissions = list2.toArray(new String[list2.size()]);
