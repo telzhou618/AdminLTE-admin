@@ -30,7 +30,7 @@ public class LogController extends SuperController{
 	 */
 	@Permission("listLog")
     @RequestMapping("/list/{pageNumber}")  
-    public  String list(@PathVariable Integer pageNumber,String search,String start,String over,Model model){
+    public  String list(@PathVariable Integer pageNumber,String search,String daterange,Model model){
     	
 		Page<SysLog> page = getPage(pageNumber);
 		page.setOrderByField("createTime");
@@ -42,13 +42,12 @@ public class LogController extends SuperController{
 			.or("title like CONCAT('\'%'\',{0},'\'%'\'))", search);
 			model.addAttribute("search", search);
 		}
-		if(StringUtils.isNotBlank(start)){
-			model.addAttribute("start", start);
-			ew.addFilter(" createTime >= {0}", start +" 00:00:00");
-		}
-		if(StringUtils.isNotBlank(over)){
-			model.addAttribute("over", over);
-			ew.addFilter(" createTime <= {0}", over +" 23:59:59");
+		//日期查询
+		if(StringUtils.isNotBlank(daterange)){
+			model.addAttribute("daterange", daterange);
+			String[] dateranges = StringUtils.split(daterange, "-");
+			ew.addFilter(" createTime >= {0}", dateranges[0].trim().replaceAll("/","-") + " 00:00:00");
+			ew.addFilter(" createTime <= {0}", dateranges[1].trim().replaceAll("/","-") + " 23:59:59");
 		}
 		Page<SysLog> pageData = sysLogService.selectPage(page, ew);
 		model.addAttribute("pageData", pageData);
