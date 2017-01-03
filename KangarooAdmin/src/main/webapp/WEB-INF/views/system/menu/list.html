@@ -75,9 +75,9 @@
               </#list>
             </table>
           </div><!-- /.box-body -->
-          <div class="box-footer">
-            <div class="col-xs-6">显示 ${((pageData.current -1) * pageData.size + 1)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
-            <div class="col-xs-6">
+          <div class="box-footer row">
+            <div class="col-md-6">显示 ${((pageData.current -1) * pageData.size + 1)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录</div>
+            <div class="col-md-6 pull-left">
             <#include "/common/paginate.html" />
  			<@paginate currentPage=pageData.getCurrent() totalPage=pageData.getPages() actionUrl="/system/menu/list/" urlParas=".html?search=${search!}"  />
             </div>
