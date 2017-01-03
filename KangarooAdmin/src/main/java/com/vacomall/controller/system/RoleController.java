@@ -171,7 +171,7 @@ public class RoleController extends SuperController{
     @RequestMapping("/doAuth")  
     public  String doAuth(String roleId,String[] mid,Model model){
     	sysRoleMenuService.addAuth(roleId,mid);
-    	model.addAttribute("info","OK,授权成功,1分钟后生效 ~ ~");
+    	model.addAttribute("info","OK,授权成功,1分钟后生效  ~");
     	this.auth(roleId, model);
     	return "system/role/auth";
     } 
