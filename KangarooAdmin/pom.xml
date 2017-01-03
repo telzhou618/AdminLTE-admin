@@ -28,7 +28,6 @@
 		<fastjson.version>1.2.11</fastjson.version>
 
 		<freemarker.version>2.3.20</freemarker.version>
-		<ehcache.version>2.6.11</ehcache.version>
 		<kaptcha-version>0.0.9</kaptcha-version>
 		<ehcache.version>2.6.11</ehcache.version>
 		
@@ -216,6 +215,7 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
 		</dependency>
+		
 		
 	</dependencies>
 	<build>

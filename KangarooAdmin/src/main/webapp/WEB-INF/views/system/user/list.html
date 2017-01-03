@@ -15,21 +15,21 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
-         <form action="/system/user/list/1.html" method="post">
-          <div class="box-header">
-            <#if permissions?seq_contains('addUser')>
-              <a class="btn btn-primary" href="/system/user/add.html"><i class="fa fa-plus"></i> 创建新用户</a>
-            </#if>
-            <div class="box-tools">
-              <div class="input-group" style="width: 250px;">
-                <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-              </div>
-            </div>
-          </div><!-- /.box-header -->
-          </form>
+           <form action="/system/user/list/1.html" method="post">
+	          <div class="box-header row m5">
+	            <div class="input-group pull-left col-sm-9 col-lg-10 pb5">
+		          <#if permissions?seq_contains('addUser')>
+		              	<a class="btn btn-primary" href="/system/user/add.html"><i class="fa fa-plus"></i> 创建新用户</a>
+		            </#if>
+	              </div>
+	            <div class="input-group pull-right col-sm-3 col-lg-2">
+	               <input type="text" name="search" value="${search!}" class="form-control input-sm pull-right" placeholder="Search">
+	               <div class="input-group-btn">
+	                 <button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>
+	               </div>
+	            </div>
+	          </div><!-- /.box-header -->
+           </form>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
