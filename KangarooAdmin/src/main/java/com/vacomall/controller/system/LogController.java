@@ -38,8 +38,8 @@ public class LogController extends SuperController{
 		// 查询分页
 		EntityWrapper<SysLog> ew = new EntityWrapper<SysLog>();
 		if(StringUtils.isNotBlank(search)){
-			ew.where("(userName like CONCAT('\'%'\',{0},'\'%'\')", search)
-			.or("title like CONCAT('\'%'\',{0},'\'%'\'))", search);
+			ew.where("(userName like CONCAT('%',{0},'%')", search)
+			.or("title like CONCAT('%',{0},'%'))", search);
 			model.addAttribute("search", search);
 		}
 		//日期查询
