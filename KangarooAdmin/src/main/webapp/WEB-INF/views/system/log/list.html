@@ -16,17 +16,17 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-             <form class="form-inline pull-right"  action="/system/log/list/1.html" method="post">
+             <form class="form-inline"  action="/system/log/list/1.html" method="post">
 			  <div class="form-group">
 			    <input type="text" name="daterange" value="${daterange!}" class="form-control date" id="daterange" placeholder="开始日期  - 结束日期" style="width: 228px;">
 			  </div>
-			  <div class="input-group">
-                <input type="text" id="search" name="search" value="${search!}" class="form-control" placeholder="关键词">
-                <div class="input-group-btn">
-                  <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                  <a class="btn btn-default" href="/system/log/list/1.html" data-toggle="tooltip" title="清空查询"><i class="fa fa-refresh"></i></a>
-                </div>
-              </div>
+			 <div class="input-group">
+               <input type="text" name="search" value="${search!}" class="form-control" placeholder="Search">
+               <div class="input-group-btn">
+                 <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                 <a href="/system/log/list/1.html" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+               </div>
+            </div>
 			</form>
           </div>
           <div class="box-body table-responsive no-padding">
@@ -157,7 +157,7 @@
 		    },
 		    "alwaysShowCalendars": true,
 		    "autoUpdateInput":false,
-		    "opens": "left",
+		    "opens": "right",
 		    "buttonClasses": "btn btn-sm"
 		}, function(start, end, label) {
 		  console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
