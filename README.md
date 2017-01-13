@@ -29,3 +29,8 @@
 ![输入图片说明](http://git.oschina.net/uploads/images/2017/0112/212538_5d2a3805_89451.png "在这里输入图片标题")
 ![输入图片说明](http://git.oschina.net/uploads/images/2017/0112/212737_5fdcad1c_89451.png "在这里输入图片标题")
 ![输入图片说明](http://git.oschina.net/uploads/images/2017/0112/212936_75c22591_89451.png "在这里输入图片标题")
+```
+### 数据库监控
+```
+访问地址:http://kangaroo.com:8081/druid/sql.html,账号/密码:admin/admin,配置在web.xml中。
+![输入图片说明](http://git.oschina.net/uploads/images/2017/0113/101521_312c0eae_89451.png "在这里输入图片标题")
