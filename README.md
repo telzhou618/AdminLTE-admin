@@ -27,7 +27,6 @@
 4.地址栏输入 http://kangaroo.com:8080/login/index.html 访问，账号admin/密码123456。
 5.注意域名和端口可随意定义，但一定记得修改properties/sso.properties配置文件中的sso.cookie.domain和sso.login.url,这两个配置要和自己定义的一致即可 。
 ![输入图片说明](http://git.oschina.net/uploads/images/2017/0112/212538_5d2a3805_89451.png "在这里输入图片标题")
-![输入图片说明](http://git.oschina.net/uploads/images/2017/0112/212737_5fdcad1c_89451.png "在这里输入图片标题")
 ![输入图片说明](http://git.oschina.net/uploads/images/2017/0112/212936_75c22591_89451.png "在这里输入图片标题")
 ```
 ### 数据库监控
