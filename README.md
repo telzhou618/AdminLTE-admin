@@ -19,4 +19,8 @@
 2. 把项目导入到Eclipse中启动,端口为8080,上下文为/。
 3. 修改本地host加入如下一行:127.0.0.1 kangaroo.com，需另起一行。
 4. 地址栏输入 http://kangaroo.com:8080/login/index.html 访问，账号admin/密码123456。
-5. 注意域名和端口可随意定义，但一定记得修改properties/sso.properties配置文件中的sso.cookie.domain和sso.login.url,这两个配置要和自己定义的一致即可 。
+```
+### 参考项目
+```
+1. https://www.oschina.net/p/kisso
+1. https://www.oschina.net/p/mybatis-plus
