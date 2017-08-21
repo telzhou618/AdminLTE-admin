@@ -14,7 +14,7 @@
 
 ### 技术选型
 -------------
-Extjs4、Spring MVC、Mybatis、Mybatis-Plus、Shiro、Mysql、Maven
+AdminLTE、Spring MVC、Mybatis、Mybatis-Plus、Shiro、Mysql、Maven
 
 ### 快速开始
 -------------
