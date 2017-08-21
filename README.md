@@ -22,9 +22,9 @@
 1. 安装好Docker环境,登录到Docker服务器。
 2. git clone https://github.com/foreyer/AdminLTE-admin.git
 3. cd AdminLTE-admin
-5. docker build -t github.com/foreyer/AdminLTE_admin .
-6. docker run -p 8080:8080 -t github.com/foreyer/AdminLTE_admin
-7. http://ip:8080，账号/密码:admin/123456。
-8. 也可以借助第三方docker平台完成部署,这样更加省事,如:daocloud,csphere等docker云平台。
+4. docker build -t github.com/foreyer/AdminLTE_admin .
+5. docker run -p 8080:8080 -t github.com/foreyer/AdminLTE_admin
+6. http://ip:8080，账号/密码:admin/123456。
+7. 也可以借助第三方docker平台完成部署,这样更加省事,如:daocloud,csphere等docker云平台。
 ```
 ![输入图片说明](http://git.oschina.net/uploads/images/2017/0227/134231_4d568122_89451.png "在这里输入图片标题")
