@@ -1,0 +1,60 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 菜单管理</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+     <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">编辑菜单</h3>
+          </div><!-- /.box-header -->
+          <!-- form start -->
+          <div class="row">
+          	<div class="col-md-6">
+        	    <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/menu/doEdit">
+	             <input type="hidden" name="id" value="${(sysMenu.id)!}" />
+	            <div class="box-body">
+	              <div class="form-group">
+	                <label for="uname">目录名称</label>
+	               	<input type="text" name="menuName" class="form-control" value="${(sysMenu.menuName)!}" placeholder="请输入目录名称"  data-rule="目录名称:required;">
+	              </div>
+	              <div class="form-group">
+	                <label for="uname">编码</label>
+	               	<input type="text" name="code" class="form-control" placeholder="请输入编码,如05" 
+	               	value="${(sysMenu.code)!}" 
+	               	data-rule="required;number" data-rule-number="[/^\d{2}$/, '请输入2位数字编码']">
+	              </div>
+	              <div class="form-group">
+	                <label for="uname">排序</label>
+	               	<input type="text" name="sort" class="form-control" value="${(sysMenu.sort)!}"  placeholder="请输入排序"  data-rule="排序:required;integer[+0]">
+	              </div>
+	              <div class="form-group">
+	                <label for="uname">图标 <i class="fa ${(sysMenu.icon)!}"></i></label>
+	               	<input type="text" name="icon" class="form-control" value="${(sysMenu.icon)!}" placeholder="请输入图标,如:fa-user" >
+	              </div>
+	            </div><!-- /.box-body -->
+	            <div class="box-footer">
+	              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+	              <a  class="btn btn-default" href="/system/menu/list/1"><i class="fa fa-close"></i>  取消</a>
+	            </div>
+	          </form>
+            </div>
+          	</div>
+          </div>
+        </div><!-- /.box -->
+      </div><!--/.col (left) -->
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+</@footer>

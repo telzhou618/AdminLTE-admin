@@ -1,0 +1,174 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 菜单管理</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+     <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">创建菜单</h3>
+          </div><!-- /.box-header -->
+          <!-- form start -->
+          <div class="row">
+          	<div class="col-md-12">
+        	  <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tab_1" data-toggle="tab">添加目录</a></li>
+                  <li><a href="#tab_2" data-toggle="tab">添加菜单</a></li>
+                  <li><a href="#tab_3" data-toggle="tab">添加功能</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab_1">
+                   	 <div class="row">
+			          	<div class="col-md-6">
+			        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/menu/doAddDir">
+				            <div class="box-body">
+				              <div class="form-group">
+				                <label for="uname">目录名称</label>
+				               	<input type="text" name="menuName" class="form-control" placeholder="请输入目录名称"  data-rule="目录名称:required;">
+				              </div>
+				              <div class="form-group">
+				                <label for="uname">编码</label>
+				               	<input type="text" name="code" class="form-control" placeholder="请输入编码,如05" 
+				               	data-rule="required;number" data-rule-number="[/^\d{2}$/, '请输入2位数字编码']">
+				              </div>
+				              <div class="form-group">
+				                <label for="uname">排序</label>
+				               	<input type="text" name="sort" class="form-control" placeholder="请输入排序"  data-rule="排序:required;integer[+0]">
+				              </div>
+				              <div class="form-group">
+				                <label for="uname">图标</label>
+				               	<input type="text" name="icon" value="fa-folder" class="form-control" placeholder="请输入图标,如:fa-user" >
+				              </div>
+				            </div><!-- /.box-body -->
+				            <div class="box-footer">
+				              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+				              <a  class="btn btn-default" href="/system/menu/list/1"><i class="fa fa-close"></i>  取消</a>
+				            </div>
+				          </form>
+			          	</div>
+			          </div>
+                  </div><!-- /.tab-pane -->
+                  <div class="tab-pane" id="tab_2">
+                     <div class="row">
+			          	<div class="col-md-6">
+			        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/menu/doAddMenu">
+				            <div class="box-body">
+				                 <div class="form-group">
+				                    <label>父级菜单</label>
+				                    <select name="pid" class="form-control select2" style="width: 100%;" data-rule="父级菜单:required;">
+				                      <#list list as m>
+				                      <option value="${(m.id)!}">${(m.code)!}-${(m.menuName)!}</option>
+				                      </#list>
+				                    </select>
+				                  </div><!-- /.form-group -->
+				            	 <div class="form-group">
+					                <label for="uname">菜单名称</label>
+					               	<input type="text" name="menuName" class="form-control" placeholder="请输入菜单名称"  data-rule="菜单名称:required;">
+					              </div>
+					              <div class="form-group">
+					                <label for="uname">编码</label>
+					               	<input type="text" name="code" class="form-control" 
+					               	placeholder="请输入编码,如0501" data-rule="required;number" data-rule-number="[/^\d{4}$/, '请输入4位数字编码']">
+					              </div>
+					              <div class="form-group">
+					                <label for="uname">菜单URL</label>
+					               	<input type="text" name="url" class="form-control" placeholder="请输入菜单URL"  data-rule="菜单URL:required;">
+					              </div>
+					              <div class="form-group">
+					                <label for="uname">排序</label>
+					               	<input type="text" name="sort" class="form-control" placeholder="请输入排序"  data-rule="排序:required;integer[+0]">
+					              </div>  
+					              <div class="form-group">
+					                <label for="uname">图标</label>
+					               	<input type="text" name="icon" value="fa-file" class="form-control" placeholder="请输入图标,如:fa-user" >
+					              </div>
+				            </div><!-- /.box-body -->
+				            <div class="box-footer">
+				              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+				              <a  class="btn btn-default" href="/system/menu/list/1"><i class="fa fa-close"></i>  取消</a>
+				            </div>
+				          </form>
+			          	</div>
+			          </div>
+                  </div><!-- /.tab-pane -->
+                  
+                   <div class="tab-pane" id="tab_3">
+                   	 <div class="row">
+			          	<div class="col-md-6">
+			        	  <form role="form" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/menu/doAddAction">
+				            <div class="box-body">
+				              <div class="form-group">
+			                    <label>选择目录/菜单</label>
+			                    <select id="dir" class="form-control select2" style="width: 100%;" data-rule="目录:required;">
+			                      <option value="" selected="selected">--请选择--</option>
+			                      <#list list as m>
+			                      <option value="${(m.id)!}">${(m.code)!}-${(m.menuName)!}</option>
+			                      </#list>
+			                    </select>
+			                    <select id="pid" name="pid" class="form-control select2" style="width: 100%;" data-rule="菜单:required;">
+                      				<option value="" selected="selected">--请选择--</option>
+                    			</select>
+						       </div>
+				              <div class="form-group">
+				                <label for="uname">功能名称</label>
+				               	<input type="text" name="menuName" class="form-control" placeholder="请输入目录名称"  data-rule="目录名称:required;">
+				              </div>
+				               <div class="form-group">
+				                <label for="uname">编码</label>
+				               	<input type="text" name="code" class="form-control" 
+				               	placeholder="请输入编码,如050101" data-rule="required;number" data-rule-number="[/^\d{6}$/, '请输入6位数字编码']">
+				              </div>
+				              <div class="form-group">
+				                <label for="resource">权限资源</label>
+				               	<input type="text" id="resource" name="resource" class="form-control" placeholder="请输入权限资源名称"  data-rule="权限资源:required;remote[/system/menu/checkMenuResource]">
+				              </div> 
+				              <div class="form-group">
+				                <label for="uname">排序</label>
+				               	<input type="text" name="sort" class="form-control" placeholder="请输入排序"  data-rule="排序:required;integer[+0]">
+				              </div>
+				            </div><!-- /.box-body -->
+				            <div class="box-footer">
+				              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+				              <a  class="btn btn-default" href="/system/menu/list/1"><i class="fa fa-close"></i>  取消</a>
+				            </div>
+				          </form>
+			          	</div>
+			          </div>
+                  </div><!-- /.tab-pane -->
+                  
+                  </div><!-- /.tab-pane -->
+                </div><!-- /.tab-content -->
+              </div><!-- nav-tabs-custom -->
+          	</div>
+          </div>
+        </div><!-- /.box -->
+      </div><!--/.col (left) -->
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+<script>
+$("#dir").on('change',function(){
+	var pid = $(this).val();
+	 $.post('/system/menu/json?_dc='+new Date().getTime(),{pid:pid},function(response){
+		if(response.meta && response.meta.success){
+			$("#pid").empty();
+			$("#pid").select2({
+				data:response.data
+			});
+		}
+	}); 
+});
+</script>
+</@footer>

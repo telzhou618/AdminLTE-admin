@@ -1,0 +1,80 @@
+<#include "/common/layout.html">
+<@header>
+<style>
+	td > label{
+		padding: 3px;
+	}
+</style>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 角色管理</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+     <div class="row">
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <form action="/system/role/doAuth" method="post">
+        <input type="hidden" value="${(sysRole.id)!}" name="roleId" />
+        <div class="box box-primary">
+          <!-- form start -->
+          <div class="box-body">
+	        <table class="table table-hover">
+	          <tr>
+	            <th colspan="2">给角色【${(sysRole.roleName)!}】授权</th>
+	          </tr>
+	          <#list treeMenuAllowAccesses as vo>
+	          <tr>
+	             <td width="150px">
+	             	<label><input name="mid" type="checkbox" <#if vo.allowAccess>  checked="checked"  </#if>  value="${(vo.sysMenu.id)!}" class="minimal checkbox-tr"> <i class="fa ${(vo.sysMenu.icon)!}"></i> ${(vo.sysMenu.menuName)!} ></label></td>
+	             <td>
+	             	<#list vo.children as ch>
+	                <label><input name="mid" type="checkbox" <#if ch.allowAccess>  checked="checked"  </#if> value="${(ch.sysMenu.id)!}" class="minimal checkbox-td"> <i class="fa ${(ch.sysMenu.icon)!}"></i> ${(ch.sysMenu.menuName)!}</label>&nbsp; > &nbsp;
+		             	<#list ch.children as it>
+		                	<label style="font-weight: normal;"><input name="mid" type="checkbox" <#if it.allowAccess>  checked="checked"  </#if> value="${(it.sysMenu.id)!}" class="minimal checkbox-td"> ${(it.sysMenu.menuName)!}</label>&nbsp;
+		             	</#list>
+	             	<br>
+	             	</#list>
+	             </td>
+	           </tr>
+	           </#list>
+	        </table>
+	      </div>
+         <div class="box-footer">
+              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  确认授权</button>
+              <a  class="btn btn-default" href="/system/role/list/1"><i class="fa fa-angle-left"></i>  返回</a>
+         </div>
+        </div><!-- /.box -->
+        </form>
+      </div><!--/.col (left) -->
+     </div>
+     
+     <div class="row">
+     	<div class="col-md-3">
+     		<#if info??>
+		      	<div  class="alert alert-success alert-dismissible">
+			       <h4 style="margin-bottom: 0px;"><i class="fa fa-check-circle"></i> ${info!}</h4>
+			    </div>
+		      </#if>
+     	</div>
+     </div>
+     
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+<script type="text/javascript">
+	
+	 $(".checkbox-tr").on('ifClicked',function(){
+		$(this).parents('tr').find('.checkbox-td').iCheck('check');
+	}).on('ifUnchecked',function(){
+		$(this).parents('tr').find('.checkbox-td').iCheck('uncheck');
+	});
+	
+</script>
+</@footer>

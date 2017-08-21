@@ -1,0 +1,15 @@
+<#macro paginate pageData actionUrl urlParas="">
+ 	每页<select class="form-control" name="size" style="width: auto;display: initial;margin: 0 5px;" onchange="changePage(this)">
+      <option value="15" <#if pageData.size?? && pageData.size=15 > selected="selected" </#if>  >15条</option>
+      <option value="30" <#if pageData.size?? && pageData.size=30 > selected="selected" </#if>  >30条</option>
+      <option value="100" <#if pageData.size?? && pageData.size=100 > selected="selected" </#if>   >100条</option>
+      <option value="250" <#if pageData.size?? && pageData.size=250 > selected="selected" </#if>   >250条</option>
+      <option value="500" <#if pageData.size?? && pageData.size=500 > selected="selected" </#if>   >500条</option>
+    </select>条
+ 	显示 ${((pageData.current -1) * pageData.size + 1)!}  -  ${(pageData.current * pageData.size)!} 条  共 ${(pageData.getTotal())!} 条记录
+ <script>
+ 	function changePage(obj){
+ 		window.location.href="${actionUrl}#{1}${urlParas}&pageSize="+$(obj).val();
+ 	}
+ </script>
+</#macro>

@@ -1,0 +1,90 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 用户管理 > 创建新用户</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+     <div class="row box box-primary">
+      	<div class="col-md-6">
+         <form class="form-horizontal" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/user/doAdd">
+            <div class="box-body">
+              <div class="form-group">
+                <label for="uname" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+               		<input type="text" id="uname" name="userName" class="form-control" placeholder="请输入用户名"  data-rule="用户名:required;username;remote[/system/user/checkName]">
+              	</div>
+              </div>
+              <div class="form-group">
+                    <label class="col-sm-2 control-label">部门</label>
+                    <div class="col-sm-10">
+                    <select name="deptId" class="form-control select2" style="width: 100%;" data-rule="部门:required;">
+                     <#list deptList as dept>
+                       <option value="${(dept.id)!}">${(dept.deptName)!}</option>
+                     </#list>
+                   </select>
+                   </div>
+                 </div>
+              <div class="form-group">
+                <label for="password"  class="col-sm-2 control-label">密码</label>
+                 <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" data-rule="密码: required; length(6~16)">
+              	</div>
+              </div>
+              <div class="form-group">
+                <label for="password2" class="col-sm-2 control-label">确认密码</label>
+                 <div class="col-sm-10">
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="请再次输入密码" data-rule="确认密码: required; match(password)">
+              	</div>
+              </div>
+              <div class="form-group">
+                     <label class="col-sm-2 control-label">描述</label>
+                      <div class="col-sm-10">
+                     <textarea class="form-control" name="userDesc" rows="3" placeholder="请输入描述，最多300个字符 ..." ></textarea>
+                   	</div>
+                   </div>
+              <div class="form-group">
+              	  <label class="col-sm-2 control-label">状态</label>
+                   <div class="col-sm-10">
+                  <label>
+                      <input name="userState" type="radio" class="minimal" checked value="1"> 启用
+                     </label>
+                  <label>
+                      <input name="userState" type="radio" class="minimal"  value="-1"> 禁用
+                     </label>
+                   </div>
+                 </div>
+                 <div class="form-group">
+                 	<label class="col-sm-2 control-label">角色</label>
+                 	 <div class="col-sm-10">
+                 	<#list roleList as role>
+                   <label title="${(role.roleDesc)!}">
+                     <input type="checkbox" name="roleId" class="minimal" value="${(role.id)!}">
+                     	${(role.roleName)!}
+                   </label>
+                   &nbsp;
+                   </#list>
+                   </div>
+                 </div>
+                  <div class="form-group">
+                  		<label class="col-sm-2 control-label">&nbsp;</label>
+                  		 <div class="col-sm-10">
+                  		 	<button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+             			 <a  class="btn btn-default" href="/system/user/list/1"><i class="fa fa-close"></i>  取消</a>
+            		  </div>
+                  </div>
+              </div><!-- /.box-body -->
+          </form>
+      </div><!--/.col (left) -->
+    </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+</@footer>

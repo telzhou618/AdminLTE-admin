@@ -1,0 +1,57 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <small>系统管理 > 角色管理 > 创建角色</small>
+    </h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+     <div class="row box box-primary">
+      <div class="col-md-6">
+        <!-- general form elements -->
+         <form class="form-horizontal" data-validator-option="{theme:'bootstrap', timely:2, stopOnError:true}" method="post" action="/system/role/doAdd">
+            <div class="box-body">
+              <div class="form-group">
+                <label for="uname"  class="col-sm-2 control-label">角色名</label>
+                 <div class="col-sm-10">
+               		<input type="text" id="uname" name="roleName" class="form-control" placeholder="请输入角色名"  data-rule="角色名:required;">
+              	 </div>
+              </div>
+              <div class="form-group">
+                     <label  class="col-sm-2 control-label">描述</label>
+                     <div class="col-sm-10">
+                     	<textarea class="form-control" name="roleDesc" rows="3" placeholder="请输入描述，最多300个字符 ..." ></textarea>
+                     </div>
+                   </div>
+              <div class="form-group">
+              <label   class="col-sm-2 control-label">状态</label>
+              <div class="col-sm-10">
+                 <label>
+                     <input name="roleState" type="radio" class="minimal" checked value="1"> 启用
+                    </label>
+                 <label>
+                     <input name="roleState" type="radio" class="minimal"  value="-1"> 禁用
+                    </label>
+                 </div>
+                 </div>
+                 <div class="form-group">
+                 	 <label   class="col-sm-2 control-label"></label>
+                  <div class="col-sm-10">
+		              <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>  提 交</button>
+		              <a  class="btn btn-default" href="/system/role/list/1"><i class="fa fa-close"></i>  取消</a>
+		            </div>
+	          </div>
+            </div>
+          </form>
+      </div><!--/.col (left) -->
+     </div>
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+</@footer>
