@@ -43,6 +43,4 @@ AdminLTE、Spring MVC、Mybatis、Mybatis-Plus、Shiro、Mysql、Maven
 
 ### 实例截图
 -------------
-![image](https://github.com/foreyer/AdminLTE-admin/blob/master/imgs/1.png)
-
-
+![](https://git.oschina.net/uploads/images/2017/0821/134254_7428309f_89451.png "1.png")
