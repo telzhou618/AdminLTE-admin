@@ -29,7 +29,7 @@
 	                    <select id="dir" class="form-control select2" style="width: 100%;" data-rule="目录:required;">
 	                      <option value="" selected="selected">--请选择--</option>
 	                      <#list list as m>
-	                      	 <option value="${(m.id)!}" <#if m.id==pSysMenu.pid> selected="selected" </#if> >${(m.code)!}-${(m.menuName)!}</option>
+	                      	 <option value="${(m.id)!}" ${(m.id==pSysMenu.pid)?string('selected="selected"','')}>${(m.code)!}-${(m.menuName)!}</option>
 	                      </#list>
 	                    </select>
 	                    <select id="pid" name="pid" class="form-control select2" style="width: 100%;" data-rule="菜单:required;">

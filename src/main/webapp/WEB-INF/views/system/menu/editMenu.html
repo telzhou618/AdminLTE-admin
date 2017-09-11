@@ -28,7 +28,7 @@
 		                    <label>父级菜单</label>
 		                    <select name="pid" class="form-control select2" style="width: 100%;" data-rule="父级菜单:required;">
 		                      <#list list as m>
-		                        <option value="${(m.id)!}" <#if m.id==sysMenu.pid> selected="selected" </#if> > ${(m.code)!}-${(m.menuName)!}</option>
+		                        <option value="${(m.id)!}" ${(m.id==sysMenu.pid)?string('selected="selected"','')} > ${(m.code)!}-${(m.menuName)!}</option>
 		                      </#list>
 		                    </select>
 		                  </div><!-- /.form-group -->

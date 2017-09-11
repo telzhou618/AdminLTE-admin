@@ -32,10 +32,10 @@
                   <label  class="col-sm-2 control-label">状态</label>
                   <div class="col-sm-10">
                    <label>
-                     <input name="roleState" type="radio" class="minimal" <#if sysRole.roleState = 1> checked </#if> value="1"> 启用
+                     <input name="roleState" type="radio" class="minimal" ${(sysRole.roleState == 1)?string('checked','')} value="1"> 启用
                    </label>
                    <label>
-                     <input name="roleState" type="radio" class="minimal" <#if sysRole.roleState = -1>checked </#if>  value="-1"> 禁用
+                     <input name="roleState" type="radio" class="minimal" ${(sysRole.roleState == -1)?string('checked','')}  value="-1"> 禁用
                    </label>
                   </div>
                 </div>

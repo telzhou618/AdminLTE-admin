@@ -31,12 +31,12 @@
 	          <#list treeMenuAllowAccesses as vo>
 	          <tr>
 	             <td width="150px">
-	             	<label><input name="mid" type="checkbox" <#if vo.allowAccess>  checked="checked"  </#if>  value="${(vo.sysMenu.id)!}" class="minimal checkbox-tr"> <i class="fa ${(vo.sysMenu.icon)!}"></i> ${(vo.sysMenu.menuName)!} ></label></td>
+	             	<label><input name="mid" type="checkbox" ${(vo.allowAccess)?string('checked','')}  value="${(vo.sysMenu.id)!}" class="minimal checkbox-tr"> <i class="fa ${(vo.sysMenu.icon)!}"></i> ${(vo.sysMenu.menuName)!} ></label></td>
 	             <td>
 	             	<#list vo.children as ch>
-	                <label><input name="mid" type="checkbox" <#if ch.allowAccess>  checked="checked"  </#if> value="${(ch.sysMenu.id)!}" class="minimal checkbox-td"> <i class="fa ${(ch.sysMenu.icon)!}"></i> ${(ch.sysMenu.menuName)!}</label>&nbsp; > &nbsp;
+	                <label><input name="mid" type="checkbox" ${(ch.allowAccess)?string('checked','')} value="${(ch.sysMenu.id)!}" class="minimal checkbox-td"> <i class="fa ${(ch.sysMenu.icon)!}"></i> ${(ch.sysMenu.menuName)!}</label>&nbsp; > &nbsp;
 		             	<#list ch.children as it>
-		                	<label style="font-weight: normal;"><input name="mid" type="checkbox" <#if it.allowAccess>  checked="checked"  </#if> value="${(it.sysMenu.id)!}" class="minimal checkbox-td"> ${(it.sysMenu.menuName)!}</label>&nbsp;
+		                	<label style="font-weight: normal;"><input name="mid" type="checkbox" ${(it.allowAccess)?string('checked','')}  value="${(it.sysMenu.id)!}" class="minimal checkbox-td"> ${(it.sysMenu.menuName)!}</label>&nbsp;
 		             	</#list>
 	             	<br>
 	             	</#list>

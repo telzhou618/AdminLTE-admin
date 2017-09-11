@@ -27,7 +27,7 @@
                     <div class="col-sm-10">
                     <select name="deptId" class="form-control select2" style="width: 100%;" data-rule="部门:required;">
                      <#list deptList as dept>
-                       <option value="${(dept.id)!}" <#if sysUser.deptId?? && dept.id==sysUser.deptId> selected="selected" </#if> >${(dept.deptName)!}</option>
+                       <option value="${(dept.id)!}"  ${(sysUser.deptId?? && dept.id==sysUser.deptId)?string('selected="selected"','')}  >${(dept.deptName)!}</option>
                      </#list>
                    </select>
                    </div>
@@ -48,10 +48,10 @@
               	   <label  class="col-sm-2 control-label">状态</label>
               	   <div class="col-sm-10">
                    <label>
-                     <input name="userState" type="radio" class="minimal" <#if sysUser.userState = 1> checked </#if> value="1"> 启用
+                     <input name="userState" type="radio" class="minimal" ${(sysUser.userState == 1)?string('checked','')} value="1"> 启用
                    </label>
                    <label>
-                     <input name="userState" type="radio" class="minimal" <#if sysUser.userState = -1>checked </#if>  value="-1"> 禁用
+                     <input name="userState" type="radio" class="minimal" ${(sysUser.userState == -1)?string('checked','')}  value="-1"> 禁用
                    </label>
                    </div>
                  </div>
@@ -60,7 +60,7 @@
                  	<div class="col-sm-10">
                  	<#list sysRoles as role>
                     <label title="${(role.roleDesc)!}">
-                      <input type="checkbox" name="roleId" class="minimal" value="${(role.id)!}" <#if myRolds?seq_contains('${role.id}') > checked </#if> >
+                      <input type="checkbox" name="roleId" class="minimal" value="${(role.id)!}" ${(myRolds?seq_contains('${role.id}')?string('checked',''))} >
                       ${(role.roleName)!}
                     </label>
                     &nbsp;
