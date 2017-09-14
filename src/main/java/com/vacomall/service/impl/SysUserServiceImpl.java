@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.vacomall.common.util.CommonUtil;
 import com.vacomall.common.util.ShiroUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.entity.SysUserRole;
@@ -66,12 +65,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 				userRoleMapper.insert(sysUserRole);
 			}
 		}
-	}
-
-	@Override
-	public SysUser login(String userName, String password) {
-		// TODO Auto-generated method stub
-		return this.selectOne(new EntityWrapper<SysUser>().eq("userName", userName).eq("password", CommonUtil.MD5(password)));
 	}
 
 	@Override

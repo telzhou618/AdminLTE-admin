@@ -15,6 +15,6 @@ public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
 	/**
 	 * 根据用户Id获取用户所在角色的权限
 	 */
-	public List<SysRoleMenu> selectRoleMenuByUserId(String uid);
+	public List<String> selectRoleMenuIdsByUserId(String uid);
 	
 }

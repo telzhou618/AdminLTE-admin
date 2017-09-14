@@ -9,8 +9,8 @@
 		<result column="menuId" property="menuId" />
 	</resultMap>
 	
-	<select id="selectRoleMenuByUserId" parameterType="java.lang.String" resultType="com.vacomall.entity.SysRoleMenu">
-		SELECT DISTINCT rm.* FROM `sys_user_role` ur
+	<select id="selectRoleMenuIdsByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT DISTINCT rm.menuId FROM `sys_user_role` ur
 		INNER JOIN `sys_role` r ON r.`id` = ur.`roleId`
 		INNER JOIN  `sys_role_menu` rm ON rm.`roleId` = ur.`roleId`
 		WHERE ur.`userId` = #{uid}

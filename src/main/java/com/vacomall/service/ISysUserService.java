@@ -27,11 +27,6 @@ public interface ISysUserService extends IService<SysUser> {
 	 */
 	void updateUser(SysUser sysUser, String[] roleId);
 	/**
-	 * 登录
-	 */
-	SysUser login(String userName, String password);
-	
-	/**
 	 * 删除用户
 	 */
 	void delete(String id);

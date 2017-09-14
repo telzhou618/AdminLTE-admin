@@ -12,7 +12,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import com.vacomall.entity.SysMenu;
-import com.vacomall.entity.SysRoleMenu;
 import com.vacomall.entity.vo.TreeMenu;
 import com.vacomall.entity.vo.TreeMenuAllowAccess;
 import com.vacomall.mapper.SysMenuMapper;
@@ -51,20 +50,12 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 		/**
 		 * 当前用户二级菜单权限
 		 */
-		List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectRoleMenuByUserId(uid);
-		/**
-		 * 当前用户菜单主键
-		 */
-		List<String> menuIds = new ArrayList<String>();
-		for(SysRoleMenu sysRoleMenu : sysRoleMenus){
-			menuIds.add(sysRoleMenu.getMenuId());
-		}
+		List<String> menuIds = sysRoleMenuMapper.selectRoleMenuIdsByUserId(uid);
 		return selectTreeMenuByMenuIdsAndPid(menuIds, "0");
 	}
 	
 	@Override
-	public List<TreeMenu> selectTreeMenuByMenuIdsAndPid(final List<String> menuIds,
-			String pid) {
+	public List<TreeMenu> selectTreeMenuByMenuIdsAndPid(final List<String> menuIds,String pid) {
 		// TODO Auto-generated method stub
 		EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
 		ew.orderBy("sort", true);
