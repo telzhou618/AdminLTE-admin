@@ -6,11 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.vacomall.common.util.ShiroUtil;
 import com.vacomall.common.util.SpringUtil;
 import com.vacomall.entity.SysSetting;
 import com.vacomall.entity.SysUser;
@@ -42,11 +41,10 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 			/**
 			 * 保存登录信息
 			 */
-			Subject subject = SecurityUtils.getSubject();
-			if(subject== null || subject.getPrincipal() == null){
+			SysUser me = ShiroUtil.getSessionUser();
+			if(me == null){
 				return true;
 			}
-			SysUser me = (SysUser) subject.getPrincipal();
 			me.setPassword("");
 			request.setAttribute("me", me);
 			/**

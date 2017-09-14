@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.common.util.CommonUtil;
+import com.vacomall.common.util.ShiroUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.service.ISysUserService;
 /**
@@ -32,9 +33,7 @@ public class MeController extends SuperController{
     @RequestMapping("/info")  
     public  String info(Model model){
     	
-    	Subject subject = SecurityUtils.getSubject();
-		SysUser user = (SysUser) subject.getPrincipal();
-    	SysUser sysUser = sysUserService.selectById(user.getId());
+    	SysUser sysUser = sysUserService.selectById(ShiroUtil.getSessionUid());
     	model.addAttribute("sysUser", sysUser);
 		return "system/me/info";
     } 
