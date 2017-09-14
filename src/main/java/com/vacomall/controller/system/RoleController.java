@@ -18,7 +18,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Lists;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.bean.Response;
 import com.vacomall.common.bean.Rest;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
@@ -113,9 +112,9 @@ public class RoleController extends SuperController{
     @Log("删除角色")
     @RequestMapping("/delete")  
     @ResponseBody
-    public  Response delete(String id){
+    public  Rest delete(String id){
     	sysRoleService.deleteById(id);
-    	return new Response().success();
+    	return Rest.ok();
     }  
 
     /**
@@ -125,9 +124,9 @@ public class RoleController extends SuperController{
     @Log("批量删除角色")
     @RequestMapping("/deleteBatch")  
     @ResponseBody
-    public Response deleteBatch(@RequestParam("id[]") List<String> ids){
+    public Rest deleteBatch(@RequestParam("id[]") List<String> ids){
     	sysRoleService.deleteBatchIds(ids);
-    	return new Response().success();
+    	return Rest.ok();
     }  
     
     /**

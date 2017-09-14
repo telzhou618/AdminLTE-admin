@@ -67,8 +67,8 @@ public class Rest {
 		return new Rest(200,0,null,msg);
 	}
 	
-	public static Rest okCountData(long count,Object data){
-		return new Rest(0,count,data,"ok");
+	public static Rest okData(Object data){
+		return new Rest(200,0,data,"ok");
 	}
 
 	public static Rest failure(String msg) {

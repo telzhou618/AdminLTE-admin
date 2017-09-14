@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.vacomall.common.bean.Token;
 import com.vacomall.common.util.HttpUtil;
-import com.vacomall.common.util.TokenUtil;
 
 /**
  * 基础控制器
@@ -36,19 +34,6 @@ public class SuperController {
 
 	@Autowired
 	protected ServletContext application;
-
-
-	/**
-	 * 返回登录 Token
-	 */
-	protected Token getSSOToken() {
-		Token tk = TokenUtil.getToken(request);
-		if ( tk == null ) {
-			throw new RuntimeException("-1,The user does not exist, please relogin.");
-		}
-		return tk;
-	}
-
 
 	/**
 	 * 是否为 post 请求

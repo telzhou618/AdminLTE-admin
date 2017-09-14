@@ -19,12 +19,12 @@ $("*[data-tiggle='ajax']").click(function(){
 	            btnClass: 'btn-blue',
 	            action: function(){
 	            	$.post(dataUrl,{},function(json){
-						if(json.meta.success){
+						if(json.code==200){
 							window.location.reload();
 						}else{
 							$.alert({
 							    title: '提示',
-							    content: json.meta.message,
+							    content: json.msg,
 							    buttons:{"好的":{ btnClass: 'btn-blue'}}
 							});
 						}
@@ -66,12 +66,12 @@ $("*[delete-batch-url]").click(function(){
 		            btnClass: 'btn-blue',
 		            action: function(){
 		            	$.post(deleteBatchUrl,{id:ids},function(json){
-							if(json.meta.success){
+							if(json.code==200){
 								window.location.reload();
 							}else{
 								$.alert({
 								    title: '提示',
-								    content: json.meta.message,
+								    content: json.msg,
 								    buttons:{"好的":{ btnClass: 'btn-blue'}}
 								});
 							}

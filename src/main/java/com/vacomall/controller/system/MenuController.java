@@ -18,7 +18,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Maps;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.bean.Response;
 import com.vacomall.common.bean.Rest;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysMenu;
@@ -163,9 +162,9 @@ public class MenuController extends SuperController{
     @Log("删除菜单")
     @RequestMapping("/delete")
     @ResponseBody
-    public Response delete(String id){
+    public Rest delete(String id){
     	sysMenuService.deleteById(id);
-    	return new Response().success();
+    	return Rest.ok();
     } 
     
     /**
@@ -173,7 +172,7 @@ public class MenuController extends SuperController{
      */
     @RequestMapping("/json")
     @ResponseBody
-    public Response json(String pid){
+    public Rest json(String pid){
     	EntityWrapper<SysMenu> ew = new EntityWrapper<SysMenu>();
     	ew.orderBy("sort");
     	ew.addFilter("pid = {0} ", pid);
@@ -186,7 +185,7 @@ public class MenuController extends SuperController{
     		map.put("text",StringUtils.join(m.getCode(),"-",m.getMenuName()));
     		listMap.add(map);
     	}
-    	return new Response().success(listMap);
+    	return Rest.okData(listMap);
     } 
     
     

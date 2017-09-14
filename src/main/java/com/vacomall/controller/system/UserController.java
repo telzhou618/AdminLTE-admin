@@ -17,7 +17,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Lists;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.bean.Response;
 import com.vacomall.common.bean.Rest;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
@@ -86,9 +85,9 @@ public class UserController extends SuperController{
     @RequiresPermissions("deleteUser")
     @RequestMapping("/delete")  
     @ResponseBody
-    public  Response delete(String id){
+    public  Rest delete(String id){
     	sysUserService.delete(id);
-    	return new Response().success();
+    	return Rest.ok();
     }  
     
 	/**

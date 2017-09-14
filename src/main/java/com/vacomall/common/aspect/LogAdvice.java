@@ -17,10 +17,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.google.gson.Gson;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.bean.Token;
+import com.vacomall.common.util.ShiroUtil;
 import com.vacomall.common.util.SpringUtil;
-import com.vacomall.common.util.TokenUtil;
 import com.vacomall.entity.SysLog;
+import com.vacomall.entity.SysUser;
 import com.vacomall.service.ISysLogService;
 /**
  * 正常业务日志记录
@@ -48,12 +48,12 @@ public class LogAdvice {
 		Method method = methodSignature.getMethod();
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();  
 		Log log =  method.getAnnotation(Log.class);
-		Token st = TokenUtil.getToken(request);
+		SysUser sysUser = ShiroUtil.getSessionUser();
 		if(log != null){
 			SysLog sysLog  =new SysLog();
 			sysLog.setCreateTime(new Date());
 			sysLog.setTitle(log.value());
-			sysLog.setUserName((st != null )? st.getUname() : "system");
+			sysLog.setUserName((sysUser != null )? sysUser.getUserName() : "system");
 			sysLog.setUrl(request.getRequestURI().toString());
 			sysLog.setParams(new Gson().toJson(request.getParameterMap()));
 			SpringUtil.getBean(ISysLogService.class).insert(sysLog);
