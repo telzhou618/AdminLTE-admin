@@ -3,7 +3,7 @@
 
 ### 项目说明
 -------------
-1. AdminLTE-admin是以SpringMVC+Mybatis+MySQL为核心开发的精简后台基础系统。
+1. AdminLTE-admin是以SpringMVC+Shiro+Mybatis为核心开发的精简后台基础系统。
 2. 包含用户管理,角色管理,部门管理,权限管理,菜单管理,日志管理等常用业务模块。
 3. 使用AdminLTE作为前端UI框架。
 4. 第三方Mybatis-plus作为ORM框架。
@@ -14,13 +14,14 @@
 
 ### 技术选型
 -------------
-AdminLTE、Spring MVC、Mybatis、Mybatis-Plus、Shiro、Mysql、Maven
+AdminLTE、Spring MVC、Shiro、Mybatis、Mybatis-Plus、Mysql、Maven
 
 ### 快速开始
 -------------
-1. 创建数据库AdminLTE-admin,导入resource/sql/AdminLTE-admin.sql数据库脚本。
-2. 把项目导入到eclipse中启动,端口为8080,上下文为/。
-4. 地址栏输入 http://localhost.com:8080，账号/密码:admin/123456。
+1. 创建数据库AdminLTE-admin,导入resource/sql/AdminLTE-admin.sql
+2. cd ~/AdminLTE-admin
+2. mvn clean package -Dmaven.test.skip=true
+3. mvn jetty:run
 
 ### 参考项目
 -------------

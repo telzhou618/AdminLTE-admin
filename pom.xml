@@ -232,7 +232,6 @@
 			<version>1.7</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<finalName>AdminLTE-admin</finalName>
@@ -247,6 +246,11 @@
 					<encoding>UTF-8</encoding>
 					<verbal>true</verbal>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.0.2.v20130417</version>
 			</plugin>
 		</plugins>
 		<!-- 打包包含*.xml -->
