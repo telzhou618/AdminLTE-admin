@@ -1,5 +1,7 @@
 package com.vacomall.service;
 
+import java.util.Set;
+
 import com.baomidou.mybatisplus.service.IService;
 import com.vacomall.entity.SysUserRole;
 
@@ -9,4 +11,11 @@ import com.vacomall.entity.SysUserRole;
  *
  */
 public interface ISysUserRoleService extends IService<SysUserRole> {
+	
+	/**
+	 * 获取用户的角色
+	 * @param uid
+	 * @return
+	 */
+	Set<String> findRolesByUid(String uid);
 }

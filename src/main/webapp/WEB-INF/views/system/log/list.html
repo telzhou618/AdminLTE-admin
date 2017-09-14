@@ -50,11 +50,16 @@
 	                <td>${(log.url)!'--'}</td>
 	                <td>${(log.createTime?string('yyyy/MM/dd HH:mm:ss'))!}</td>
 	                <td>
-	                <a class="btn btn-xs"
+	                <!-- <a class="btn btn-xs"
 	                 data-tiggle="ajaxmodel"
 	                 data-title="参数"
-	                 data-url="/system/log/params/${log.id}"
-	                >查看参数</a></td>
+	                 data-url="/system/log/params/${log.id}">查看参数</a> -->
+	                 
+	                 <a class="btn btn-xs dialog"
+	                 data-title="参数"
+	                 data-url="/system/log/params/${log.id}">查看参数</a>
+	                 
+	               </td>
 	              </tr>
               </#list>
             </table>

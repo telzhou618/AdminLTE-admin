@@ -1,14 +1,12 @@
 package com.vacomall.entity;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-
+import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-
-import java.io.Serializable;
 
 
 /**
@@ -23,7 +21,10 @@ import java.io.Serializable;
 public class SysUser extends Model<SysUser> {
 
     private static final long serialVersionUID = 1L;
-
+    
+    public static final int _0 = 0;
+	public static final int _1 = 1;
+    
     /**
      * 主键
      */

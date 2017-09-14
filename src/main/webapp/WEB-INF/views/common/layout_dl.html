@@ -1,0 +1,19 @@
+<#macro header>
+<!DOCTYPE html>
+<html>
+<head>
+  <#include "/common/head.html">
+  <#nested> 
+</head>
+</#macro>
+<!-- /header -->
+<#macro body>
+	<#nested>
+</#macro>
+<!-- /body -->
+<#macro footer>
+	<#include "/common/js.html">
+	<#nested>
+</body>
+</html>
+</#macro>

@@ -39,6 +39,8 @@
 <!-- 自定义系统初始化话JS -->
 <script src="/app/js/init.js"></script>
 
+<script src="/plugins/layui/layui.js" charset="utf-8"></script>
+<script src="/app/js/x-layui.js" charset="utf-8"></script>
 <script type="text/javascript">
  	
 $(function(){
@@ -49,15 +51,15 @@ $(function(){
        checkboxClass: 'icheckbox_minimal-blue',
        radioClass: 'iradio_minimal-blue'
     });
-    // Custom theme
-    $.validator.setTheme('bootstrap', {
-        validClass: 'has-success',
-        invalidClass: 'has-error',
-        bindClassTo: '.form-group',
-        formClass: 'n-default n-bootstrap',
-        msgClass: 'n-right'
-    });
 });
+</script>
+<script type="text/javascript">
+ layui.config({
+	version:true,
+	debug:true,
+   	base: '/app/js/modules/'
+ }).use('xform'); //加载入口
+
 </script>
 
 

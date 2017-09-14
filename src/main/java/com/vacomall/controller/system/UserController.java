@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +17,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Lists;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.anno.Permission;
 import com.vacomall.common.bean.Response;
+import com.vacomall.common.bean.Rest;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysRole;
 import com.vacomall.entity.SysUser;
@@ -43,7 +44,7 @@ public class UserController extends SuperController{
 	/**
 	 * 分页查询用户
 	 */
-	@Permission("listUser")
+	@RequiresPermissions("listUser")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,@RequestParam(defaultValue="15") Integer pageSize,String search,Model model){
 		if(StringUtils.isNotBlank(search)){
@@ -58,7 +59,7 @@ public class UserController extends SuperController{
     /**
      * 新增用户
      */
-	@Permission("addUser")
+	@RequiresPermissions("addUser")
     @RequestMapping("/add")  
     public  String add(Model model){
     	model.addAttribute("roleList", sysRoleService.selectList(null));
@@ -70,18 +71,19 @@ public class UserController extends SuperController{
      * 执行新增
      */
     @Log("创建用户")
-    @Permission("addUser")
+    @RequiresPermissions("addUser")
     @RequestMapping("/doAdd")  
-    public  String doAdd(SysUser user,String[] roleId){
+    @ResponseBody
+    public  Rest doAdd(SysUser user,@RequestParam(value="roleId[]",required=false) String[] roleId){
     	
     	sysUserService.insertUser(user,roleId);
-		return redirectTo("/system/user/list/1");
+    	return Rest.ok();
     }  
     /**
      * 删除用户
      */
     @Log("删除用户")
-    @Permission("deleteUser")
+    @RequiresPermissions("deleteUser")
     @RequestMapping("/delete")  
     @ResponseBody
     public  Response delete(String id){
@@ -93,7 +95,7 @@ public class UserController extends SuperController{
 	 * 编辑用户
 	 */
     @RequestMapping("/edit/{id}")  
-    @Permission("editUser")
+    @RequiresPermissions("editUser")
     public  String edit(@PathVariable String id,Model model){
     	SysUser sysUser = sysUserService.selectById(id);
     	
@@ -113,11 +115,12 @@ public class UserController extends SuperController{
      * 执行编辑
      */
     @Log("编辑用户")
-    @Permission("editUser")
+    @RequiresPermissions("editUser")
     @RequestMapping("/doEdit")  
-    public  String doEdit(SysUser sysUser,String[] roleId,Model model){
+    @ResponseBody
+    public  Rest doEdit(SysUser sysUser,@RequestParam(value="roleId[]",required=false) String[] roleId,Model model){
     	sysUserService.updateUser(sysUser,roleId);
-    	return redirectTo("/system/user/list/1");
+    	return Rest.ok();
     } 
     
     /**
@@ -125,13 +128,12 @@ public class UserController extends SuperController{
      */
     @RequestMapping("/checkName")  
     @ResponseBody
-    public String checkName(String userName){
-    	
+    public Rest checkName(String userName){
     	List<SysUser> list = sysUserService.selectList(new EntityWrapper<SysUser>().eq("userName", userName));
     	if(list.size() > 0){
-    		return "{\"error\":\" "+userName+" 用户名已存在,请换一个尝试.\"}";
+    		return Rest.failure("用户名已存在");
     	}
-    	return "{\"ok\":\"用户名很棒.\"}";
+    	return Rest.ok();
     }
     
 }

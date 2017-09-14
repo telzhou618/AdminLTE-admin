@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Maps;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.anno.Permission;
 import com.vacomall.common.bean.Response;
+import com.vacomall.common.bean.Rest;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysMenu;
 import com.vacomall.service.ISysMenuService;
@@ -39,7 +40,7 @@ public class MenuController extends SuperController{
 	/**
 	 * 分页查询菜单
 	 */
-	@Permission("listMenu")
+	@RequiresPermissions("listMenu")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,@RequestParam(defaultValue="15") Integer pageSize, String search,Model model){
     	
@@ -74,7 +75,7 @@ public class MenuController extends SuperController{
     /**
      * 增加菜单
      */
-	@Permission("addMenu")
+	@RequiresPermissions("addMenu")
     @RequestMapping("/add")
     public String add(Model model){
 		
@@ -89,32 +90,34 @@ public class MenuController extends SuperController{
     /**
      * 添加目录
      */
-	@Permission("addMenu")
+	@RequiresPermissions("addMenu")
     @Log("创建目录菜单")
     @RequestMapping("/doAddDir")
-    public String doAddDir(SysMenu sysMenu,Model model){
+	@ResponseBody
+    public Rest doAddDir(SysMenu sysMenu,Model model){
     	
     	sysMenu.setPid("0");
     	sysMenu.setDeep(1);
     	sysMenuService.insert(sysMenu);
-    	return redirectTo("/system/menu/list/1.html");
+    	return Rest.ok();
     } 
     
     /**
      * 添加菜单
      */
-	@Permission("addMenu")
+	@RequiresPermissions("addMenu")
     @Log("创建菜单")
     @RequestMapping("/doAddMenu")
-    public String doAddMenu(SysMenu sysMenu,Model model){
+	@ResponseBody
+    public Rest doAddMenu(SysMenu sysMenu,Model model){
     	sysMenu.setDeep(2);
     	sysMenuService.insert(sysMenu);
-    	return redirectTo("/system/menu/list/1.html");
+    	return Rest.ok();
     } 
     /**
      * 编辑菜单
      */
-	@Permission("editMenu")
+	@RequiresPermissions("editMenu")
     @RequestMapping("/edit/{id}")
     public String edit(@PathVariable String id,Model model){
     	SysMenu sysMenu =sysMenuService.selectById(id);
@@ -144,18 +147,19 @@ public class MenuController extends SuperController{
     /**
      * 执行编辑菜单
      */
-	@Permission("editMenu")
+	@RequiresPermissions("editMenu")
     @Log("编辑菜单")
     @RequestMapping("/doEdit")
-    public String doEdit(SysMenu sysMenu,Model model){
+	@ResponseBody
+    public Rest doEdit(SysMenu sysMenu,Model model){
     	sysMenuService.updateById(sysMenu);
-    	return redirectTo("/system/menu/list/1.html");
+    	return Rest.ok();
     } 
     
     /**
      * 执行编辑菜单
      */
-	@Permission("deleteMenu")
+	@RequiresPermissions("deleteMenu")
     @Log("删除菜单")
     @RequestMapping("/delete")
     @ResponseBody
@@ -191,16 +195,16 @@ public class MenuController extends SuperController{
      */
     @RequestMapping("/checkMenuResource")  
     @ResponseBody
-    public String checkMenuResource(String resource){
+    public Rest checkMenuResource(String resource){
     	
     	List<SysMenu> list = sysMenuService.selectList(new EntityWrapper<SysMenu>().addFilter("resource = {0}", resource));
     	if(list.size() > 0){
-    		return "{\"error\":\" "+resource+" 资源已存在,请换一个尝试.\"}";
+    		return Rest.failure("资源已存在,请换一个尝试.");
     	}
-    	return "{\"ok\":\"资源名称很棒.\"}";
+    	return Rest.ok();
     }
     
-    @Permission("addMenu")
+    @RequiresPermissions("addMenu")
     @Log("新增功能菜单")
     @RequestMapping("/doAddAction")
     public String doAddAction(SysMenu sysMenu,Model model){

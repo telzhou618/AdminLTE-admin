@@ -22,9 +22,10 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<!-- freemarker的配置 -->
-	<bean id="freemarkerConfig"
-          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+	<bean id="shiroFreemarkerConfig"
+          class="com.vacomall.common.shiro.ShiroTagFreeMarkerConfigurer">
         <property name="templateLoaderPath" value="WEB-INF/views/" />
+        <property name="defaultEncoding" value="UTF-8" />
         <property name="freemarkerSettings">
             <props>
                 <prop key="template_update_delay">0</prop>
@@ -82,21 +83,10 @@
 
 	<!-- 拦截器 -->
 	<mvc:interceptors>
-
-		<!-- 登录拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.vacomall.interceptor.LoginInterceptor" />
+			<bean class="com.vacomall.interceptor.GlobalInterceptor" />
 		</mvc:interceptor>
-	
-		<!-- 权限拦截器 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.vacomall.interceptor.PermissionInterceptor">
-				<property name="permissionService" ref="permissionServiceImpl"></property>
-			</bean>
-		</mvc:interceptor>
-
 	</mvc:interceptors>
 
 </beans>

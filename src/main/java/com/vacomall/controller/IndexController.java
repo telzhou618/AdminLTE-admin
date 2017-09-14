@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class IndexController {  
 	
-    @RequestMapping(value = {"","/","/index"})  
+    @RequestMapping({"","/","index"})  
     public  String index(Model model){
-    	
 		return "index";
     }  
 }

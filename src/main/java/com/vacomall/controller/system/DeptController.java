@@ -1,6 +1,7 @@
 package com.vacomall.controller.system;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.anno.Permission;
 import com.vacomall.common.bean.Response;
+import com.vacomall.common.bean.Rest;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysDept;
 import com.vacomall.service.ISysDeptService;
@@ -31,7 +32,7 @@ public class DeptController extends SuperController{
 	/**
 	 * 分页查询部门
 	 */
-	@Permission("listDept")
+	@RequiresPermissions("listDept")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber,@RequestParam(defaultValue="15") Integer pageSize, String search,Model model){
     	
@@ -51,7 +52,7 @@ public class DeptController extends SuperController{
     /**
      * 新增部门
      */
-	@Permission("addDept")
+	@RequiresPermissions("addDept")
     @RequestMapping("/add")  
     public  String add(Model model){
 		return "system/dept/add";
@@ -60,18 +61,19 @@ public class DeptController extends SuperController{
     /**
      * 执行新增
      */
-	@Permission("addDept")
+	@RequiresPermissions("addDept")
     @Log("创建部门")
     @RequestMapping("/doAdd")  
-    public  String doAdd(SysDept dept,String[] roleId){
+	@ResponseBody
+    public  Rest doAdd(SysDept dept,String[] roleId){
     	
     	sysDeptService.insert(dept);
-		return redirectTo("/system/dept/list/1");
+		return Rest.ok();
     }  
     /**
      * 删除部门
      */
-	@Permission("deleteDept")
+	@RequiresPermissions("deleteDept")
     @Log("删除部门")
     @RequestMapping("/delete")  
     @ResponseBody
@@ -83,7 +85,7 @@ public class DeptController extends SuperController{
 	/**
 	 * 编辑部门
 	 */
-	@Permission("editDept")
+	@RequiresPermissions("editDept")
     @RequestMapping("/edit/{id}")  
     public  String edit(@PathVariable String id,Model model){
     	SysDept dept = sysDeptService.selectById(id);
@@ -94,12 +96,13 @@ public class DeptController extends SuperController{
     /**
      * 执行编辑
      */
-	@Permission("editDept")
+	@RequiresPermissions("editDept")
     @Log("编辑部门")
     @RequestMapping("/doEdit")  
-    public  String doEdit(SysDept dept,Model model){
+	@ResponseBody
+    public  Rest doEdit(SysDept dept,Model model){
     	sysDeptService.updateById(dept);
-    	return redirectTo("/system/dept/list/1");
+    	return Rest.ok();
     } 
 	
 }

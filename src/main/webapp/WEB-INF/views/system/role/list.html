@@ -17,16 +17,16 @@
         <div class="box">
          <form action="/system/role/list/1" method="post" class="form-inline">
           <div class="box-header">
-            <#if permissions?seq_contains('addRole')>
+             <@shiro.hasPermission name="addRole">
 	            <div class="input-group">
-		            <a class="btn btn-primary" href="/system/role/add"><i class="fa fa-plus"></i> 创建新角色</a>
+		            <a class="btn btn-primary dialog" href="javascript:;" data-url="/system/role/add" data-title="创建新角色" data-width="850" data-height="400"><i class="fa fa-plus"></i> 创建新角色</a>
 	            </div>
-            </#if>
-           	<#if permissions?seq_contains('deleteBatchRole')>
-	            <div class="input-group">
+	          </@shiro.hasPermission>
+	          <@shiro.hasPermission name="deleteBatchRole">
+	          	 <div class="input-group">
 		            <a class="btn btn-danger" delete-batch-url="/system/role/deleteBatch" ><i class="fa fa-remove"></i> 批量删除选中</a>
 	            </div>
-            </#if>
+	          </@shiro.hasPermission>
              <div class="input-group">
 	               <input type="text" name="search" value="${search!}" class="form-control" placeholder="Search">
 	               <div class="input-group-btn">
@@ -58,29 +58,29 @@
 	                	</label>
 	                </td>
 	                <td>${(role.roleName)!}
-	                	<a class="btn btn-xs"
-	                 	   data-tiggle="ajaxmodel"
-	                	   data-max="true"
-	                 	   data-title="所属角色[${(role.roleName)!}]的用户列表"
-	                 	   data-url="/system/role/getUsers?roleId=${role.id}"
+	                	<a class="btn btn-xs dialog"
+	                		data-wdith="800"
+	                 	    data-title="所属角色[${(role.roleName)!}]的用户列表"
+	                 	    data-url="/system/role/getUsers?roleId=${role.id}"
 	                ><span sysc sysc-url="/system/role/getCount?roleId=${role.id}" format=" [ %s个用户 ]"></span></a>
 	                </td>
 	                <td>${(role.roleDesc)!'--'}</td>
 	                <td>${(role.createTime?string('yyyy/MM/dd HH:mm:ss'))!'--'}</td>
 	                <td><#if role.roleState==1>启用<#else><font color="red">禁用</font></#if></td>
 	                <td>
-	                	<#if permissions?seq_contains('authRole')>
-	                	<a class="btn btn-success btn-xs" href="/system/role/auth/${(role.id)!}" data-toggle="tooltip" title="授权" data-placement="bottom">授权</a>
-	                	<#else>-</#if>
-	                	<#if permissions?seq_contains('editRole')>
-	                	<a class="btn btn-primary btn-xs" href="/system/role/edit/${(role.id)!}" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
-	 	               	<#else>-</#if>
-	                	<#if permissions?seq_contains('deleteRole')>
+	                	<@shiro.hasPermission name="authRole">
+	                		<a class="btn btn-success btn-xs dialog" href="javascript:;" data-url="/system/role/auth/${(role.id)!}" data-title="授权" data-width="850" data-height="600" data-toggle="tooltip" title="授权" data-placement="bottom">授权</a>
+	                	</@shiro.hasPermission>
+	                	
+	                	<@shiro.hasPermission name="editRole">
+	                		<a class="btn btn-primary btn-xs dialog" href="javascript:;" data-url="/system/role/edit/${(role.id)!}" data-title="创建新角色" data-width="850" data-height="400" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
+	                	</@shiro.hasPermission>
+	                	<@shiro.hasPermission name="deleteRole">
 	 	               	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/role/delete?id=${(role.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
-	                	 <#else>-</#if>
+	                	 </@shiro.hasPermission>
 	                </td>
 	              </tr>
               </#list>

@@ -1,6 +1,7 @@
 package com.vacomall.controller.system;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.vacomall.common.anno.Permission;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysLog;
 import com.vacomall.service.ISysLogService;
@@ -29,7 +29,7 @@ public class LogController extends SuperController{
 	/**
 	 * 分页查询日志
 	 */
-	@Permission("listLog")
+	@RequiresPermissions("listLog")
     @RequestMapping("/list/{pageNumber}")  
     public  String list(@PathVariable Integer pageNumber, @RequestParam(defaultValue="15") Integer pageSize, String search,String daterange,Model model){
     	

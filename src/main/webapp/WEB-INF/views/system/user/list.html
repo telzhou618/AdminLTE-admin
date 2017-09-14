@@ -6,7 +6,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      <small>系统管理 > 用户管理</small>
+      <small>系统管理 > 角色管理</small>
     </h1>
   </section>
   <!-- Main content -->
@@ -18,10 +18,10 @@
            <form action="/system/user/list/1" method="post" class="form-inline">
 	          <div class="box-header">
 	            <div class="input-group">
-		          <#if permissions?seq_contains('addUser')>
-		              	<a class="btn btn-primary" href="/system/user/add"><i class="fa fa-plus"></i> 创建新用户</a>
-		            </#if>
-	              </div>
+	            <@shiro.hasPermission name="addUser">
+		            <a class="btn btn-primary dialog" href="javascript:;" data-url="/system/user/add" data-title="创建新用户" data-width="850" data-height="550"><i class="fa fa-plus"></i> 创建新用户</a>
+	            </@shiro.hasPermission>
+	            </div>
 	            <div class="input-group">
 	               <input type="text" name="search" value="${search!}" class="form-control" placeholder="Search">
 	               <div class="input-group-btn">
@@ -59,15 +59,15 @@
 	                <td>${(user.deptName)!'--'}</td>
 	                <td><#if user.userState==1>启用<#else><font color="red">禁用</font></#if></td>
 	                <td>
-	                	<#if permissions?seq_contains('editUser')>
-	                	<a class="btn btn-primary btn-xs" href="/system/user/edit/${(user.id)!}">编辑</a>
-	                	<#else>-</#if>
-	                	<#if permissions?seq_contains('deleteUser')>
+	                	<@shiro.hasPermission name="editUser">
+	                	  <a class="btn btn-primary btn-xs dialog" href="javascript:;" data-url="/system/user/edit/${(user.id)!}" data-title="编辑用户" data-width="850" data-height="550">编辑</a>
+	                	</@shiro.hasPermission>
+	                	<@shiro.hasPermission name="deleteUser">
 	                	<a class="btn btn-danger btn-xs"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/user/delete?id=${(user.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
-	                	 <#else>-</#if>
+	                	 </@shiro.hasPermission>
 	                </td>
 	              </tr>
               </#list>

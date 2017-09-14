@@ -17,11 +17,11 @@
         <div class="box">
          <form action="/system/dept/list/1" method="post" class="form-inline">
           <div class="box-header">
-            <#if permissions?seq_contains('addDept')>
-            <div class="input-group">
-            	<a class="btn btn-primary" href="/system/dept/add"><i class="fa fa-plus"></i> 创建部门</a>
-            </div>
-            </#if>
+            <@shiro.hasPermission name="addDept">
+	            <div class="input-group">
+	            	<a class="btn btn-primary dialog" href="javascript:;" data-title="创建部门" data-url="/system/dept/add" data-width="800" data-height="400"><i class="fa fa-plus"></i> 创建部门</a>
+	            </div>
+            </@shiro.hasPermission>
              <div class="input-group">
                <input type="text" name="search" value="${search!}" class="form-control" placeholder="Search">
                <div class="input-group-btn">
@@ -37,31 +37,26 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
-                <th  width="100px"><input name="deptState" type="checkbox" class="minimal checkbox-toolbar"> 行号</th>
+                <th  width="100px">行号</th>
                 <th>部门名称</th>
                 <th>描述</th>
                 <th width="120px">操作</th>
               </tr>
               <#list pageData.getRecords() as dept>
               	  <tr>
-	                <td>
-	                   <label>
-	                	<input type="checkbox" class="minimal checkbox-item">
-	                	${((pageData.current-1)*pageData.size +dept_index+1)!}
-	                	</label>
-	                </td>
+	                <td>${((pageData.current-1)*pageData.size +dept_index+1)!}</td>
 	                <td>${(dept.deptName)!}</td>
 	                <td>${(dept.deptDesc)!'--'}</td>
 	                <td>
-	                	<#if permissions?seq_contains('editDept')>
-	                	<a class="btn btn-primary btn-xs" href="/system/dept/edit/${(dept.id)!}"> <i class="fa fa-pencil-square-o"></i> 编辑</a>
-	                	<#else>-</#if>
-	                	<#if permissions?seq_contains('deleteDept')>
-	                	<a class="btn btn-danger btn-xs"
-	                	 data-tiggle="ajax"
-	                	 data-submit-url="/system/dept/delete?id=${(dept.id)!}"
-	                	 data-confirm="您确定要删除该条记录吗?"><i class="fa fa-times"></i> 删除</a>
-	                	 <#else>-</#if>
+	                	<@shiro.hasPermission name="editDept">
+	                		<a class="btn btn-primary btn-xs dialog" href="javascript:;" data-title="编辑部门" data-url="/system/dept/edit/${(dept.id)!}",data-width="800" data-height="400" > <i class="fa fa-pencil-square-o"></i> 编辑</a>
+	                	</@shiro.hasPermission>
+	                	<@shiro.hasPermission name="deleteDept">
+		                	<a class="btn btn-danger btn-xs"
+		                	 data-tiggle="ajax"
+		                	 data-submit-url="/system/dept/delete?id=${(dept.id)!}"
+		                	 data-confirm="您确定要删除该条记录吗?"><i class="fa fa-times"></i> 删除</a>
+	                	 </@shiro.hasPermission>
 	                </td>
 	              </tr>
               </#list>

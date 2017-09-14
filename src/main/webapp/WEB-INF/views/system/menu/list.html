@@ -17,11 +17,11 @@
         <div class="box">
          <form action="/system/menu/list/1" method="post" class="form-inline">
           <div class="box-header">
-            <#if permissions?seq_contains('addMenu')>
+            <@shiro.hasPermission name="addMenu">
             <div class="input-group">
-           	 <a class="btn btn-primary" href="/system/menu/add"><i class="fa fa-plus"></i> 创建菜单</a>
+           	 <a class="btn btn-primary dialog" href="javascript:;" data-title="创建菜单" data-url="/system/menu/add" data-width="800" data-height="650"><i class="fa fa-plus"></i> 创建菜单</a>
             </div>
-            </#if>
+            </@shiro.hasPermission>
             <div class="input-group">
                <input type="text" name="search" value="${search!}" class="form-control" placeholder="Search">
                <div class="input-group-btn">
@@ -65,15 +65,15 @@
 	                <td>${(menu.sort)!}</td>
 	                <td><#if menu.deep?? && menu.deep==1 >目录<#elseif menu.deep?? && menu.deep==2>菜单<#else>功能</#if> </td>
 	                <td>
-	                	<#if permissions?seq_contains('editMenu')>
-	                	<a class="btn btn-primary btn-xs" href="/system/menu/edit/${(menu.id)!}" data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
-	                	<#else>-</#if>
-	                	<#if permissions?seq_contains('deleteMenu')>
+	                	 <@shiro.hasPermission name="editMenu">
+	                	   <a class="btn btn-primary btn-xs dialog" href="javascript:;" data-title="编辑菜单" data-url="/system/menu/edit/${(menu.id)!}" data-width="800" data-height="650"  data-toggle="tooltip" title="编辑" data-placement="bottom">编辑</a>
+	                	 </@shiro.hasPermission>
+	                	<@shiro.hasPermission name="deleteMenu">
 	                	<a class="btn btn-danger btn-xs" data-toggle="tooltip" title="删除" data-placement="bottom"
 	                	 data-tiggle="ajax"
 	                	 data-submit-url="/system/menu/delete?id=${(menu.id)!}"
 	                	 data-confirm="您确定要删除该条记录吗?">删除</a>
-	                	 <#else>-</#if>
+	                	 </@shiro.hasPermission>
 	                </td>
 	              </tr>
               </#list>

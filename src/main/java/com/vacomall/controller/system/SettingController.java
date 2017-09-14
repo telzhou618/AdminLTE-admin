@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.vacomall.common.anno.Log;
-import com.vacomall.common.anno.Permission;
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.entity.SysSetting;
 import com.vacomall.service.ISysSettingService;
@@ -30,7 +30,7 @@ public class SettingController extends SuperController{
 	/**
 	 * 查询系统设置
 	 */
-	@Permission("listSetting")
+	@RequiresPermissions("listSetting")
     @RequestMapping("/page")  
     public  String page(Model model){
     	
@@ -39,7 +39,7 @@ public class SettingController extends SuperController{
 		return "system/setting/page";
     } 
     
-	@Permission("doSetting")
+	@RequiresPermissions("doSetting")
     @Log("更新系统设置")
     @RequestMapping("/doSetting")
     public String doSetting(String[] id,String[] sysValue,Model model,RedirectAttributes redirectAttributes){

@@ -1,6 +1,8 @@
 package com.vacomall.controller.system;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vacomall.common.controller.SuperController;
 import com.vacomall.common.util.CommonUtil;
-import com.vacomall.common.util.TokenUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.service.ISysUserService;
 /**
@@ -31,7 +32,9 @@ public class MeController extends SuperController{
     @RequestMapping("/info")  
     public  String info(Model model){
     	
-    	SysUser sysUser = sysUserService.selectById(TokenUtil.getToken(request).getUid());
+    	Subject subject = SecurityUtils.getSubject();
+		SysUser user = (SysUser) subject.getPrincipal();
+    	SysUser sysUser = sysUserService.selectById(user.getId());
     	model.addAttribute("sysUser", sysUser);
 		return "system/me/info";
     } 
@@ -58,7 +61,10 @@ public class MeController extends SuperController{
     		return redirectTo("/system/me/pwd");
     	}
     	
-    	SysUser user = sysUserService.selectById(TokenUtil.getToken(request).getUid());
+    	Subject subject = SecurityUtils.getSubject();
+		SysUser sysUser = (SysUser) subject.getPrincipal();
+    	
+    	SysUser user = sysUserService.selectById(sysUser.getId());
     	if(!user.getPassword().equals(CommonUtil.MD5(password))){
     		redirectAttributes.addFlashAttribute("msg","旧密码输入错误.");
     		return redirectTo("/system/me/pwd");
