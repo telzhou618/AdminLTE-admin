@@ -37,10 +37,6 @@ AdminLTE、Spring MVC、Mybatis、Mybatis-Plus、Shiro、Mysql、Maven
 6. http://ip:8080，账号/密码:admin/123456。
 7. 也可以借助第三方docker平台完成部署,这样更加省事,如:daocloud,csphere等docker云平台。
 
-### 开发进度
--------------
-正在努力开发中...
-
 ### 实例截图
 -------------
 ![](https://git.oschina.net/uploads/images/2017/0821/134254_7428309f_89451.png "1.png")
