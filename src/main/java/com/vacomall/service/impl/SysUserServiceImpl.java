@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vacomall.common.util.CommonUtil;
+import com.vacomall.common.util.ShiroUtil;
 import com.vacomall.entity.SysUser;
 import com.vacomall.entity.SysUserRole;
 import com.vacomall.mapper.SysUserMapper;
@@ -33,7 +34,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	public void insertUser(SysUser user, String[] roleIds) {
 		// TODO Auto-generated method stub
 		user.setCreateTime(new Date());
-    	user.setPassword(CommonUtil.MD5(user.getPassword()));
+    	user.setPassword(ShiroUtil.md51024Pwd(user.getPassword(), user.getUserName()));
 		//保存用户
     	userMapper.insert(user);
 		//绑定角色

@@ -18,7 +18,6 @@ import com.vacomall.entity.vo.TreeMenuAllowAccess;
 import com.vacomall.mapper.SysMenuMapper;
 import com.vacomall.mapper.SysRoleMenuMapper;
 import com.vacomall.service.ISysMenuService;
-import com.vacomall.service.ISysRoleMenuService;
 
 /**
  *
@@ -27,11 +26,6 @@ import com.vacomall.service.ISysRoleMenuService;
  */
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements ISysMenuService {
-
-	/**
-	 * 角色权限服务
-	 */
-	@Autowired private ISysRoleMenuService sysRoleMenuService;
 	/**
 	 * 菜单服务
 	 */

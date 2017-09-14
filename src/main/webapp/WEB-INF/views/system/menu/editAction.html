@@ -45,7 +45,6 @@
 <script>
 $("#dir").on('change',function(){
 	var pid = $(this).val();
-	alert(pid);
 	 $.post('/system/menu/json?_dc='+new Date().getTime(),{pid:pid},function(response){
 		if(response.meta && response.meta.success){
 			$("#pid").empty();

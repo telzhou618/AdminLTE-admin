@@ -12,7 +12,7 @@
 
 		<junit.version>4.12</junit.version>
 		<spring.version>4.3.7.RELEASE</spring.version>
-		<mybatis-plus.version>2.0.7</mybatis-plus.version>
+		<mybatis-plus.version>2.1.1</mybatis-plus.version>
 		<mysql.version>5.1.32</mysql.version>
 		<jackson.version>2.7.4</jackson.version>
 		<druid.version>1.0.19</druid.version>
@@ -149,6 +149,12 @@
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- 文件上传组件 -->
 		<dependency>
@@ -197,7 +203,7 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
 		</dependency>
-		
+
 		<!-- shiro -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -219,7 +225,7 @@
 			<artifactId>shiro-web</artifactId>
 			<version>${shiro.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
