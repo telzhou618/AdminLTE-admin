@@ -22,6 +22,7 @@ AdminLTE、Spring MVC、Shiro、Mybatis、Mybatis-Plus、Mysql、Maven
 2. cd ~/AdminLTE-admin
 2. mvn clean package -Dmaven.test.skip=true
 3. mvn jetty:run
+4. http://localhost:8080,账号/密码:admin/123456
 
 ### 参考项目
 -------------
@@ -44,3 +45,5 @@ AdminLTE、Spring MVC、Shiro、Mybatis、Mybatis-Plus、Mysql、Maven
 ![](https://git.oschina.net/uploads/images/2017/0914/161612_2616eeed_89451.png "2.png")
 ![](https://git.oschina.net/uploads/images/2017/0914/161619_db1dd09f_89451.png "3.png")
 ![](https://git.oschina.net/uploads/images/2017/0914/161627_7e08a1ea_89451.png "4.png")
+
+说明:手动修改admin的密码可使用src/test/java下的TestAdmin生成admin的密码。
