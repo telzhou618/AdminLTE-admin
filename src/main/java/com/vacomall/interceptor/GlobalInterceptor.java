@@ -50,11 +50,11 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 			/**
 			 * 资源和当前选中菜单
 			 */
-			String res = request.getParameter("res");
+			String res = request.getParameter("p");
 			if (StringUtils.isNotBlank(res)) {
 				request.getSession().setAttribute("res", res);
 			}
-			String cur = request.getParameter("cur");
+			String cur = request.getParameter("t");
 			if (StringUtils.isNotBlank(cur)) {
 				request.getSession().setAttribute("cur", cur);
 			}

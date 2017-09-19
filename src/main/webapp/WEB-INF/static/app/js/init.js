@@ -148,5 +148,4 @@ var checkedBgColor = "#f5f5f5",
 			exclude_inputs: true
 		});
 	}
-	
 })(jQuery, window);

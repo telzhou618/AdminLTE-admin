@@ -8,7 +8,6 @@
      </div>
      <div class="pull-left info">
        <p>${(me.userName)!'游客'}</p>
-       Status
        <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
      </div>
    </div>
@@ -36,7 +35,7 @@
 		       </a>
 		       <ul class="treeview-menu">
 		         <#list vo.children as ch>
-		         	<li><a href="${(ch.sysMenu.url)!}?res=${(vo.sysMenu.id)!}&cur=${(ch.sysMenu.id)!}"  style="<#if cur?? && ch.sysMenu.id==cur> color: white </#if>"><i class="fa ${(ch.sysMenu.icon)!}"></i> ${(ch.sysMenu.menuName)!}</a></li>
+		         	<li><a href="${(ch.sysMenu.url)!}?p=${(vo.sysMenu.id)!}&t=${(ch.sysMenu.id)!}" style="<#if cur?? && ch.sysMenu.id==cur> color: white </#if>"><i class="fa ${(ch.sysMenu.icon)!}"></i> ${(ch.sysMenu.menuName)!}</a></li>
 		         </#list>
 		       </ul>
 		     </li>
