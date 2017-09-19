@@ -58,7 +58,7 @@ public class TestAdmin {
 	}
 	
 	/**
-	 * 修改Admin的密码
+	 * 修改Admin的密码位123456
 	 */
 	@Test
 	public void changeAdminPwd() {

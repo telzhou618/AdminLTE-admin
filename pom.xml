@@ -12,7 +12,7 @@
 
 		<junit.version>4.12</junit.version>
 		<spring.version>4.3.7.RELEASE</spring.version>
-		<mybatis-plus.version>2.1.1</mybatis-plus.version>
+		<mybatis-plus.version>2.0.8</mybatis-plus.version>
 		<mysql.version>5.1.32</mysql.version>
 		<jackson.version>2.7.4</jackson.version>
 		<druid.version>1.0.19</druid.version>
