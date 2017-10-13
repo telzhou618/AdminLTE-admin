@@ -32,10 +32,10 @@ AdminLTE、Spring MVC、Shiro、Mybatis、Mybatis-Plus、Mysql、Maven
 ### Docker部署
 -------------
 1. 安装好Docker环境,登录到Docker服务器。
-2. git clone https://github.com/foreyer/AdminLTE-admin.git
+2. git clone https://github.com/zhougaojun618/AdminLTE-admin.git
 3. cd AdminLTE-admin
-4. docker build -t github.com/foreyer/AdminLTE_admin .
-5. docker run -p 8080:8080 -t github.com/foreyer/AdminLTE_admin
+4. docker build -t github.com/zhougaojun618/AdminLTE_admin .
+5. docker run -p 8080:8080 -t github.com/zhougaojun618/AdminLTE_admin
 6. http://ip:8080，账号/密码:admin/123456。
 7. 也可以借助第三方docker平台完成部署,这样更加省事,如:daocloud,csphere等docker云平台。
 
